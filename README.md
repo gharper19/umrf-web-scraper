@@ -2,6 +2,11 @@
 
 Accepts a url and then exports data to csv file
 
+## TODO - Needed by Tues
+- Complete Task documentation for Laura
+- Decide on stack (Python or Js, Selenium or webkit for Js interaction, BeautifulSoup or lxml for html, Panda for exporting to xlsx, JavaFx for .exe wrapping)
+- Deliberate on alternatives: recreate the DOM virtually then extract the data, make a chrome extension  
+
 ## Contributing
 Branch ```dev``` is our main development branch.
 To contribute:
@@ -27,3 +32,5 @@ To contribute:
     git push origin your-branch-name
     ```
     Now, either ask the rest of the team to merge your changes into ```dev```, or submit a pull request via Github.
+    
+*** Feel free to update with new or completed items as needed*** 
