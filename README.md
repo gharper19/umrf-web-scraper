@@ -2,10 +2,24 @@
 
 Accepts a url and then exports data to csv file
 
-## TODO - Needed by Tues
+## TODO
 - Complete Task documentation for Laura
-- Decide on stack (Python or Js, Selenium or webkit for Js interaction, BeautifulSoup or lxml for html, Panda for exporting to xlsx, JavaFx for .exe wrapping)
 - Deliberate on alternatives: recreate the DOM virtually then extract the data, make a chrome extension  
+
+## Stack
+Python 
+BeautifulSoup for grabbing html
+Selenium for Js interactions
+Panda for exporting to xlsx
+JavaFx for .exe wrapping
+
+##Setup
+#Installing python modules
+The system default python:
+$ python -m pip install fish
+
+A specific version of python:
+$ python-3.6 -m pip install fish
 
 ## Contributing
 Branch ```dev``` is our main development branch.
