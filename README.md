@@ -5,6 +5,7 @@ Accepts a url and then exports data to csv file
 ## TODO
 - Complete Task documentation for Laura
 - Deliberate on alternatives: recreate the DOM virtually then extract the data, make a chrome extension  
+- lxml is a parsing lib and is compatible with BS4
 
 ## Stack
 Python 
