@@ -1,0 +1,16 @@
+When looking at a catalog task, underneath work notes there are activities.
+    These represent all changes to the current task. Whats important here is state(open or closed) and whether its switched hands(assigned user)
+ 
+Example Page(in BM): 
+Go to My Requests in Sidebar
+    > Click a Req num
+    > Scroll down to requested items and click a req or rit num  
+    > Scroll down to catalog tasks and click a task num
+   
+Problems:
+- Close request connection? - on reddCrawl too
+- Check if input boxes are loaded as a JavaScript Post-Load
+    - Use implicit timed waits and try to do it, then figure out why explicit wont work
+    - Try different by (e.g. selector, xpath, inner html, index in collection of same tags) 
+        - Make use of bs4 to organize and understand html
+        - Recall Aaron said some property of the tables in SN are different ea time
