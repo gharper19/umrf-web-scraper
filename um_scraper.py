@@ -139,6 +139,7 @@ import clipboard as cb
 
 USER_NAME="admin"
 USER_PASSWORD= 'Veryhap1*'
+login_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
 
 def getSoup(url):
         return BeautifulSoup((requests.get(url)).text, features="html.parser")
@@ -177,147 +178,58 @@ def exists_by_id(id):
     return True
 
 #Lists headings and p's, then all frame names, then all links, then all div names  
-def htmlRunDown(url):
-        pass
-        # browser = getBrowserDriver(url='https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber')
-        # print(f" >>> Before frame Switch:  \niFrame name: {(browser.find_elements_by_tag_name('iframe'))[0].title}")
-        # print(f"iFrames: {len(browser.find_elements_by_tag_name('iframe'))}")
-        # print(f"inputs: {len(browser.find_elements_by_tag_name('input'))}")
-                
-        # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it(
-        #                 (0)))
-        # # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((By.ID, 'gsft_main')))
-        
-        # # browser.switch_to.frame('gsft_main')
-        # try:
-        #         # Notice wait is a bool , and there is only one iframe, auto switches to iframe
-        #         # and there are no reg frames
-                
-        #         p = browser.find_elements_by_id('loginPage')
-
-        #         print(f" >>> After frame[0] Switch:  \nFrames: {len(browser.find_elements_by_tag_name('frame'))}")        
-        #         print(f"iFrames now: {len(browser.find_elements_by_tag_name('iframe'))}")
-                
-        #         l = browser.find_elements_by_tag_name('input')
-        #         print(f"inputs: {len(l)}")
-        #         print("   Attr: ")
-        #         element = l[0]
-        #         for i in browser.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', element):
-        #                 print(i)
-        #         for i in range(0, len(l)): 
-        #                 print(f"  Input {i}: {l[i].id}") 
-
-        #         d= browser.find_elements_by_tag_name('div')
-        #         element = d[0]
-        #         for i in browser.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', element):
-        #                 print(i)
-        #         print(f"Divs: {len(d)}")
-        #         for i in range(0, len(d)):
-        #                 print(f"  Div {i}: {d[i].title}")
-
-        #         #try switching to login form
-                
-        # except Exception:
-        #         print("-------------------- Error thrown --------------------")
-        # finally:
-        #         try:
-        #                 # print("U box located")
-        #                 (browser.find_element_by_name("user_name")).send_keys(USERNAME)
-        #                 (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
-        #         except Exception:
-        #                 print("-------------------- Couldnt add Text --------------------")
-        #         finally:
-        #                 browser.close()
-
-# Open and scrape Activities in Catalog Tasks
-def find_Catalog_Tasks():
+def htmlRunDown(url=login_url):
         # Just start off in uname, tab to password -- Or try parent child movement
-        browser = getBrowserDriver(url='https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber')
+        browser = getBrowserDriver(url)
 
-        print(f" >>> Before frame Switch:  ")  #\niFrame name: {(browser.find_elements_by_tag_name('iframe'))[0].id}")
-        frame_names = [frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('iframe')]
-        browser.switch_to_frame(0)
-        input_names = [frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]
-        
-        print(f"Frame Names: {frame_names}")
-        print(f"Input Names: {input_names}")
-        print(f"iFrames #: {len(browser.find_elements_by_tag_name('iframe'))}")
-        print(f"inputs #: {len(browser.find_elements_by_tag_name('input'))}")
-                
-        WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it(
-                        (0)))
-        # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((By.ID, 'gsft_main')))
-        
-        # browser.switch_to.frame('gsft_main')
+        print(f" >>> First frame Switch:  ")
+        #frame_names = [frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('iframe')]
+        print(browser.find_element_by_tag_name('iframe').get_attribute('id'))
+        print(browser.find_element_by_tag_name('div').get_attribute('id'))
+        WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+        print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
+        # AS of Now output here is gsft_main - ['sysparm_ck', 'user_name', 'user_password', ...
+        # Still times out tho - doubling up on Web waits works as well as one switchTo(0) with a webWait
+
+
+        # print(f"Frame Names: {frame_names}")
+        # print(f"Input Names: {input_names}")
+        # print(f"iFrames #: {len(browser.find_elements_by_tag_name('iframe'))}")
+        # print(f"inputs #: {len(browser.find_elements_by_tag_name('input'))}")
+
+        # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+        # print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
+        # print(browser.find_element_by_tag_name('iframe').get_attribute('id'))
+        # print(browser.find_element_by_tag_name('frame').get_attribute('id'))
+        # print(browser.find_element_by_tag_name('div').get_attribute('id'))
+
         try:
                 # Notice wait is a bool , and there is only one iframe, auto switches to iframe
-                # and there are no reg frames
-                
+                # and there are no reg frames      
 
         # OKAY, SO ID Changes each time so use page layout to find web elements OOOR 
         # see if you can select web elements using attributes OOR
-        # See if its the browser?
+        # See if its the browser
 
-                p = browser.find_elements_by_id('loginPage')
-                print(f"Form id: {p.__getattribute__}\n")
-
-                print(f" >>> After frame[0] Switch:  \nFrames: {len(browser.find_elements_by_tag_name('frame'))}")        
-                print(f"iFrames now: {len(browser.find_elements_by_tag_name('iframe'))}")
-                
-                l = browser.find_elements_by_tag_name('input')
-                print(f"inputs: {len(l)}")
-                print("   Attr: ")
-                element = l[0]
-                input_names = [frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]
-                print(f"Input Names: {input_names}")
-
-                d= browser.find_elements_by_tag_name('div')
-                div_names = [frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]
-                print(f"Div Names: {div_names}")
-                #try switching to login form
+                #         # print("U box located")
+                #         (browser.find_element_by_name("user_name")).send_keys(USERNAME)
+                #         (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
                 
         except Exception:
                 print("-------------------- Error thrown --------------------")
         finally:
-                try:
-                        # print("U box located")
-                        (browser.find_element_by_name("user_name")).send_keys(USERNAME)
-                        (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
-                except Exception:
-                        print("-------------------- Couldnt add Text --------------------")
-                finally:
-                        browser.close()
-        
-        # try: 
-        #         wait.until(EC.frame_to_be_available_and_switch_to_it(By.ID('gsft_main')))
-        #         print("frame located")
-        #         # uname = wait.until(EC.presence_of_element_located(
-        #         #         (By.XPATH, '//*[@id="user_name"]')))
-        #         # 
-        #         # pword = wait.until(EC.presence_of_element_located(
-        #         #         (By.XPATH, '//*[@id="user_password"]')))
-        #         # print("Pass located")
-        # except Exception:
-        #         print("EC Timeout - Can't find web elements. ")
-        #         browser.close()
-        # # Service Now Login 
-        # try:
-        #         wait = WebDriverWait(browser, 30)
-        #         wait.until(EC.visibility_of_element_located(By.XPATH('//*[@id="user_name"]')))
-        #         # browser.switch_to.frame('gsft-main')              
-        #         # print('swtitched to gsft-main')  
-        #         # browser.switch_to_active_element('loginPage')
-        #         # print('swtitched to loginPage')
+                browser.close()
 
-        #         (browser.find_element_by_xpath('//*[@id="user_name"]')).send_keys(USERNAME)
-        #         print('Added uname')
-        #         (browser.find_element_by_xpath('//*[@id="user_password"]')).send_keys(USER_PASSWORD, Keys.RETURN)
-        #         print('Added pword')
-        #         # Parse html
-        #         soup = BeautifulSoup(browser.page_source, features='html.parser')
+# Open and scrape Activities in Catalog Tasks
+def find_Catalog_Tasks(url=login_url):
+        browser = getBrowserDriver(url=login_url)
 
-        # finally: 
-        #         browser.close()
+        WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+        WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+
+        (browser.find_element_by_name("user_name")).send_keys(USERNAME)
+        (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
+
 
 MAX_PAGES = 100 #include stopper  
 ALLOWED_DOMAINS =[]
@@ -325,7 +237,7 @@ ALLOWED_DOMAINS =[]
 pages_visited = [] 
 numPages = 0
 
-find_Catalog_Tasks()
+htmlRunDown()
 '''
 s = getHtml("https://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python")
 r = getHtml("http://www.storybench.org/how-to-scrape-reddit-with-python/")
