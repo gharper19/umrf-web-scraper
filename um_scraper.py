@@ -138,50 +138,24 @@ import re as regex
 import clipboard as cb
 import time
 
-USER_NAME="admin"
-USER_PASSWORD= 'Veryhap1*'
-login_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
-BROWSER_TIMEOUT = 45 # seconds
-buffer_wait = 3 # Seconds
-
-def getSoup(url):
-        return BeautifulSoup((requests.get(url)).text, features="html.parser")
-
-def getHtml(url):
-        #can also get as JSON instead of text
-        return getSoup(url).prettify()
-
-def getBrowserDriver(url=None):
-        driver_path = '.\\web_drivers\\geckodriver.exe'
-        driver =webdriver.Firefox(executable_path=driver_path)
-        if not(url==None): driver.get(url)
-        return driver
-
 def writeHtmlToFile(html, name, ext="html", overwriteFile=False):
-        file = "./html/" + str(name) + '.' + str(ext)
-        try:
-                if overwriteFile:
-                        f=open(file, 'w')
-                        f.write(html) 
-                        f.close()
-                else:
-                        f=open(file, 'a') 
+                file = "./html/" + str(name) + '.' + str(ext)
+                try:
+                        if overwriteFile:
+                                f=open(file, 'w')
+                                f.write(html) 
+                                f.close()
+                        else:
+                                f=open(file, 'a') 
+                                f.write(html)
+                                f.close()
+                except FileNotFoundError:
+                        f=open(file, 'w+') 
                         f.write(html)
-                        f.close()
-        except FileNotFoundError:
-                f=open(file, 'w+') 
-                f.write(html)
-                f.close()
-
-def exists_by_id(id):
-    try:
-        browser.find_element_by_id(id)
-    except NoSuchElementException:
-        return False
-    return True
+                        f.close() 
 
 #Lists headings and p's, then all frame names, then all links, then all div names  
-def htmlRunDown(url=login_url):
+def htmlRunDown(self, url):
         # Just start off in uname, tab to password -- Or try parent child movement
         browser = getBrowserDriver(url)
 
@@ -203,40 +177,72 @@ def htmlRunDown(url=login_url):
         print(browser.find_element_by_tag_name('iframe').get_attribute('id'))
         print(browser.find_element_by_tag_name('div').get_attribute('id'))
 
-        try:
-                # Notice wait is a bool , and there is only one iframe, auto switches to iframe
-                # and there are no reg frames      
+        browser.close  
 
-        # OKAY, SO ID Changes each time so use page layout to find web elements OOOR 
-        # see if you can select web elements using attributes OOR
-        # See if its the browser
-                pass
+class ServiceNowCrawler:
+        def _init_(self):
+                # Target takes to login then to target page
+                nonlocal target_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
+                nonlocal BROWSER_TIMEOUT = 45 # seconds
+                nonlocal buffer_wait = 2 # Seconds
                 
-        except Exception:
-                print("-------------------- Error thrown --------------------")
-        finally:
-                browser.close()
+                nonlocal USER_NAME="admin"
+                nonlocal USER_PASSWORD= 'Veryhap1*'
+                
+                nonlocal browser= exec_Prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
+                start_tasks_crawl()
 
-# Open and scrape Activities in Catalog Tasks
-def login_ServiceNow(url=login_url):
-        browser = getBrowserDriver(url=login_url)
-        time.sleep(buffer_wait)
-        print(f"Inputs at Load: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
-        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
-        print(f"Inputs at Switch: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
-        time.sleep(buffer_wait)
-        print(f"Inputs after timed wait: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
-        (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
-        (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
+        def exec_Prefs(self, driver):
+                # driver.manage().window().setSize(new Dimension(100,100))
+                # driver.manage().window().setPosition(new Point(0,200))
+                return driver
+
+        def exists_by_id(self, id):
+                try:
+                        browser.find_element_by_id(id)
+                except NoSuchElementException:
+                        return False
+                return True
+
+        def start_tasks_crawl(self):
+                login_ServiceNow()
+                scrape_Task()
+                browser.close
+
+        # Open and scrape Activities in Catalog Tasks
+        def login_ServiceNow(self, url=target_url):
+                time.sleep(buffer_wait)
+                
+                print(f"Inputs at Load: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
+                WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
+                print(f"Inputs at Switch: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
+                time.sleep(buffer_wait)
+                print(f"Inputs after timed wait: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
+                
+                (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
+                (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
+
+        def scrape_Task(self):
+                # Just making sure html matches what i am seeing
+                time.sleep(buffer_wait)
+                soup = BeautifulSoup(browser.page_source, features="html.parser")
+                writeHtmlToFile(soup.prettify, task, overwriteFile=True)
+                inputs = soup.find_all('input')
+                tables = soup.find_all('table')
+                print(len(inputs), len(table))
+                col = soup.findAll('ul')
+                print(f"Table Column 0: {len(col)}")
+                rows = soup.findChildren()
+                print(len(rows))
+                for i in rows: 
+                        print(i)
+                        print(i.content)
+                
 
 
-MAX_PAGES = 100 #include stopper  
-ALLOWED_DOMAINS =[]
+    
 
-pages_visited = [] 
-numPages = 0
-
-login_ServiceNow()
+ServiceNowCrawler()
 '''
 s = getHtml("https://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python")
 r = getHtml("http://www.storybench.org/how-to-scrape-reddit-with-python/")
