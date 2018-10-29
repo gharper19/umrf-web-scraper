@@ -1,0 +1,213 @@
+<bound method Tag.prettify of <html class="ltr date-calendar tabbed" data-doctype="true" dir="ltr" lang="en"><head><title>ServiceNow</title><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="public" http-equiv="cache-control"/><meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/><script data-description="globals population" type="text/javascript">
+	window.NOW = window.NOW || {};
+	var g_loadTime = new Date();
+	var lastActivity = new Date();
+	var g_lang = 'en';
+	var g_system_lang = 'en';
+	var g_enhanced_activated = 'true';
+	  var g_popup_timeout = parseInt(100);
+	var g_export_warn_threshold = parseInt(10000);
+	  var g_event_handler_ids = {};
+	var g_event_handlers = [];
+	var g_event_handlers_onLoad = [];
+	var g_event_handlers_onSubmit = [];
+	var g_event_handlers_onChange = [];
+	var g_event_handlers_onCellEdit = {};
+	var g_event_handlers_localCache = {};
+	var g_event_handlers_queryTracking = true;
+	var g_user_date_time_format = "yyyy-MM-dd HH:mm:ss";
+	var g_user_date_format = "yyyy-MM-dd";
+	var g_user_decimal_separator = ".";
+	var g_user_grouping_separator = ",";
+	var g_glide_list_separator = ", ";
+	var g_tz_offset = -25200000;
+	  var g_tz_user_offset = true;
+	var g_first_day_of_week = parseInt(1, 10);
+	var g_date_picker_first_day_of_week = parseInt(0, 10);
+	  var g_full_calendar_edit = true;
+	var g_submitted = false;
+	var g_max_table_length = 80;
+	var g_fontSizePreference = "";
+	var g_fontSize = "10pt";
+	// use to be the sys_property glide.ui.js_error_notify, hard coded for PRB603998
+	var g_jsErrorNotify = "true";
+	var g_cancelPreviousTransaction = true;
+	var g_text_direction = "ltr";
+	var g_glide_list_filter_max_length =  parseInt("0", 10);
+	var g_accessibility = false;
+	var g_accessibility_visual_patterns = false;
+	var g_detail_row = false;
+	window.g_load_functions = [];
+	window.g_render_functions = [];
+	window.g_late_load_functions = [];
+	
+	
+	var g_ck = 'd7ce971edb112300dd93fe1b689619e8d9e57955c4832b9a62dfcdc6edc162566fad177f';
+	
+
+	
+	var g_acWaitTime = parseInt(250);
+	
+
+	var g_autoRequest = '';
+
+	  try {
+	    window.NOW.dateFormat = JSON.parse("{timeAgo: false, dateBoth: false}");
+	  } catch (e) {
+	    window.NOW.dateFormat = {timeAgo: false, dateBoth: false};
+	  }
+
+	window.NOW.shortDateFormat = false;
+	window.NOW.listTableWrap = true;
+	window.NOW.compact = false;
+  	window.NOW.templateToggle = false;
+	window.NOW.tabbed = true;
+	window.NOW.permalink = true;
+	window.NOW.useSimpleStorage = true;
+	window.NOW.simpleStorageSynch = "ca8f0312db112300dd93fe1b68961926";
+	window.NOW.language =  'en';
+	window.NOW.listOpenInAppTab = false;
+	window.NOW.floatingScrollbars = false;
+	
+	window.NOW.user = {};
+	window.NOW.user.preferences = [];
+	window.NOW.user.roles = 'teamdev_code_reviewer,admin';
+	window.NOW.user.allRoles = 'teamdev_code_reviewer,admin';
+	window.NOW.user.userID = '6816f79cc0a8016401c5a33be04be441';
+	window.NOW.user.departmentID = 'a581ab703710200044e0bfc8bcbe5de8';
+	window.NOW.user.firstName = 'System';
+	window.NOW.user.lastName = 'Administrator';
+	window.NOW.user.name = 'admin';
+    window.NOW.batch_glide_ajax_requests = 'true' === 'true';
+    window.NOW.batch_glide_ajax_requests_max_time_in_queue = ~~'50';
+    window.NOW.batch_glide_ajax_disable_time = ~~'1000';
+
+	window.NOW.currency = {};
+    window.NOW.currency.code = 'USD';
+    window.NOW.locale = {};
+	window.NOW.locale.code = 'en_US';
+  </script><script data-comment="GlideUser initialization">(function() {
+		 g_render_functions.push(setGlideUser);
+		function setGlideUser() {
+			if (window.g_user || !window.GlideUser)
+		return;
+
+		window.g_user = new GlideUser(NOW.user.name,
+			  NOW.user.firstName,
+			  NOW.user.lastName,
+			  NOW.user.roles,
+			  NOW.user.userID,
+			  NOW.user.departmentID);
+		window.g_user.setRoles(NOW.user.allRoles, true);
+		}
+	})();</script><script data-description="NOW glide web analytics siteid and url">window.NOW = window.NOW || {};
+		// glide web analytics config
+		window.NOW.webaConfig = {};
+		window.NOW.webaConfig.siteId = "";
+		window.NOW.webaConfig.trackerURL = "";
+		window.NOW.webaConfig.webaScriptPath = "scripts/piwik-2.16/thirdparty/piwik.min.js";</script><link href="favicon.ico?v=4" rel="shortcut icon"/><script>// window.performance in Chrome, Firefox, and Internet Explorer 9+ (not Safari)
+				window.NOW.xperf = window.performance || {};
+				if (!NOW.xperf.now) {
+					NOW.xperf.now = function() { return new Date().getTime(); };
+				}
+				NOW.xperf.parseBegin = NOW.xperf.now(); 
+				NOW.xperf.cssBegin = NOW.xperf.now();</script><link href="/styles/css_includes_doctype.cssx?v=05-24-2018_1317&amp;c=2015-08-22_14:42:14_8d9fc312db112300dd93fe1b689619b2&amp;theme=" rel="stylesheet" type="text/css"/><link href="/styles/heisenberg/source_sans_pro.cssx?v=05-24-2018_1317&amp;c=2015-08-22_14:42:14_8d9fc312db112300dd93fe1b689619b2&amp;theme=null" rel="stylesheet" type="text/css"/><link href="/styles/heisenberg/heisenberg_all.cssx?v=05-24-2018_1317&amp;c=2015-08-22_14:42:14_8d9fc312db112300dd93fe1b689619b2&amp;theme=null" rel="stylesheet" type="text/css"/><script>NOW.xperf.cssEnd = NOW.xperf.now();
+			NOW.xperf.scriptBegin = NOW.xperf.now();</script><script src="/scripts/doctype/js_includes_doctype.jsx?v=05-24-2018_1317&amp;lp=Thu_May_24_15_56_08_PDT_2018&amp;c=4_50" type="text/javascript"></script><script src="/scripts/js_includes_customer.jsx?v=05-24-2018_1317&amp;lp=Thu_May_24_15_56_08_PDT_2018&amp;c=4_50" type="text/javascript"></script><script>NOW.xperf.scriptEnd = NOW.xperf.now();
+				NOW.xperf.parseEnd = NOW.xperf.now();  
+				$j(function() {
+					var x = NOW.xperf;
+					var last = x.lastDoctypeEnd - x.lastDoctypeBegin;
+					if (window.console) {
+						console.log("+-- Parse times");
+						console.log("| CSS parse: " + (x.cssEnd - x.cssBegin));
+						console.log("| JS  doctype: " + (x.scriptEnd - x.scriptBegin));
+						console.log("| JS at end of page: " + last);
+						console.log("+-- All parsing: " + (x.parseEnd - x.parseBegin + last));	
+					}
+					
+					var ms = Math.round(x.parseEnd - x.parseBegin + last);
+					CustomEvent.fire('page_timing', { name: 'PARS', ms: ms, win: window });
+					
+					if (window.performance && performance.timing) {
+						NOW.xperf.z = new Date().getTime();
+						setTimeout(function () {
+						   var x = performance.timing.loadEventEnd - performance.timing.domContentLoadedEventStart;
+						   CustomEvent.fire('page_timing', { name: 'DOMC', ms: x, win: window });
+						   x = performance.timing.loadEventStart - NOW.xperf.z;
+						   CustomEvent.fire('page_timing', { name: 'PROC', ms: x, win: window });
+						}, 250);  // has to be done after the loadEvent ends
+					}
+				})</script><script src="/scripts/doctype/js_includes_legacy.jsx?v=05-24-2018_1317&amp;lp=Thu_May_24_15_56_08_PDT_2018&amp;c=4_50" type="text/javascript"></script><script data-comment="navpage layout preferences, onfocus observation" type="text/javascript">/**
+	* Every window needs to observe these events.
+	*/
+	if (Prototype.Browser.IE && !isMSIE9) {
+		document.onfocusout = function() { CustomEvent.fireTop(GlideEvent.WINDOW_BLURRED, window); };
+		document.onfocusin = function() { CustomEvent.fireTop(GlideEvent.WINDOW_FOCUSED, window); };
+	} else {
+		Event.observe(window, 'blur', function() { CustomEvent.fireTop(GlideEvent.WINDOW_BLURRED, window); });
+		Event.observe(window, 'focus', function() { CustomEvent.fireTop(GlideEvent.WINDOW_FOCUSED, window); });
+	}</script><script type="text/javascript">g_swLoadTime = new StopWatch(g_loadTime);
+
+    if (window.CustomEvent){
+        CustomEvent.fireAll("ck_updated", "d7ce971edb112300dd93fe1b689619e8d9e57955c4832b9a62dfcdc6edc162566fad177f");
+	    CustomEvent.fireTop("navigation.complete", window);
+	}
+
+    addLoadEvent( function() {
+
+		if ('ontouchstart' in window || 
+				(navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 0) ||
+				(navigator.msMaxTouchPoints !== 'undefined' && navigator.msMaxTouchPoints > 0)) {
+			if (typeof document.body != undefined) {
+				var bodyClass = document.body.getAttribute('class') || '';
+				if (bodyClass.length) {
+					bodyClass += ' ';
+				}
+				bodyClass += 'touch_scroll';
+				document.body.setAttribute('class', bodyClass);
+			}
+		}
+
+      if (typeof g_ck != 'undefined') {
+        CustomEvent.observe("ck_updated", function(ck) { g_ck = ck; });
+        CustomEvent.fireAll("ck_updated", "d7ce971edb112300dd93fe1b689619e8d9e57955c4832b9a62dfcdc6edc162566fad177f");CustomEvent.fireTop('user.impersonation', '');}try {
+              var helpico = getTopWindow().document.getElementById("help_ico");
+
+              if (helpico) {
+                var urlname=window.location.pathname.split("?");
+                var search_str = window.location.search;
+                
+                // if this is a form, extract the record's sys_id...
+                var sys_id_loc = search_str.search(/sys_id=[0-9a-f]{32}/i);
+                var sys_id_str = (sys_id_loc != -1) ? search_str.substr(sys_id_loc, 39) : null;
+                
+                // make the URL to our context help processor...
+                var url_search = "?sysparm_url=" + urlname[0];
+                if (sys_id_loc != -1)
+                   url_search += "&" + sys_id_str;
+
+               	helpico.href="context_help.do" + url_search;                	
+              }
+            } catch (exception) {}synchCache();
+      pageLoaded();
+    });
+    
+    function synchCache() {
+      try {
+        var w = getTopWindow();
+        if (w.g_cache_message)
+          w.g_cache_message.stamp("ca8f0312db112300dd93fe1b68961926");
+  
+        if (w.g_cache_td)
+          w.g_cache_td.stamp("c68f0312db112300dd93fe1b6896192a");
+      } catch(e) {}
+    }</script><script src="/scripts/js_includes_amb.jsx?v=05-24-2018_1317&amp;lp=Thu_May_24_15_56_08_PDT_2018&amp;c=4_50" type="text/javascript"></script><!--googleoff: all--><noscript>This site requires JavaScript to be enabled</noscript> <!--googleon: all--><script src="/scripts/app.guided_tours/js_guided_tours_includes.jsx?v=05-24-2018_1317" type="text/javascript"></script></head><body class=" firefox windows " data-formname="login_redirect" onclick="CustomEvent.fireAll('body_clicked', event);" ontouchend="CustomEvent.fireAll('body_clicked', event);"><div class="outputmsg_div"><div class="outputmsg_container" id="output_messages" style="display:none"><h2 class="sr-only">Notifications</h2><button class="btn btn-icon close icon-cross" onclick="GlideUI.get().clearOutputMessages(this); return false;"><span class="sr-only">Close Messages"</span></button><div class="outputmsg_div"></div></div><script>addRenderEvent(function() {CustomEvent.fire('glide_optics_inspect_update_watchfield', '');});</script></div><script>g_url = "sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b%26sysparm_view=my_request%26sysparm_record_target=sc_task%26sysparm_record_row=1%26sysparm_record_rows=1%26sysparm_record_list=request_item%3Daeed229047801200e0ef563dbb9a71c2%5EORDERBYDESCnumber";
+		
+			loginRedirectURL();
+		
+		
+
+		function loginRedirectURL() {
+			   var url = "nav_to.do?uri=" + g_url;
+			   getTopWindow().location.replace(url);
+		}</script></body></html>>
