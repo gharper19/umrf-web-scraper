@@ -134,7 +134,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 import requests
 import pandas as pd
-import re as regex
+import re
 import clipboard as cb
 import time
 
@@ -180,8 +180,8 @@ def htmlRunDown( url):
         browser.close  
 
 def exec_Prefs( driver):
-        # driver.manage().window().setSize(newDimension(100,100))
-        # driver.manage().window().setPosition(new Point(0,200))
+        # driver.set_window_size(100,100)
+        # driver.set_window_position(0,200)
         return driver
 
 def exists_by_id( id):
@@ -191,8 +191,9 @@ def exists_by_id( id):
                 return False
         return True
 
-def start_tasks_crawl():
+def start_tasks_crawl(browser):
         t = time.time()
+        browser = exec_Prefs(browser)
         browser.set_page_load_timeout(10)
         try:
                 browser.get(target_url)
@@ -204,11 +205,16 @@ def start_tasks_crawl():
         
         print('Time consuming: ', time.time() - t)
         
-        time.sleep(buffer_wait)
-        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
+        time.sleep(buffer_wait*2)
         
-        scrape_Task(browser.page_source)
-        browser.close
+        # Checking loc in html - Frame
+        browser.switch_to_default_content()
+        time.sleep(buffer_wait)
+        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
+        
+        time.sleep(buffer_wait)
+        scrape_Task(browser)
+        print('Time consuming: ', time.time() - t)
 
 # Open and scrape Activities in Catalog Tasks
 def login_ServiceNow(browser):
@@ -222,28 +228,34 @@ def login_ServiceNow(browser):
         print("Login Successful")
         return browser
 
-def scrape_Task(html):
+def scrape_Task(browser):
+        browser.find_element_by_xpath("//*[@id='8687fbccc611229100727249a775cc31']/div[2]/div/div[5]/table/tbody/tr/td/div[1]/div/div/div/div[3]/div")
+        html= browser.page_source
         # Just making sure html matches what i am seeing
-        time.sleep(buffer_wait)
         soup = BeautifulSoup(html, features="html.parser")
         try:
-                num_activities = soup.find_element_by_partial_link_text("Activ")
+                num_activities = soup.find_all(text="Bud Richman", recursive=True)
                 #num_activities = [int(s) for s in num_activities.split() if s.isdigit()]
 
                 i =0
                 page_texts= {}
+                classes = {}
+                ids = {}
                 for element in soup.find_all(text=True):
                         if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
                                 pass
                         else: 
-                                page_texts[i]= element
-                                i += 1
-                print(num_activities)
-                        
+                                try:
+                                        page_texts[i]= element
+                                        classes[i] = element.get_attribute("class")
+                                        ids[i] = element.get_attribute("id")
+                                        i += 1
+                                        print(f"{i}. ID: {id[i]}, class: {classes[i]}")
+                                except Exception as e: print(f"Error parsing text tags: {e}")
+                print(f"BUD? - {num_activities}")
+                
         except Exception as e:
                 print(f"SCRAPING ERROR: {e}")
-        finally:
-                browser.close
 
 # Fill w/ params from GUI
 # Target takes to login then to target page
@@ -256,9 +268,11 @@ USER_PASSWORD= 'Veryhap1*'
 
 browser= exec_Prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
 
-start_tasks_crawl()
+start_tasks_crawl(browser)
 
-#Catch Errors: Webdriver - Permisson denied(for update or other browser error), NoSuchElem for uname login
+# Catch Errors: Webdriver - Permisson denied(for update or other browser error), 
+# NoSuchElem for uname login,  
+# Message: connection refused for random browser error
 
 '''
 s = getHtml("https://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python")
