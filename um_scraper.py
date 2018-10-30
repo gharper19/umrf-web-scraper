@@ -194,11 +194,11 @@ def exists_by_id( id):
 def start_tasks_crawl(browser):
         t = time.time()
         browser = exec_Prefs(browser)
-        browser.set_page_load_timeout(10)
-        try:
-                browser.get(target_url)
-        except TimeoutException:
-                browser.execute_script("window.stop();")
+        browser.set_page_load_timeout(15)
+        # try:
+        browser.get(target_url)
+        # except TimeoutException:
+        #         browser.execute_script("window.stop();")
         print('Time consuming: ', time.time() - t)
 
         browser= login_ServiceNow(browser)
@@ -229,31 +229,41 @@ def login_ServiceNow(browser):
         return browser
 
 def scrape_Task(browser):
-        browser.find_element_by_xpath("//*[@id='8687fbccc611229100727249a775cc31']/div[2]/div/div[5]/table/tbody/tr/td/div[1]/div/div/div/div[3]/div")
+        # browser.find_element_by_xpath("//*[@id='8687fbccc611229100727249a775cc31']/div[2]/div/div[5]/table/tbody/tr/td/div[1]/div/div/div/div[3]/div")
         html= browser.page_source
         # Just making sure html matches what i am seeing
         soup = BeautifulSoup(html, features="html.parser")
-        try:
-                num_activities = soup.find_all(text="Bud Richman", recursive=True)
-                #num_activities = [int(s) for s in num_activities.split() if s.isdigit()]
+        
+                # for block in act:  - Acts children*
+                #         pass
 
-                i =0
-                page_texts= {}
-                classes = {}
-                ids = {}
-                for element in soup.find_all(text=True):
-                        if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
-                                pass
-                        else: 
-                                try:
-                                        page_texts[i]= element
-                                        classes[i] = element.get_attribute("class")
-                                        ids[i] = element.get_attribute("id")
-                                        i += 1
-                                        print(f"{i}. ID: {id[i]}, class: {classes[i]}")
-                                except Exception as e: print(f"Error parsing text tags: {e}")
-                print(f"BUD? - {num_activities}")
-                
+                # i =0
+                # 
+                # for element in soup.find_all(text=True):
+                #         if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+                #                 pass
+                #         else: 
+                #                 pass
+        try:
+                i=1
+                act_type, act_user, act_change= {}
+                time.sleep(buffer_wait)
+                # act= 
+                soup.find(name='ul', attrs={"class":"h-card-wrapper.activities-form"})
+                print(act)
+                time.sleep(buffer_wait)
+                # for elem in act:
+                try:
+                        #if elem is in soup.find_all('li'):
+                        act_user[i] = soup.findChild("span", {"class": "sn-card-component-createdby"}).content
+                        print(act_user[i])
+                        act_type[i] = soup.findNext("span", {"class": "sn-widget-list-table-cell"}).content # try going through divs
+                        print(act_type[i])
+                        act_change[i] = soup.findNextSibling("span", {"class": "sn-widget-list-table-cell"}).findChild().content # try going through divs
+                        print(act_change[i])
+                except Exception:
+                        print("Error Parsing Activities table")
+                # print(act) # taking out print ->SCRAPING ERROR: not enough values to unpack (expected 3, got 0)
         except Exception as e:
                 print(f"SCRAPING ERROR: {e}")
 
@@ -266,13 +276,24 @@ buffer_wait = 2 # Seconds
 USER_NAME="admin"
 USER_PASSWORD= 'Veryhap1*'
 
-browser= exec_Prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
+go = True
+while (go==True):
+        browser= exec_Prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
 
-start_tasks_crawl(browser)
+        try: 
+                start_tasks_crawl(browser)
+                go = False
+        except TimeoutError: 
+                browser.close
+                go = True
+        except NoSuchElementException, NoSuchFrameException:
+                browser.close
+                go = True
 
 # Catch Errors: Webdriver - Permisson denied(for update or other browser error), 
 # NoSuchElem for uname login,  
 # Message: connection refused for random browser error
+# Timeout excep loop with counter for resets on connection
 
 '''
 s = getHtml("https://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python")
