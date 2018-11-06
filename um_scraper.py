@@ -99,6 +99,15 @@ element = browser.find_elements( X )[0]
 for i in browser.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', element):
         print(i)
 
+# Exclude tags from search - bs4
+   for element in soup.find_all(text=True):
+        if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+                pass
+
+# Classes 
+---------
+- when we changed the class element (static - outisde _init_), it changed for both objects. 
+But, changing the object element(inside init) does not
 
 # FileWriter
 ------------
@@ -121,7 +130,7 @@ Debugging:
 # setting up a log: 
 - Put this in beginning and write to it each time exception is thrown
 path_to_log = '/Users/yourname/Desktop/'
-log_errors = open(path_to_log + 'log_errors.txt', mode = 'w')
+log_errors = open(path_to_log + 'log_errors.txt', mode = 'w') #Should use append, right, maybe also assigning log size threshold?
 
 '''
 # encoding: utf-8
@@ -129,7 +138,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import WebDriverException, TimeoutException
+from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, NoSuchAttributeException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 import requests
@@ -138,134 +147,140 @@ import re
 import clipboard as cb
 import time
 
-def writeHtmlToFile(html, name, ext="html", overwriteFile=False):
-                file = "./html/" + str(name) + '.' + str(ext)
+'''
+TODO: 
+        1) Wrap in a class
+        2) Write alg for getting task list and turn tasks into data objects:            # apachepoi
+                - for task iteration: the data will already be in a table and a filter allows the user to specify the data thats provided, 
+                if its easier than drilling down with scrape_task, notify user of specified filter settings and go by that, 
+                otherwise just grab whatever you can while there b/c table data doesnt require page transition from selenium.
+        3) Replace any timed waits with multiple web element based waits for selenium interactions, error handling
+        4) wrap in Java Fx
+'''
+class TaskScraper:
+        # Class Structure: 1) def function which will handle error checking and close browser and restart on error
+        def _init_(url=target_url, browser=None):
+                # self.url= url
+                self.browser= browser
+                pass
+        
+        def exec_Prefs():
+                # self.driver.set_window_size(100,100)
+                # self.driver.set_window_position(0,200)
+
+        def exists_by_id(self, id):
                 try:
-                        if overwriteFile:
-                                f=open(file, 'w')
-                                f.write(str(html)) 
-                                f.close()
-                        else:
-                                f=open(file, 'a') 
-                                f.write(str(html))
-                                f.close()
-                except FileNotFoundError:
-                        f=open(file, 'w+') 
-                        f.write(str(html))
-                        f.close() 
+                        self.browser.find_element_by_id(id)
+                except NoSuchElementException:
+                        return False
+                return True
 
-#Lists headings and p's, then all frame names, then all links, then all div names  
-def htmlRunDown( url):
-        # Just start off in uname, tab to password -- Or try parent child movement
-        browser = getBrowserDriver(url)
+        #Lists headings and p's, then all frame names, then all links, then all div names  
+        def htmlRunDown(self,  url):
+                # Just start off in uname, tab to password -- Or try parent child movement
+                # print(f"+ First frame Switch ({browser.find_element_by_tag_name('iframe').get_attribute('id')}): ")
+                # print(f"Inputs at Load: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
+                # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+                # print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
+                # # AS of Now output here is gsft_main - ['sysparm_ck', 'user_name', 'user_password', ...
+                # # Still times out tho - doubling up on Web waits works as well as one switchTo(0) with a webWait
+                # print(f"iFrames #: {len(browser.find_elements_by_tag_name('iframe'))}")
+                # print(f"inputs #: {len(browser.find_elements_by_tag_name('input'))}")
+                # print(f"\n+ Second frame Switch:  ")
+                # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+                # print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
+                # print(browser.find_element_by_tag_name('iframe').get_attribute('id'))
+                # print(browser.find_element_by_tag_name('div').get_attribute('id'))
+                # browser.close  
+                pass
 
-        print(f"+ First frame Switch ({browser.find_element_by_tag_name('iframe').get_attribute('id')}): ")
-        print(f"Inputs at Load: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
-        WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
+        def go_scrape(self):
+                go = True
+                failed_starts= 0
+                while (go==True and failed_starts < failed_start_threshold ):
+                        self.browser= webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe')
+                        try: 
+                                # Try to start task crawl
+                                t = time.time()
+                                self.browser.set_page_load_timeout(15)
 
-        print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
-        # AS of Now output here is gsft_main - ['sysparm_ck', 'user_name', 'user_password', ...
-        # Still times out tho - doubling up on Web waits works as well as one switchTo(0) with a webWait
+                                # Login to service now with credintials
+                                self.browser.get(target_url)
+                                # print('Time consuming: ', time.time() - t)
+                                self.browser= login_ServiceNow(self.browser)
+                                # print('Time consuming: ', time.time() - t)
+                                time.sleep(buffer_wait*2)
+                        
+                                # Switch focus to main frame
+                                self.browser.switch_to_default_content()
+                                time.sleep(buffer_wait)
+                                WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
+                                
+                                # Get task data
+                                time.sleep(buffer_wait)
+                                scrape_Task(self.browser)
+                                # print('Time consuming: ', time.time() - t)
 
+                                go = False
+                        except TimeoutError: 
+                                self.browser.close
+                                go = True
+                                failed_starts += 1
+                        except NoSuchElementException:
+                                self.browser.close
+                                go = True
+                                failed_starts += 1
+                        finally:
+                                self.browser.close()
+                                print(failed_starts)
 
-        print(f"iFrames #: {len(browser.find_elements_by_tag_name('iframe'))}")
-        print(f"inputs #: {len(browser.find_elements_by_tag_name('input'))}")
+                def login_ServiceNow(self, browser):
+                # Open and scrape Activities in Catalog Tasks
+                                
+                        time.sleep(buffer_wait)
+                        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
 
-        print(f"\n+ Second frame Switch:  ")
-        WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
-        print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
-        print(browser.find_element_by_tag_name('iframe').get_attribute('id'))
-        print(browser.find_element_by_tag_name('div').get_attribute('id'))
+                        # Change to wait until uname and password appear - should fix random errors
+                        time.sleep(buffer_wait)
+                        (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
+                        (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
+                        time.sleep(buffer_wait)
+                        
+                        # print("Login Successful")
+                        return browser
 
-        browser.close  
+                def scrape_Task(self, browser):
+                        soup = BeautifulSoup(browser.page_source, features="html.parser")
+                        try:
+                                i=1
+                                act_type= {}    # Assigning all in one line throws value error
+                                act_user = {}
+                                act_change= {}
+                                
+                                # act=soup.find(name='ul', attrs={"class":"h-card-wrapper.activities-form"})
+                                activities = soup.findChildren(name='li', attrs={"class":"h-card h-card_md h-card_comments"})
+                                for i in activities[0].findChildren(): 
+                                        # Each card divided into 3 blocks: CreatedBy, DateChanged, and statusChange 
+                                        created_by= soup.findChild(name='span', attrs={"class":"sn-card-component-createdby"})
+                                        date_changed = soup.findChild(name='div', attrs={"class":"date-calendar"})
+                                        status = soup.findChild(name='ul', attrs={"class":"sn-widget-list sn-widget-list-table"}).findChild("li").findChildren("span", {"class": "sn-widget-list-table"})
+                                        change = status[0]
+                                        effect = status[1]
+                                        print("\n\n--") 
+                                        print(f"User: {created_by}, Date: {date_changed}\n{status}")
+                                        print("\n\n")
 
-def exec_Prefs( driver):
-        # driver.set_window_size(100,100)
-        # driver.set_window_position(0,200)
-        return driver
+                                        # act_user[i] = soup.findChild("span", {"class": "sn-card-component-createdby"})
+                                        # print(act_user[i])
+                                        # act_type[i] = soup.find("span", {"class": "sn-widget-list-table-cell"}) # try going through divs
+                                        # print(act_type[i])
+                                        # act_change[i] = soup.find_next_sibling("span", {"class": "sn-widget-list-table-cell"}) # try going through divs
+                                        # print(act_change[i])
 
-def exists_by_id( id):
-        try:
-                browser.find_element_by_id(id)
-        except NoSuchElementException:
-                return False
-        return True
-
-def start_tasks_crawl(browser):
-        t = time.time()
-        browser = exec_Prefs(browser)
-        browser.set_page_load_timeout(15)
-        # try:
-        browser.get(target_url)
-        # except TimeoutException:
-        #         browser.execute_script("window.stop();")
-        print('Time consuming: ', time.time() - t)
-
-        browser= login_ServiceNow(browser)
-        
-        print('Time consuming: ', time.time() - t)
-        
-        time.sleep(buffer_wait*2)
-        
-        # Checking loc in html - Frame
-        browser.switch_to_default_content()
-        time.sleep(buffer_wait)
-        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
-        
-        time.sleep(buffer_wait)
-        scrape_Task(browser)
-        print('Time consuming: ', time.time() - t)
-
-# Open and scrape Activities in Catalog Tasks
-def login_ServiceNow(browser):
-        time.sleep(buffer_wait)
-        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
-        time.sleep(buffer_wait)
-        (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
-        (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
-        time.sleep(buffer_wait)
-        
-        print("Login Successful")
-        return browser
-
-def scrape_Task(browser):
-        # browser.find_element_by_xpath("//*[@id='8687fbccc611229100727249a775cc31']/div[2]/div/div[5]/table/tbody/tr/td/div[1]/div/div/div/div[3]/div")
-        html= browser.page_source
-        # Just making sure html matches what i am seeing
-        soup = BeautifulSoup(html, features="html.parser")
-        
-                # for block in act:  - Acts children*
-                #         pass
-
-                # i =0
-                # 
-                # for element in soup.find_all(text=True):
-                #         if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
-                #                 pass
-                #         else: 
-                #                 pass
-        try:
-                i=1
-                act_type, act_user, act_change= {}
-                time.sleep(buffer_wait)
-                # act= 
-                soup.find(name='ul', attrs={"class":"h-card-wrapper.activities-form"})
-                print(act)
-                time.sleep(buffer_wait)
-                # for elem in act:
-                try:
-                        #if elem is in soup.find_all('li'):
-                        act_user[i] = soup.findChild("span", {"class": "sn-card-component-createdby"}).content
-                        print(act_user[i])
-                        act_type[i] = soup.findNext("span", {"class": "sn-widget-list-table-cell"}).content # try going through divs
-                        print(act_type[i])
-                        act_change[i] = soup.findNextSibling("span", {"class": "sn-widget-list-table-cell"}).findChild().content # try going through divs
-                        print(act_change[i])
-                except Exception:
-                        print("Error Parsing Activities table")
-                # print(act) # taking out print ->SCRAPING ERROR: not enough values to unpack (expected 3, got 0)
-        except Exception as e:
-                print(f"SCRAPING ERROR: {e}")
+                        except NoSuchAttributeException as e:
+                                print(f"Error: Attribute attribute requested, {e}")
+                        except Exception as e:
+                                print(f"SCRAPING ERROR: {e}")
 
 # Fill w/ params from GUI
 # Target takes to login then to target page
@@ -276,26 +291,13 @@ buffer_wait = 2 # Seconds
 USER_NAME="admin"
 USER_PASSWORD= 'Veryhap1*'
 
-go = True
-while (go==True):
-        browser= exec_Prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
-
-        try: 
-                start_tasks_crawl(browser)
-                go = False
-        except TimeoutError: 
-                browser.close
-                go = True
-        except NoSuchElementException, NoSuchFrameException:
-                browser.close
-                go = True
-
 # Catch Errors: Webdriver - Permisson denied(for update or other browser error), 
 # NoSuchElem for uname login,  
 # Message: connection refused for random browser error
 # Timeout excep loop with counter for resets on connection
 
 '''
+list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
 s = getHtml("https://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python")
 r = getHtml("http://www.storybench.org/how-to-scrape-reddit-with-python/")
 soup = getHtml('https://dev58662.service-now.com/pm')
