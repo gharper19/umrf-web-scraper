@@ -3,11 +3,11 @@
 V3ryhap
 
 
-## REQUESTS: 
+## REQUESTS:
 -------------
 - post: r = requests.post('https://httpbin.org/post', data = {'key1': 'value1', 'key2': ['value2', 'value3']})
 - get: requests.get('https://github.com/', timeout=0.001)
-- r.status_code or r.raise_for_status() 
+- r.status_code or r.raise_for_status()
 - Url w/ params: print(r.url)
 - print http resp: print(r.text) or r.content
 - get/set encoding: r.encoding
@@ -15,16 +15,19 @@ V3ryhap
 
 --
 
-DECODING: 
-- Create an image from binary data returned by a request: 
+DECODING:
+- Create an image from binary data returned by a request:
 from PIL import Image
 from io import BytesIO
 i = Image.open(BytesIO(r.content))
 - r.json()
 
 
-### BeautifulSoup - Navigating html 
+### BeautifulSoup - Navigating html
 ------------------------------------
+General
+        find_all_previous
+
 Going down
         Navigating using tag names
         .contents and .children
@@ -40,31 +43,35 @@ Going sideways
 Going back and forth
         .next_element and .previous_element
         .next_elements and .previous_elements
-Getting Links: 
+Getting Links:
         redditAll = soup.find_all("a")
         for links in soup.find_all('a'):
                 print (links.get('href'))
+CSS Selectors
+        soup.select("p > a") : link directly under p
+
+bs4 can also modify or prettify html
 
 ## Selenium:
 -------------
-# Element interaction: 
+# Element interaction:
         browser.find_element_by_partial_link_text('.txt')
         browser.find_element_by_id('searchbox').clear()
 
-# Browser Nav: 
+# Browser Nav:
    Navigating Frames:
         browser.switch_to_frame(By.id('mainFrame'))
         Switch to default frame: browser.switch_to_default_content()
         Switch to 1st frame: browser.switch_to_frame('mainFrame.0.child')
-        Find xpath containing: 
+        Find xpath containing:
            dyn_frame = browser.find_element_by_xpath(
                    '//frame[contains(@name, "fr_resultsNav")]' )
                    # framename = dyn_frame[0].get_attribute('name')
-# Window Nav: 
-        Switch window to the handle of the 2nd window opened: 
-           browser.switch_to_window(browser.window_handles[1]) 
+# Window Nav:
+        Switch window to the handle of the 2nd window opened:
+           browser.switch_to_window(browser.window_handles[1])
 
-# Waiting: 
+# Waiting:
 ----------
 - Wait: driver.implicitly_wait(10)
         time.sleep(random.random() * max_seconds)
@@ -108,9 +115,9 @@ for i in browser.execute_script('var items = {}; for (index = 0; index < argumen
         if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
                 pass
 
-# Classes 
+# Classes
 ---------
-- when we changed the class element (static - outisde _init_), it changed for both objects. 
+- when we changed the class element (static - outisde _init_), it changed for both objects.
 But, changing the object element(inside init) does not
 
 # FileWriter
@@ -127,14 +134,31 @@ This method writes a sequence of strings to the file. write ()
 import os.path
 save_path = 'C:/example/'
 name_of_file = raw_input("What is the name of the file: ")
-completeName = os.path.join(save_path, name_of_file+".txt") 
+completeName = os.path.join(save_path, name_of_file+".txt")
 
-Debugging:
-----------
-# setting up a log: 
+# Debugging:
+-------------
+# setting up a log:
 - Put this in beginning and write to it each time exception is thrown
 path_to_log = '/Users/yourname/Desktop/'
 log_errors = open(path_to_log + 'log_errors.txt', mode = 'w') #Should use append, right, maybe also assigning log size threshold?
+
+
+## Notes:
+---------
+Problems:
+- Close request connection? - on reddCrawl too
+- Check if input boxes are loaded as a JavaScript Post-Load
+    - Use implicit timed waits and try to do it, then figure out why explicit wont work
+    - Try different by (e.g. selector, xpath, inner html, index in collection of same tags)
+        - Make use of bs4 to organize and understand html
+        - Recall Aaron said some property of the tables in SN are different ea time
+
+Moving Forward:
+- Start from task lists and do for each task - https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_userpref_module%3D59f8a2a60a0a0b9b00fd6bfe2e28ada5%26sysparm_query%3Dactive%3Dtrue%5EEQ%26sysparm_clear_stack%3Dtrue
+- Can follow a direct link to catalog tasks or go through sidebar links by setting a checkbox in dash
+- PARAMS: uname, password, target_url(Maybe w/ some webElement verification),
+- Surround everything in try catch and surround try catch with do while counters
 
 '''
 # encoding: utf-8
@@ -145,6 +169,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, NoSuchAttributeException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+import lxml
 import requests
 import pandas as pd
 import re
@@ -152,15 +177,19 @@ import clipboard as cb
 import time
 
 '''
-TODO: 
+TODO:
         1) Wrap in a class
         2) Write alg for getting task list and turn tasks into data objects:            # apachepoi
-                - for task iteration: the data will already be in a table and a filter allows the user to specify the data thats provided, 
-                if its easier than drilling down with scrape_task, notify user of specified filter settings and go by that, 
+                - for task iteration: the data will already be in a table and a filter allows the user to specify the data thats provided,
+                if its easier than drilling down with scrape_task, notify user of specified filter settings and go by that,
                 otherwise just grab whatever you can while there b/c table data doesnt require page transition from selenium.
         3) Replace any timed waits with multiple web element based waits for selenium interactions, error handling
         4) wrap in Java Fx
 '''
+class Task:
+        def __init__(self, name):
+                pass
+
 class TaskScraper:
         # Class Structure: 1) def function which will handle error checking and close browser and restart on error
         # Fill w/ params from GUI
@@ -169,20 +198,16 @@ class TaskScraper:
         list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
         buffer_wait = 2 # Seconds
 
-        
         USER_NAME="admin"
         USER_PASSWORD= 'Veryhap1*'
 
-
         def __init__(self, url=task_url, browser=None):
+                def exec_window_prefs(driver):
+                        driver.set_window_position(0, 0)
+                        driver.set_window_size(325, 250)
+                        return driver
                 # self.url= url
-                self.browser= browser
-                
-        
-        def exec_Prefs():
-                # self.driver.set_window_size(100,100)
-                # self.driver.set_window_position(0,200)
-                pass
+                self.browser= exec_window_prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
 
         def exists_by_id(self, id):
                 try:
@@ -191,42 +216,19 @@ class TaskScraper:
                         return False
                 return True
 
-        #Lists headings and p's, then all frame names, then all links, then all div names  
-        def htmlRunDown(self,  url):
-                # Just start off in uname, tab to password -- Or try parent child movement
-                # print(f"+ First frame Switch ({browser.find_element_by_tag_name('iframe').get_attribute('id')}): ")
-                # print(f"Inputs at Load: {[frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')]}")
-                # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
-                # print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
-                # # AS of Now output here is gsft_main - ['sysparm_ck', 'user_name', 'user_password', ...
-                # # Still times out tho - doubling up on Web waits works as well as one switchTo(0) with a webWait
-                # print(f"iFrames #: {len(browser.find_elements_by_tag_name('iframe'))}")
-                # print(f"inputs #: {len(browser.find_elements_by_tag_name('input'))}")
-                # print(f"\n+ Second frame Switch:  ")
-                # WebDriverWait(browser, 25).until(EC.frame_to_be_available_and_switch_to_it((0)))
-                # print([frame.get_attribute('id') for frame in browser.find_elements_by_tag_name('input')])
-                # print(browser.find_element_by_tag_name('iframe').get_attribute('id'))
-                # print(browser.find_element_by_tag_name('div').get_attribute('id'))
-                # browser.close  
-                pass
-
-        # Start scraping loop                  - Loop can either be main, in init or just here as a kickoff method
+        # Start scraping loop        - Loop can either be main, in init or just here as a kickoff method
         def go_scrape(self, failed_start_threshold=5 ):
                 BROWSER_TIMEOUT = 45 # seconds
                 go = True
                 failed_starts= 0
                 while (go==True and failed_starts < failed_start_threshold ):
-                        self.browser= webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe')
-                        try: 
+                        try:
                                 # Try to start task crawl
                                 t = time.time()
-                                self.browser.set_page_load_timeout(15)
+                                self.browser.set_page_load_timeout(20)
+                                self.browser.get(self.list_url)
+                                print('Time consuming: ', time.time() - t)
 
-                                # Login to service now with credintials
-                                # self.browser.get(self.list_url)
-                                self.browser.get(self.task_url)
-                                # print('Time consuming: ', time.time() - t)
-                                
                                 ## Log in to SN using credintials
                                 time.sleep(self.buffer_wait)
                                 WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
@@ -235,31 +237,30 @@ class TaskScraper:
                                 time.sleep(self.buffer_wait)
                                 (self.browser.find_element_by_name("user_name")).send_keys(self.USER_NAME)
                                 (self.browser.find_element_by_id("user_password")).send_keys(self.USER_PASSWORD + Keys.RETURN)
-                                time.sleep(self.buffer_wait)
-                                
-                                # print("Login Successful")
-                                # print('Time consuming: ', time.time() - t)
+                                print('Time consuming: ', time.time() - t)
                                 time.sleep(self.buffer_wait*2)
 
                                 # Scrape tasks list
-
-
-                                # '''
-                                # Switch browser focus to main frame and scrape task html
-                                # browser.get(self.task_url)
                                 self.browser.switch_to_default_content()
                                 time.sleep(self.buffer_wait)
                                 WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
+                                print('Time consuming: ', time.time() - t)
+                                self.scrape_task_list(self.browser.page_source)
                                 
-                                time.sleep(self.buffer_wait*2)
+                                # Switch browser focus to main frame and scrape task html
+                                '''
+                                self.browser.get(self.task_url)
+                                self.browser.switch_to_default_content()
+                                print('Time consuming: ', time.time() - t)
+                                time.sleep(self.buffer_wait)
+                                WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
                                 self.scrape_Task(self.browser.page_source)
-                                # print('Time consuming: ', time.time() - t)
-                                # '''
+                                '''
 
                                 # Stop loop
                                 go = False
 
-                        except TimeoutError: 
+                        except TimeoutError:
                                 print(f"Timeout Error: {int(time.time()-t)}")
                                 self.browser.close
                                 go = True
@@ -271,57 +272,68 @@ class TaskScraper:
                                 failed_starts += 1
                         finally:
                                 self.browser.close()
-                                print(failed_starts)
+                                print(f"Total Exception Restarts: {failed_starts}")
+
+        def scrape_task_list(self, html):
+                soup= BeautifulSoup(html, features="lxml")
+                try:
+                        # data in table/tbody/tr/td/div/table/-> thead & tbody/tr/td
+                          # You can check what fields are included in columns by looking a thead - id: hdr_sc_task
+                        table= soup.find("tbody", attrs={"class":"list2_body"})
+                        rows = table.findChildren("tr")
+
+                        # grab text from each field(td) in each row of table(tr) and assign to data in task obj
+                        for field in row: 
+                                pass
+                      
+                        # parse table data w/ panda or apace aoi
+                        print(rows)
+                        
+                        
+                except Exception as e:
+                        print(f"error: {e}")
 
         def scrape_Task(self, html):
-                soup = BeautifulSoup(html, features="html.parser")
+                pass
+        '''
+                soup = BeautifulSoup(html, features="lxml")
                 try:
                         k=0
-                        date_changed = {}    # Assigning all in one line throws value error
-                        created_by = {}
-                        status_changes = {}
+                        created_by, status_changes, date_changed = {},{},{}    # Assigning all in one line throws value error
                         
-                        activities = soup.find(name='ul', attrs={"class":"h-card-wrapper activities-form"}).findChildren(name='li', 
+
+                        # IDEA: Instead of findChild, create new soup obj using web element
+                        # Each card divided into 3 blocks: CreatedBy, DateChanged, and statusChange
+                        activities = soup.find(name='ul', attrs={"class":"h-card-wrapper activities-form"}).findChildren(name='li',
                                 attrs={"class":"h-card h-card_md h-card_comments"})
-                        for card in activities: 
-                                # Each card divided into 3 blocks: CreatedBy, DateChanged, and statusChange 
+                        for card in activities:
                                 created_by= soup.findChild(name='span', attrs={"class":"sn-card-component-createdby"})
                                 date_changed = soup.findChild(name='div', attrs={"class":"date-calendar"})
-                                status_changes = soup.findChild(name='ul', 
+                                status_changes = soup.findChild(name='ul',
                                         attrs={"class":"sn-widget-list sn-widget-list-table"}).findChildren("li") # each li is an additional status change
-                                
+
                                 change, effect = [], []; j=0 # Holds spans from li
                                 for i in status_changes:
                                         # get two spans from each li in card status
                                         status = i.findChildren("span", {"class": "sn-widget-list-table"})
                                         s=""
-                                        for l in status: s=+ str(l + " ")
-                                        print(s)
+                                        for l in status: 
+                                                s=+ str(l + " ")
                                         # change[j] = status_changes[0]
                                         # effect[j] = status [1]
                                         pass
-
-                                print(f"User: {created_by}, Date: {date_changed}")
-                                print("\n\nStatus: {status}")
-
-                                # act_user[i] = soup.findChild("span", {"class": "sn-card-component-createdby"})
-                                # print(act_user[i])
-                                # act_type[i] = soup.find("span", {"class": "sn-widget-list-table-cell"}) # try going through divs
-                                # print(act_type[i])
-                                # act_change[i] = soup.find_next_sibling("span", {"class": "sn-widget-list-table-cell"}) # try going through divs
-                                # print(act_change[i])
+                                # print(f"User: {created_by}, Date: {date_changed}")
+                                # print(f"\n\nStatus: {status}")
 
                 except NoSuchAttributeException as e:
                         print(f"Error: Attribute attribute requested, {e}")
                 except Exception as e:
                         print(f"SCRAPING ERROR: {e}")
-
-        def scrape_task_list(self, html):
-                pass
+        '''                        
 
 def main():
-        # Catch Errors: Webdriver - Permisson denied(for update or other browser error), 
-        # NoSuchElem for uname login,  
+        # Catch Errors: Webdriver - Permisson denied(for update or other browser error),
+        # NoSuchElem for uname login,
         # Message: connection refused for random browser error
         # Timeout excep loop with counter for resets on connection
         t= TaskScraper()
