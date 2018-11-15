@@ -136,7 +136,7 @@ save_path = 'C:/example/'
 name_of_file = raw_input("What is the name of the file: ")
 completeName = os.path.join(save_path, name_of_file+".txt")
 
-# Debugging:
+# Debugging:            https://code.visualstudio.com/Docs/editor/debugging
 -------------
 # setting up a log:
 - Put this in beginning and write to it each time exception is thrown
@@ -185,10 +185,11 @@ TODO:
                 otherwise just grab whatever you can while there b/c table data doesnt require page transition from selenium.
         3) Replace any timed waits with multiple web element based waits for selenium interactions, error handling
         4) wrap in Java Fx
+
+Issues: 
+        ## Needed Fields: We can handle deciding what fields to grab by:
+               1) have checkboxes with what fields to grab  
 '''
-class Task:
-        def __init__(self, name):
-                pass
 
 class TaskScraper:
         # Class Structure: 1) def function which will handle error checking and close browser and restart on error
@@ -208,13 +209,6 @@ class TaskScraper:
                         return driver
                 # self.url= url
                 self.browser= exec_window_prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
-
-        def exists_by_id(self, id):
-                try:
-                        self.browser.find_element_by_id(id)
-                except NoSuchElementException:
-                        return False
-                return True
 
         # Start scraping loop        - Loop can either be main, in init or just here as a kickoff method
         def go_scrape(self, failed_start_threshold=5 ):
@@ -272,26 +266,7 @@ class TaskScraper:
                                 failed_starts += 1
                         finally:
                                 self.browser.close()
-                                print(f"Total Exception Restarts: {failed_starts}")
-
-        def scrape_task_list(self, html):
-                soup= BeautifulSoup(html, features="lxml")
-                try:
-                        # data in table/tbody/tr/td/div/table/-> thead & tbody/tr/td
-                          # You can check what fields are included in columns by looking a thead - id: hdr_sc_task
-                        table= soup.find("tbody", attrs={"class":"list2_body"})
-                        rows = table.findChildren("tr")
-
-                        # grab text from each field(td) in each row of table(tr) and assign to data in task obj
-                        for field in row: 
-                                pass
-                      
-                        # parse table data w/ panda or apace aoi
-                        print(rows)
-                        
-                        
-                except Exception as e:
-                        print(f"error: {e}")
+                                print(f"Total Exception Restarts: {failed_starts}\n")
 
         def scrape_Task(self, html):
                 pass
@@ -329,7 +304,74 @@ class TaskScraper:
                         print(f"Error: Attribute attribute requested, {e}")
                 except Exception as e:
                         print(f"SCRAPING ERROR: {e}")
-        '''                        
+        '''      
+        
+        def scrape_task_list(self, html):
+                # Well grab what we can from table, then go back for any incomplete data (desc w/ ...)
+                def get_table_columns(soup):
+                        table_header= soup.find("tr", attrs={"id" : "hdr_sc_task"})
+                        field_order= []
+                        for col in table_header:
+                                try: 
+                                        field_order.append(col.attrs['name'])    
+                                except Exception:
+                                        field_order.append("No Attribute")
+                        return field_order[2:]
+                #  I just need to know the order
+                #  - The harder part is actually changing the order, 
+                #       it may make more since to just keep order same and add whats missing then 
+                #       just use order given to determine which order you assign the tds to Task vars
+        
+                soup= BeautifulSoup(html, features="lxml")
+                try:
+                        # data in table/tbody/tr/td/div/table/-> thead & tbody/tr/td
+                          # You can check what fields are included in columns by looking at thead - 
+                        fields = get_table_columns(soup)
+                        table= soup.find("tbody", attrs={"class":"list2_body"})
+                        rows = table.findChildren("tr")
+
+                        '''     Last Debug
+                        # DEBUGGING: Trying to see why empty tags arent detected
+                        # HELP LINK: https://stackoverflow.com/questions/12256823/taking-the-text-output-when-table-cell-value-is-blank-in-python-beautifulsoup
+                        task= rows[0].find_all("td")
+                        print(f"Single Task (All td) - {len(task)}:")
+                        for i in task: 
+                                print(f"  Tag: {i}")
+                                if i.text == None or 
+                                else: print(f"\t- content: {i.text}")
+                        return
+                        '''
+
+                        # grab text from each field(td) in each row of table(tr) and assign to data in task obj
+                        for task in rows: 
+                                task_data= task.find_all("td", string=True)
+                                empty_tags= task.find_all("td", string=False) # Has both empty tags and 
+                                task_attrs= {}
+                                k=0
+
+                                # Task attributes saved in data, not labelled
+                                for attr in task_data:
+                                        task_attrs[str(fields[k])] = attr.text
+                                        if task_data[k].text == None: # make sure attr are properly assigned
+                                                task_attrs[str(fields[k])] = 'N/A'
+                                        k=k+1
+                                Task(task_attrs[str(fields[0])], task_attrs)
+
+                               
+                        # parse table data w/ panda or apace poi
+                        print(f"\n----------\nTotal rows: {len(rows)}")
+                        print(f"Total table fields: {len(fields)}")
+
+                except Exception as e:
+                        print(f"Go Loop Error: {e}")
+                          
+class Task:                                             # Current Issue: Unsynced Fields and task variables
+        def __init__(self, number, task_attributes):
+                self.show(number, task_attributes)
+        def show(self, number, task_attributes):
+                print(f"\n## {number} ... attrs: {len(task_attributes)}")
+                for i in task_attributes: 
+                        print(f"\t- {i}:  {task_attributes[i]}")
 
 def main():
         # Catch Errors: Webdriver - Permisson denied(for update or other browser error),
