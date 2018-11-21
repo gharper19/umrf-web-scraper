@@ -128,8 +128,8 @@ The read functions contains different methods,
 # readlines() returns a list of lines
 
 This method writes a sequence of strings to the file. write ()
-#Used to write a fixed sequence of characters to a file writelines()
-#writelines can write a list of strings
+# Used to write a fixed sequence of characters to a file writelines()
+# writelines can write a list of strings
 
 import os.path
 save_path = 'C:/example/'
@@ -160,6 +160,8 @@ Moving Forward:
 - PARAMS: uname, password, target_url(Maybe w/ some webElement verification),
 - Surround everything in try catch and surround try catch with do while counters
 
+ 
+
 '''
 # encoding: utf-8
 from bs4 import BeautifulSoup
@@ -189,6 +191,7 @@ TODO:
 Issues: 
         ## Needed Fields: We can handle deciding what fields to grab by:
                1) have checkboxes with what fields to grab  
+        # Still no reboot checks on main() for WebDriverException: Conn refused and Timeout
 '''
 
 class TaskScraper:
@@ -202,7 +205,7 @@ class TaskScraper:
         USER_NAME="admin"
         USER_PASSWORD= 'Veryhap1*'
 
-        def __init__(self, url=task_url, browser=None):
+        def __init__(self):
                 def exec_window_prefs(driver):
                         driver.set_window_position(0, 0)
                         driver.set_window_size(325, 250)
@@ -226,7 +229,7 @@ class TaskScraper:
                                 ## Log in to SN using credintials
                                 time.sleep(self.buffer_wait)
                                 WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
-
+                                
                                 # Change to wait until uname and password appear - should fix random errors
                                 time.sleep(self.buffer_wait)
                                 (self.browser.find_element_by_name("user_name")).send_keys(self.USER_NAME)
@@ -261,6 +264,11 @@ class TaskScraper:
                                 failed_starts += 1
                         except NoSuchElementException as e:
                                 print(f"Not Found Error: {int(time.time()-t)} - {e}")
+                                self.browser.close
+                                go = True
+                                failed_starts += 1
+                        except WebDriverException as e:
+                                print(f"Web Driver Error: {int(time.time()-t)} - {e}")
                                 self.browser.close
                                 go = True
                                 failed_starts += 1
@@ -330,7 +338,7 @@ class TaskScraper:
                         table= soup.find("tbody", attrs={"class":"list2_body"})
                         rows = table.findChildren("tr")
 
-                        '''     Last Debug
+                        '''    
                         # DEBUGGING: Trying to see why empty tags arent detected
                         # HELP LINK: https://stackoverflow.com/questions/12256823/taking-the-text-output-when-table-cell-value-is-blank-in-python-beautifulsoup
                         task= rows[0].find_all("td")
@@ -340,46 +348,153 @@ class TaskScraper:
                                 if i.text == None or 
                                 else: print(f"\t- content: {i.text}")
                         return
-                        '''
+                        ''' 
 
                         # grab text from each field(td) in each row of table(tr) and assign to data in task obj
                         for task in rows: 
-                                task_data= task.find_all("td", string=True)
-                                empty_tags= task.find_all("td", string=False) # Has both empty tags and 
+                                task_data= task.find_all("td")
                                 task_attrs= {}
                                 k=0
 
                                 # Task attributes saved in data, not labelled
                                 for attr in task_data:
                                         task_attrs[str(fields[k])] = attr.text
-                                        if task_data[k].text == None: # make sure attr are properly assigned
+                                        if task_data[k].get_text() == "" or task_data[k].get_text() == re.compile("(empty)"): # make sure attr are properly assigned
                                                 task_attrs[str(fields[k])] = 'N/A'
                                         k=k+1
                                 Task(task_attrs[str(fields[0])], task_attrs)
 
-                               
+                        # print(f">>> True String({len(task_data)})/False Strings({len(empty_tags)})\n- {task_data}\n -{empty_tags}")       
+                        
                         # parse table data w/ panda or apace poi
                         print(f"\n----------\nTotal rows: {len(rows)}")
                         print(f"Total table fields: {len(fields)}")
 
                 except Exception as e:
                         print(f"Go Loop Error: {e}")
+
+
+# Last issue        
+        # returns soup for examining list html with bs4 in shell - Trying to get blank spaces in table filled in to fix field order, 
+        # Can just replace with marker if I can just select for the empty ones ("(empty)", "", and None) they dont show in current loop(if statement) and all td are included in text=False
+                # Alt option: Set gear filter before grabbing, use only fields garunteed to be there 
+                # Last option: just grab name and basics and present list to user, allow them to specify the extra fields needed and start slower 2nd round of scraping(w/ error checking loops w/ max cap)
+
+# Just for use in interactive shell for testing purposes: trying to inject blank spaces into blcnk table cells
+class EZTask:
+        list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
+        buffer_wait = 2 # Seconds
+
+        USER_NAME="admin"
+        USER_PASSWORD= 'Veryhap1*'
+
+        def __init__(self):
+                def exec_window_prefs(driver):
+                        driver.set_window_position(0, 0)
+                        driver.set_window_size(325, 250)
+                        return driver
+                # self.url= url
+                self.browser= exec_window_prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
+
+        # Start scraping loop        - Loop can either be main, in init or just here as a kickoff method
+        def go(self, failed_start_threshold=5 ):
+                BROWSER_TIMEOUT = 45 # seconds
+                go = True
+                failed_starts= 0
+                while (go==True and failed_starts < failed_start_threshold ):
+                        try:
+                                # Try to start task crawl
+                                t = time.time()
+                                self.browser.set_page_load_timeout(20)
+                                self.browser.get(self.list_url)
+                                print('Time consuming: ', time.time() - t)
+
+                                ## Log in to SN using credintials
+                                time.sleep(self.buffer_wait)
+                                WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
+                                
+                                # Change to wait until uname and password appear - should fix random errors
+                                time.sleep(self.buffer_wait)
+                                (self.browser.find_element_by_name("user_name")).send_keys(self.USER_NAME)
+                                (self.browser.find_element_by_id("user_password")).send_keys(self.USER_PASSWORD + Keys.RETURN)
+                                print('Time consuming: ', time.time() - t)
+                                time.sleep(self.buffer_wait*2)
+
+                                # Scrape tasks list
+                                self.browser.switch_to_default_content()
+                                time.sleep(self.buffer_wait)
+                                WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
+                                print('Time consuming: ', time.time() - t) 
+                                html = self.browser.page_source
+                                self.browser.close()
+                                go= False
+                        except Exception as e:
+                                print(f"Exploration Error: {e}")
+                                self.browser.close
+                                go = True
+                                failed_starts += 1
+                return BeautifulSoup(html, features="lxml")
+        
+        def setEm(self):
+                def get_table_columns(soup): # Gets field headers
+                        table_header= soup.find("tr", attrs={"id" : "hdr_sc_task"})
+                        field_order= []
+                        for col in table_header:
+                                try: 
+                                        field_order.append(col.attrs['name'])    
+                                except Exception:
+                                        field_order.append("No Attribute")
+                        return field_order[2:]
+                soup= self.go()
+                self.fields =get_table_columns(soup)
+                self.table= soup.find("tbody", attrs={"class":"list2_body"})
+                self.rows = self.table.findChildren("tr")
+           
+                # Trying just one task - Works fine replacing blanks - rem to handle "(empty)" are they fields or meta data?
+                self.t1= self.rows[0].findChildren("td")
+                print(f"Single Task (All td) - {len(self.t1)} out of {len(self.rows)}:")
+                for i in self.t1: 
+                        print(f"  Tag: {i}")
+                        if i.get_text() == None or i.get_text() == "": 
+                                print("\t- content: n/a")
+                        else: print(f"\t- content: {i.get_text()}")
+## LAST LEFT OFF: t1 above works perfect; but for tasks below, there is an index problem with k  
+                # grab text from each field(td) in each row of table(tr) and assign to data in task obj
+                tasks= []
+                for task in self.rows: 
+                        task_data= task.findChildren("td")
+                        task_data= task_data[2:]
+                        task_attrs= {}
+                        k=0
+                        l= len(task_data)
+                        for attr in task_data:
+                                task_attrs[str(self.fields[k])] = attr.get_text() # IndexError: list index out of range
+                                if attr.get_text() == None or attr.get_text() == re.compile("(empty)") or attr.get_text()== "" : # make sure attr are properly assigned
+                                        task_attrs[str(self.fields[k])] = 'N/A'
+                                k=k+1
+                        tasks += [Task(task_attrs[str(self.fields[0])], task_attrs, l)]
+                for i in tasks:
+                        i.show()
+                         
                           
-class Task:                                             # Current Issue: Unsynced Fields and task variables
-        def __init__(self, number, task_attributes):
-                self.show(number, task_attributes)
-        def show(self, number, task_attributes):
-                print(f"\n## {number} ... attrs: {len(task_attributes)}")
-                for i in task_attributes: 
-                        print(f"\t- {i}:  {task_attributes[i]}")
+class Task:                                             
+        def __init__(self, number, task_attributes, numTags):
+                self.number= number
+                self.task_attributes= task_attributes
+                self.numTags= numTags
+        def show(self, number, task_attributes, numTags):
+                print(f"\n## {self.number} ... attrs: {len(self.task_attributes)} out of {self.numTags} Tags")
+                for i in self.task_attributes: 
+                        print(f"\t- {i}:  {self.task_attributes[i]}")
 
 def main():
         # Catch Errors: Webdriver - Permisson denied(for update or other browser error),
         # NoSuchElem for uname login,
         # Message: connection refused for random browser error
         # Timeout excep loop with counter for resets on connection
-        t= TaskScraper()
-        t.go_scrape()
+        t= EZTask()
+        # t.go_scrape()
+        soup= t.setEm()
 
 if __name__ == "__main__":
         main()
