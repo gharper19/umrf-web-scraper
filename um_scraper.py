@@ -338,18 +338,6 @@ class TaskScraper:
                         table= soup.find("tbody", attrs={"class":"list2_body"})
                         rows = table.findChildren("tr")
 
-                        '''    
-                        # DEBUGGING: Trying to see why empty tags arent detected
-                        # HELP LINK: https://stackoverflow.com/questions/12256823/taking-the-text-output-when-table-cell-value-is-blank-in-python-beautifulsoup
-                        task= rows[0].find_all("td")
-                        print(f"Single Task (All td) - {len(task)}:")
-                        for i in task: 
-                                print(f"  Tag: {i}")
-                                if i.text == None or 
-                                else: print(f"\t- content: {i.text}")
-                        return
-                        ''' 
-
                         # grab text from each field(td) in each row of table(tr) and assign to data in task obj
                         for task in rows: 
                                 task_data= task.find_all("td")
@@ -458,21 +446,34 @@ class EZTask:
                         if i.get_text() == None or i.get_text() == "": 
                                 print("\t- content: n/a")
                         else: print(f"\t- content: {i.get_text()}")
-## LAST LEFT OFF: t1 above works perfect; but for tasks below, there is an index problem with k  
+## LAST LEFT OFF: t1 above works perfect; but for tasks below, there is an index problem with k (3 more task attrs than table columns)  
+## Last 3 tags are always ones without data. Also reassignment count is weird(blank when 0)
+
+## NEXT UP: Test EZTask to see if Task objs match table rows, THEN: press button and go to next page, if data matches prev page toss it
+## Will be followed by Showing data in gui then asking about follow up individual tasks scrape
+
                 # grab text from each field(td) in each row of table(tr) and assign to data in task obj
                 tasks= []
-                for task in self.rows: 
+                for task in self.rows:
+                        # Trim unneccessary td Date attribute tags
+                        for td in task.find_all("td"): 
+                                pass # find and delete datex tds- if soup.find("div")
+                
+                        # Grab Task attributes
                         task_data= task.findChildren("td")
-                        task_data= task_data[2:]
+                        task_data= task_data[2:(len(task_data)-4)] # frst of 3 datex is [20:]
                         task_attrs= {}
                         k=0
                         l= len(task_data)
+                        # More task_data attr(td) than fields (col names)
                         for attr in task_data:
                                 task_attrs[str(self.fields[k])] = attr.get_text() # IndexError: list index out of range
                                 if attr.get_text() == None or attr.get_text() == re.compile("(empty)") or attr.get_text()== "" : # make sure attr are properly assigned
                                         task_attrs[str(self.fields[k])] = 'N/A'
                                 k=k+1
                         tasks += [Task(task_attrs[str(self.fields[0])], task_attrs, l)]
+
+                        # Adding blanks as temp fix for indexing error in fields(3 less than )
                 for i in tasks:
                         i.show()
                          
@@ -482,7 +483,7 @@ class Task:
                 self.number= number
                 self.task_attributes= task_attributes
                 self.numTags= numTags
-        def show(self, number, task_attributes, numTags):
+        def show(self):
                 print(f"\n## {self.number} ... attrs: {len(self.task_attributes)} out of {self.numTags} Tags")
                 for i in self.task_attributes: 
                         print(f"\t- {i}:  {self.task_attributes[i]}")
