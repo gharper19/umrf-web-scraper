@@ -161,6 +161,8 @@ Moving Forward:
 - Surround everything in try catch and surround try catch with do while counters
 
  
+## Problems and Solns: 
+- index error fixed by removing first 2 table cols from fields, and first 2 and last 3 tags from each task (tr)
 
 '''
 # encoding: utf-8
@@ -362,9 +364,7 @@ class TaskScraper:
                         print(f"Go Loop Error: {e}")
 
 
-# Last issue        
-        # returns soup for examining list html with bs4 in shell - Trying to get blank spaces in table filled in to fix field order, 
-        # Can just replace with marker if I can just select for the empty ones ("(empty)", "", and None) they dont show in current loop(if statement) and all td are included in text=False
+# Last issue 
                 # Alt option: Set gear filter before grabbing, use only fields garunteed to be there 
                 # Last option: just grab name and basics and present list to user, allow them to specify the extra fields needed and start slower 2nd round of scraping(w/ error checking loops w/ max cap)
 
@@ -413,6 +413,7 @@ class EZTask:
                                 time.sleep(self.buffer_wait)
                                 WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
                                 print('Time consuming: ', time.time() - t) 
+                                time.sleep(self.buffer_wait*3)
                                 html = self.browser.page_source
                                 self.browser.close()
                                 go= False
@@ -431,34 +432,35 @@ class EZTask:
                                 try: 
                                         field_order.append(col.attrs['name'])    
                                 except Exception:
-                                        field_order.append("No Attribute")
+                                        field_order.append("Missing Attribute")
                         return field_order[2:]
                 soup= self.go()
                 self.fields =get_table_columns(soup)
                 self.table= soup.find("tbody", attrs={"class":"list2_body"})
-                self.rows = self.table.findChildren("tr")
-           
-                # Trying just one task - Works fine replacing blanks - rem to handle "(empty)" are they fields or meta data?
-                self.t1= self.rows[0].findChildren("td")
-                print(f"Single Task (All td) - {len(self.t1)} out of {len(self.rows)}:")
-                for i in self.t1: 
-                        print(f"  Tag: {i}")
-                        if i.get_text() == None or i.get_text() == "": 
-                                print("\t- content: n/a")
-                        else: print(f"\t- content: {i.get_text()}")
-## LAST LEFT OFF: t1 above works perfect; but for tasks below, there is an index problem with k (3 more task attrs than table columns)  
-## Last 3 tags are always ones without data. Also reassignment count is weird(blank when 0)
+                self.rows = self.table.contents# self.table.find_all("tr")
 
-## NEXT UP: Test EZTask to see if Task objs match table rows, THEN: press button and go to next page, if data matches prev page toss it
+## NEXT UP: Issue: Some tasks are not being, THEN: press button and go to next page, if data matches prev page toss it
 ## Will be followed by Showing data in gui then asking about follow up individual tasks scrape
+## Issue: Some tasks are not being included at all in the html - Not webwait(no new items appear), Not panda(Doesnt understand field structure)
+
+## try: find(text="Task1111") to find it, pandas.read_html, giving selenium more time to load the page, scrolling table (not likely)
+## Debugging: Where are the other tasks going? How many are missing? 
+#try loading html in browser, try just decomposing unneccessary tags, check num rows is consistent(7 vs 10)
+#  Whats all in the html: table, num rows, num cols, do task attributes change?
+
+                t= soup.find("table")
+                
+                
+                print(f"Children: {len(t.findChildren())}")
+                print(f"T is : {len(t)}")
+                print(f"First Child: \n{t.findChildren()[0]}")
+                print(f"All Table Contents ({len(t.find_All())}): \n{len(t.find_All())}")
+                print(f"Table itself: \n{t}")
+                
 
                 # grab text from each field(td) in each row of table(tr) and assign to data in task obj
-                tasks= []
+                self.tasks= []
                 for task in self.rows:
-                        # Trim unneccessary td Date attribute tags
-                        for td in task.find_all("td"): 
-                                pass # find and delete datex tds- if soup.find("div")
-                
                         # Grab Task attributes
                         task_data= task.findChildren("td")
                         task_data= task_data[2:(len(task_data)-4)] # frst of 3 datex is [20:]
@@ -471,11 +473,11 @@ class EZTask:
                                 if attr.get_text() == None or attr.get_text() == re.compile("(empty)") or attr.get_text()== "" : # make sure attr are properly assigned
                                         task_attrs[str(self.fields[k])] = 'N/A'
                                 k=k+1
-                        tasks += [Task(task_attrs[str(self.fields[0])], task_attrs, l)]
+                        self.tasks += [Task(task_attrs[str(self.fields[0])], task_attrs, l)]
 
                         # Adding blanks as temp fix for indexing error in fields(3 less than )
-                for i in tasks:
-                        i.show()
+                for i in self.tasks:
+                        pass#i.show()
                          
                           
 class Task:                                             
