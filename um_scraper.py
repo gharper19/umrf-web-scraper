@@ -298,7 +298,7 @@ class EZTask:
                                 except Exception:
                                         field_order.append("Missing Attribute")
                         return field_order[2:]
-                soup= self.go()
+                soup= self.get_list_soup()
                 self.fields =get_table_columns(soup)
                 self.table= soup.find("table")
                 self.tbody = soup.find("tbody", attrs={"class":"list2_body"})
