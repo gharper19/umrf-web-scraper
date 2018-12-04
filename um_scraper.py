@@ -1,24 +1,51 @@
 '''
 Past Issues: 
-- Nov 29 - SN Service Interruption: This instance is unavailable.
-
-Problems:
-- Close request connection? - on reddCrawl too
-- Check if input boxes are loaded as a JavaScript Post-Load
+- October -  Check if input boxes are loaded as a JavaScript Post-Load - They are.
     - Use implicit timed waits and try to do it, then figure out why explicit wont work
     - Try different by (e.g. selector, xpath, inner html, index in collection of same tags)
         - Make use of bs4 to organize and understand html
         - Recall Aaron said some property of the tables in SN are different ea time
+    - FIX: Had to enter inline frame, using selenium before I could search for the login box  
+- Nov 29 - SN Service Interruption: This instance is unavailable.
+- index error fixed by removing first 2 table cols from fields, and first 2 and last 3 tags from each task (tr)
+- Before Dec 4: During Table scrape, all tasks except top one would be Pulled in - FIX: idk but that task is gone from catalouge 
 
-Moving Forward:
+
+TODO: Tasks
+1) Turn tasks into data objects:            # apachepoi
+        # for task iteration: the data will already be in a table and a filter allows the user to specify the data thats provided,
+        if its easier than drilling down with scrape_task, notify user of specified filter settings and go by that,
+        otherwise just grab whatever you can while there b/c table data doesnt require page transition from selenium.
+        # In go_scrape main loop, handle error checking and close browser and restart on error
+        # Fill w/ params from GUI
+        # Target takes to login then to target page
+2) Export Task data to csv using apache poi or panda 
+3) Replace any timed waits with multiple web element based waits for selenium interactions, error handling
+        - Then handle TimeoutExceptions and NotfoundExceptions more gracefully than denials and browser Exceptions
+4) wrap in Java Fx, Get params through GUI
+- create a doc for how to document web dev proj
+- download sphinx
+- set up proper testing task page
+- Rebase commits, clean up commit history
+- save an offline copy of html w/ removed scripts and other stuff
+
+TODO: Issues and Problems:
+- Close request connection? - on reddCrawl too
+- ## Needed Fields: We can handle deciding what fields to grab by:
+        - have checkboxes with what fields to grab  
+- Still no reboot checks on main() for WebDriverException: Conn refused and Timeout
+- Table Scrape has a max of 30 attributes I can grab before I either need to scroll. 
+        - This should be fine because most fields are blank, but can be reviewed after first table scrape 
+        to determine if a second scrape (w/ altered attribute filter) is needed. (or a page scrape)  
+- Every bs4 interaction, after using selenium, Needs a couple of error loops incase some data hasn't finished loading 
+- Assume url takes you straight to task page, then if not found use backup url and navigate via selenium
+        - You can check by grabbing page url and comparing with target
+
+TODO: Moving Forward:
 - Start from task lists and do for each task - https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_userpref_module%3D59f8a2a60a0a0b9b00fd6bfe2e28ada5%26sysparm_query%3Dactive%3Dtrue%5EEQ%26sysparm_clear_stack%3Dtrue
 - Can follow a direct link to catalog tasks or go through sidebar links by setting a checkbox in dash
-- PARAMS: uname, password, target_url(Maybe w/ some webElement verification),
-- Surround everything in try catch and surround try catch with do while counters
-
- 
-## Problems and Solns: 
-- index error fixed by removing first 2 table cols from fields, and first 2 and last 3 tags from each task (tr)
+- PARAMS: uname, password, target_url(Maybe w/ some webElement verification) and backup URL, checked off Task attributes, 
+        - CONFIGS: bufferwait, seconds for time.sleep()'s, num restarts, 
 
 '''
 # encoding: utf-8
@@ -35,24 +62,6 @@ import pandas as pd
 import re
 import clipboard as cb
 import time
-
-'''
-TODO:
-        1) Write alg for getting task list and turn tasks into data objects:            # apachepoi
-                # for task iteration: the data will already be in a table and a filter allows the user to specify the data thats provided,
-                if its easier than drilling down with scrape_task, notify user of specified filter settings and go by that,
-                otherwise just grab whatever you can while there b/c table data doesnt require page transition from selenium.
-                # def function which will handle error checking and close browser and restart on error
-                # Fill w/ params from GUI
-                # Target takes to login then to target page
-        3) Replace any timed waits with multiple web element based waits for selenium interactions, error handling
-        4) wrap in Java Fx
-
-Issues: 
-        ## Needed Fields: We can handle deciding what fields to grab by:
-               1) have checkboxes with what fields to grab  
-        # Still no reboot checks on main() for WebDriverException: Conn refused and Timeout
-'''
 
 USER_NAME="admin"
 USER_PASSWORD= 'Veryhap1*'
@@ -75,6 +84,7 @@ def go_scrape(failed_start_threshold=5):
         BROWSER_TIMEOUT = 45 # seconds
         cont_loop = True
         failed_starts= 0
+        browser= get_browser_driver()
         while (cont_loop==True and failed_starts < failed_start_threshold ):
                 try:
                         # Try to start task crawl - Takes average of 20 secs to login
@@ -92,7 +102,8 @@ def go_scrape(failed_start_threshold=5):
                         time.sleep(buffer_wait)
                         WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
                         scrape_task_list(browser.page_source)
-                        # Click nextpage then repeat
+                        
+                        # Check if there are more on next page and Scrape next page as well
                         # browser.find()
 
                         # Show Results and confirm second individual scrape or ask before starting 
@@ -166,7 +177,8 @@ def scrape_Task(html):
 
 
 def scrape_task_list(html):
-# grabs what it can from table, then later if neccessary goes back for any incomplete data (desc, worknotes, ... )
+# grabs what it can from table and returns True if there are more tasks on next page, and false when finished
+# later, if neccessary can go back for any incomplete data (desc, worknotes, ... ) after notifying user
         soup= BeautifulSoup(html, features="lxml")
 
         # Gets column headers from table header tags
@@ -201,19 +213,23 @@ def scrape_task_list(html):
                                 k=k+1
                         tasks += [Task(task_attrs[str(fields[0])], task_attrs, l)]
                 for i in tasks:
-                        i.show()
-                # parse table data w/ panda or apace poi
-                print(f"\n----------\nTotal rows: {len(rows)}")
-                print(f"Total table fields: {len(fields)}")
+                        pass#i.show()
 
+                # parse table data w/ panda or apace poi
+                # tasks
+############ LAST ##################               
+#-----> # Check vcr_controls div and return value for more tasks on next page or not
+        navbar = soup.find("table", attrs={"class": "list_nav list_nav_bottom"}).Child("tr").Child("td", attrs={"class":"text-align-right"})
+        for span in navbar.Children("span", attrs={"id": re.compile()}) # Use re to find first span - Re docs in bookmarks
+
+        # Needs error looping for unloaded data
         except Exception as e:
                 print(f"Go Loop Error: {e}")
 
+# Alt option: Set gear filter before grabbing, use only fields garunteed to be there 
+# Last option: just grab name and basics and present list to user, allow them to specify the extra fields needed and start slower 2nd round of scraping(w/ error checking loops w/ max cap)
 
-# Last issue 
-                # Alt option: Set gear filter before grabbing, use only fields garunteed to be there 
-                # Last option: just grab name and basics and present list to user, allow them to specify the extra fields needed and start slower 2nd round of scraping(w/ error checking loops w/ max cap)
-
+''' Not working as well
 # Class for testing in instance
 class EZTask:
         list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
@@ -232,6 +248,7 @@ class EZTask:
                 BROWSER_TIMEOUT = 45 # seconds
                 go = True
                 failed_starts= 0
+                html= ""
                 while (go==True and failed_starts < failed_start_threshold ):
                         try:
                                 # Try to start task crawl
@@ -266,7 +283,7 @@ class EZTask:
                                 go = True
                                 failed_starts += 1
                 return BeautifulSoup(html, features="lxml")
-        
+   
         def get_browser():
                 BROWSER_TIMEOUT = 45 # seconds
                 cont_loop = True
@@ -286,7 +303,7 @@ class EZTask:
                                 time.sleep(buffer_wait*2)
                         except Exception as e: 
                                 print(f"Error returning browser: {e}")
-
+   
 
         def setEm(self):
                 def get_table_columns(soup): # Gets field headers
@@ -340,7 +357,7 @@ class EZTask:
                 for i in self.tasks:
                         pass # i.show()
                          
-                          
+'''                      
 class Task:                                             
         def __init__(self, number, task_attributes, numTags):
                 self.number= number
@@ -357,9 +374,11 @@ def main():
         # NoSuchElem for uname login,
         # Message: connection refused for random browser error
         # Timeout excep loop with counter for resets on connection
+        '''
         t= EZTask()
-        # t.go_scrape()
         soup= t.setEm()
+        '''
+        go_scrape()
 
 if __name__ == "__main__":
         main()

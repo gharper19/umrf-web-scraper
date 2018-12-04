@@ -27,6 +27,7 @@ i = Image.open(BytesIO(r.content))
 ------------------------------------
 General
         find_all_previous
+		find("tag", recursive=False)	- Searches w/o recursion
 
 Going down
         Navigating using tag names
@@ -49,6 +50,8 @@ Getting Links:
                 print (links.get('href'))
 CSS Selectors
         soup.select("p > a") : link directly under p
+		
+decompose: delete from soup
 
 bs4 can also modify or prettify html
 
@@ -144,7 +147,7 @@ path_to_log = '/Users/yourname/Desktop/'
 log_errors = open(path_to_log + 'log_errors.txt', mode = 'w') #Should use append, right, maybe also assigning log size threshold?
 '''
 
---------------- Class Version, commit a1e2630 -------------------------------
+---------------  -------------------------------
 
 '''
 Past Issues: 
@@ -168,23 +171,6 @@ Moving Forward:
 ## Problems and Solns: 
 - index error fixed by removing first 2 table cols from fields, and first 2 and last 3 tags from each task (tr)
 
-'''
-
-
-# encoding: utf-8
-from bs4 import BeautifulSoup
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, NoSuchAttributeException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-import lxml
-import requests
-import pandas as pd
-import re
-import clipboard as cb
-import time
 
 '''
 TODO:
@@ -200,7 +186,38 @@ Issues:
         ## Needed Fields: We can handle deciding what fields to grab by:
                1) have checkboxes with what fields to grab  
         # Still no reboot checks on main() for WebDriverException: Conn refused and Timeout
-'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################################################################
+################################ Class Version, commit a1e2630 #######################
+################################
+# encoding: utf-8
+from bs4 import BeautifulSoup
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, NoSuchAttributeException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
+import lxml
+import requests
+import pandas as pd
+import re
+import clipboard as cb
+import time
 
 class TaskScraper:
         # Class Structure: 1) def function which will handle error checking and close browser and restart on error
