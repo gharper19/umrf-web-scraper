@@ -47,6 +47,20 @@ TODO: Moving Forward:
 - PARAMS: uname, password, target_url(Maybe w/ some webElement verification) and backup URL, checked off Task attributes, 
         - CONFIGS: bufferwait, seconds for time.sleep()'s, num restarts, 
 
+TODO: Error Checks:
+- Browser wont start - Message: Tried to run command without establishing a connection
+- Malformed Url - Happened directly after adding browser.get(task_url)
+
+Notes: 
+
+reports -> umrf 
+
+number, opened closed title assignmentgroup, 
+
+Activities: assigned to and state
+
+
+
 '''
 # encoding: utf-8
 from bs4 import BeautifulSoup
@@ -65,16 +79,19 @@ import time
 
 USER_NAME="admin"
 USER_PASSWORD= 'Veryhap1*'
-task_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
+task_demo_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
 list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
+task_url=""
 buffer_wait = 2 # Seconds
 
 # Replace url with given Task Page url in GUI
 def get_browser_driver(url=list_url):
 # Creates and returns selenium browser window
         driver= webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe')
-        driver.set_window_position(0, 0)
-        driver.set_window_size(325, 250)
+        
+        # driver.set_window_position(0, 0)
+        # driver.set_window_size(325, 250)
+
         driver.set_page_load_timeout(20)
         driver.get(url)
         return driver
@@ -84,9 +101,11 @@ def go_scrape(failed_start_threshold=5):
         BROWSER_TIMEOUT = 45 # seconds
         cont_loop = True
         failed_starts= 0
-        browser= get_browser_driver()
+        t=time.time()
         while (cont_loop==True and failed_starts < failed_start_threshold ):
                 try:
+                        browser= get_browser_driver()
+
                         # Try to start task crawl - Takes average of 20 secs to login
                         time.sleep(buffer_wait)
                         WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
@@ -104,24 +123,20 @@ def go_scrape(failed_start_threshold=5):
                         scrape_task_list(browser.page_source)
                         
                         # Check if there are more on next page and Scrape next page as well
-                        # browser.find()
-
-                        # Show Results and confirm second individual scrape or ask before starting 
-                
+        
                         
+                        # Click first task
+                        browser.find_element_by_xpath("//a[@class='linked formlink']").click()
+
                         # Switch browser focus to main frame and scrape task html
-                        '''
-                        browser.get(task_url)
+                        time.sleep(buffer_wait) 
                         browser.switch_to_default_content()
                         print('Time consuming: ', time.time() - t)
-                        time.sleep(buffer_wait)
                         WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
                         scrape_Task(browser.page_source)
-                        '''
-
+                        
                         # Stop loop
                         cont_loop = False
-
                 except TimeoutError:
                         print(f"Timeout Error: {int(time.time()-t)}")
                         browser.close
@@ -166,9 +181,8 @@ def scrape_Task(html):
                                         s=+ str(l + " ")
                                 # change[j] = status_changes[0]
                                 # effect[j] = status [1]
-                                pass
-                        # print(f"User: {created_by}, Date: {date_changed}")
-                        # print(f"\n\nStatus: {status}")
+                        print(f"User: {created_by}, Date: {date_changed}")
+                        print(f"\n\nStatus: {status}")
 
         except NoSuchAttributeException as e:
                 print(f"Error: Attribute attribute requested, {e}")
@@ -189,7 +203,11 @@ def scrape_task_list(html):
                 except Exception:
                         field_order.append("No Attribute")
         fields = field_order[2:]
-        
+################### Skipped - just gonna keep hitting down arrow on task page to get next task till data matches
+        # Check vcr_controls div and return value for more tasks on next page or not
+        div = soup.find("div", attrs={"class":"vcr_controls"}).findChild()
+        #print(div)
+
         # Find and scrape table body based on header fields
         try:
                 table= soup.find("tbody", attrs={"class":"list2_body"})
@@ -205,6 +223,9 @@ def scrape_task_list(html):
                         task_attrs= {}
                         k=0
                         l= len(task_data)
+                        # Stores link to first task page
+                        if rows[0] == task: 
+                                task_url=task_data[0].contents[0].attrs['href']
                         # More task_data attr(td) than fields (col names)
                         for attr in task_data:
                                 task_attrs[str(fields[k])] = attr.get_text() # IndexError: list index out of range
@@ -214,22 +235,21 @@ def scrape_task_list(html):
                         tasks += [Task(task_attrs[str(fields[0])], task_attrs, l)]
                 for i in tasks:
                         pass#i.show()
-
-                # parse table data w/ panda or apace poi
-                # tasks
-############ LAST ##################               
-#-----> # Check vcr_controls div and return value for more tasks on next page or not
-        navbar = soup.find("table", attrs={"class": "list_nav list_nav_bottom"}).Child("tr").Child("td", attrs={"class":"text-align-right"})
-        for span in navbar.Children("span", attrs={"id": re.compile()}) # Use re to find first span - Re docs in bookmarks
-
-        # Needs error looping for unloaded data
         except Exception as e:
                 print(f"Go Loop Error: {e}")
+                # parse table data w/ panda or apace poi
+
+############ LAST ##################  https://docs.python.org/3/library/re.html        
+#-----> 
+        
+        #for span in navbar.Children("span", attrs={"id": re.compile()}) # Use re to find first span - Re docs in bookmarks
+
+        # Needs error looping for unloaded data
 
 # Alt option: Set gear filter before grabbing, use only fields garunteed to be there 
 # Last option: just grab name and basics and present list to user, allow them to specify the extra fields needed and start slower 2nd round of scraping(w/ error checking loops w/ max cap)
 
-''' Not working as well
+
 # Class for testing in instance
 class EZTask:
         list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
@@ -284,10 +304,11 @@ class EZTask:
                                 failed_starts += 1
                 return BeautifulSoup(html, features="lxml")
    
-        def get_browser():
+        def get_browser(self, failed_start_threshold=3):
                 BROWSER_TIMEOUT = 45 # seconds
                 cont_loop = True
                 failed_starts= 0
+                browser= self.browser
                 while (cont_loop==True and failed_starts < failed_start_threshold ):
                         try:
                                 # Try to start task crawl - Takes average of 20 secs to login
@@ -301,6 +322,8 @@ class EZTask:
                                 (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
                                 (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
                                 time.sleep(buffer_wait*2)
+
+                                return browser
                         except Exception as e: 
                                 print(f"Error returning browser: {e}")
    
@@ -329,7 +352,7 @@ class EZTask:
 
 # Dcoumentation - easy install sphinx: https://pythonhosted.org/an_example_pypi_project/sphinx.html
                 self.rows = self.table.contents# self.table.find_all("tr")
-                
+                t=soup
                 # Show for debugging
                 print(f"Children: {len(t.findChildren())}")
                 print(f"T is : {len(t)}")
@@ -357,7 +380,7 @@ class EZTask:
                 for i in self.tasks:
                         pass # i.show()
                          
-'''                      
+                   
 class Task:                                             
         def __init__(self, number, task_attributes, numTags):
                 self.number= number
