@@ -1,3 +1,5 @@
+- I learned xpaths(in bookmarks) and that really helped with the selenium problems
+
 ## Selenium:
 -------------
 # Element interaction:
