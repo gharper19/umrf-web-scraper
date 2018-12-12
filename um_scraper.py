@@ -72,7 +72,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, NoSuchAttributeException
+from selenium.common.exceptions import WebDriverException, TimeoutException, NoSuchElementException, NoSuchAttributeException, InvalidSessionIdException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 import lxml
@@ -87,7 +87,7 @@ USER_PASSWORD= 'Veryhap1*'
 list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
 task_url=""
 buffer_wait = 2 # Seconds
-tasks = []
+
 # For testing
 task_demo_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
 restart_limit = 5
@@ -110,6 +110,7 @@ def get_browser_driver(url=list_url):
 def go_scrape(failed_start_threshold=restart_limit):
         # Start selenium browser and begin scraping loop
         BROWSER_TIMEOUT = 45 # seconds
+        
         cont_loop = True
         failed_starts= 0
         t=time.time()
@@ -127,38 +128,77 @@ def go_scrape(failed_start_threshold=restart_limit):
                         (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
                         time.sleep(buffer_wait*2)
 
-                        # Scrape tasks list
-                        browser.switch_to_default_content() 
+                        # Scrape tasks table and return list
+                        browser.switch_to.default_content() 
                         time.sleep(buffer_wait)
                         WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
-                        scrape_task_list(browser.page_source)
+                        time.sleep(buffer_wait)
+                        catalog_tasks= scrape_task_list(browser.page_source)
+                                                
+                        # For Checking next page of task table - Check vcr_controls div and return value for more tasks on next page or not
+                        # div = soup.find("div", attrs={"class":"vcr_controls"}).findChild()
+                        # print(div)
                         
-                        # Check if there are more on next page and Scrape next page as well
-        
-                        
-                        # Click first task
+                        # Click first task and start individual task page scrape loop 
                         browser.find_element_by_xpath("//a[@class='linked formlink']").click()
                         cont_task= True; num_tasks=0
+
                         while(cont_task and num_tasks < task_page_limit):
+                        # Iterate through tasks and pass to scrape task with a flag for new/updated
+                                time.sleep(buffer_wait) 
+                                soup = BeautifulSoup(browser.page_source, features="lxml")
+                                
+                                # Check if task number is already in Catalog_tasks list to determine whether to grab extra details with Tasks Activities
+                                name = soup.find(name="input", attrs={"id":"sc_task.number", "name":"sc_task.number", "class":"form-control"}).get_text()
+                                update_index=-1
+                                for task_index in range(len(catalog_tasks)): 
+                                        if catalog_tasks[task_index].number == name: update_index= task_index
+
                                 # Switch browser focus to main frame and scrape task html
                                 time.sleep(buffer_wait) 
-                                browser.switch_to_default_content()
-                                time.sleep(buffer_wait) 
-                                scrape_Task(browser.page_source)
+                                browser.switch_to.default_content()
+                                time.sleep(buffer_wait*3) 
 
+                                if (update_index == -1) : catalog_tasks += [scrape_Task(browser.page_source)]
+                                elif (update_index >= 0): 
+                                        catalog_tasks[update_index] = scrape_Task(browser.page_source, catalog_tasks[update_index])
+                                        
+####    Iteratting through Task pages - down button DOES disappear and become unclickable on last task in single page list. 
+        # So you'll have to check one iteration beforehand and signal that the next is the last one
+        # Also the page that it shows as text is the next page after not current task page 
                                 # Check if reached final task and if not Click down arrow to iterate tasks pages
-                                records_str = BeautifulSoup(browser.page_source, features="lxml").find("div", {"class":"record-paging-nowrap"}).findChild("button", attrs= {"class":"btn btn-icon icon-arrow-down" }).findChild("span", attrs={"class":"sr-only"}).get_text()
-                                records = [int(s) for s in records_str if s.isdigit()] # Next record (\d of \d)
-                                if (records[0] == records[1]): cont_task=False # Stop Task Scraping loop
-                                browser.find_element_by_xpath("//button[@class='btn btn-icon icon-arrow-down']").click()
+                                # records_str = soup.find("div", {"class":"record-paging-nowrap"}).findChild("button", attrs= {"class":"btn btn-icon icon-arrow-down" }).findChild("span", attrs={"class":"sr-only"}).get_text()
+                                # records = [int(s) for s in records_str if s.isdigit()] # Next record (\d of \d)
+                                # if (records[0] == records[1]): cont_task=False # Stop Task Scraping loop
+                                # print(records)
+                                try: 
+####    Clicking the down button, this ones having issues clicking, it did it once but once I looped it it started bugging. 
+        # try: timed waits, double clicking, window size
+        # MORE SPECIFIC XPATH, that worked last time 
+ ########## OKAY JUST Looked at the driver window and it is definitely scrolling thru pgs, 
+ # theres just some error happening that stops the loop. Its prob that the button disappears  
+ # on last Task page and I cant tell if its got the data by that point or not. Functional just needs cleanup
+ # for all the sloppy selenium interactions. 
+        # to think about later: I would add some verifiers or assertions so we can get some consistency going as far as running.
+        # Maybe setup a temporary log, also look at gecko logs               
+                                        # Iterate tasks by clicking down arrow
+                                        browser.find_element_by_xpath("//button[@class='btn btn-icon icon-arrow-down']").click()
+                                        break
+####    On another note one error throws off entire scraping loop. Either split up with try-catch loops so data does'nt get lost
+        # Or just load each entry into csv and pick up where you left off when you run again
+                                except Exception as e:
+                                        print("Error cannot iterate Task, button not found: ", int(time.time()-t))
+                                        browser.close()  
+                                        cont_loop = True
+                                        failed_starts += 1
                                 time.sleep(buffer_wait)
                                 num_tasks += 1
-                        
-                        # Stop loop
+                        # Stop main scraper loop
                         cont_loop = False
+                        for i in catalog_tasks: i.show() 
                 except TimeoutError:
                         print(f"Timeout Error: {int(time.time()-t)}")
-                        browser.close()
+                        browser.close()  
                         cont_loop = True
                         failed_starts += 1
                 except NoSuchElementException as e:
@@ -175,68 +215,25 @@ def go_scrape(failed_start_threshold=restart_limit):
                         browser.close()
                         print(f"Total Exception Restarts: {failed_starts}\n")
 
-def scrape_Task(html):
-        soup = BeautifulSoup(html, features="lxml")
-        try:
-        # Grabbing Activities
-                created_by, status_changes, date_changed = {},{},{}
-                activities = soup.find(name='ul', attrs={"class":"h-card-wrapper activities-form"}).findChildren(name='li',
-                        attrs={"class":"h-card h-card_md h-card_comments"})
-                for card in activities:
-                        created_by= card.findChild(name='span', attrs={"class":"sn-card-component-createdby"}).get_text()
-                        date_changed = card.findChild(name='div', attrs={"class":"date-calendar"}).get_text()
-                        status_changes = card.findChild(name='ul',
-                                attrs={"class":"sn-widget-list sn-widget-list-table"}).findChildren("li")
-                        task_activities= []
-                        for li in status_changes:
-                                spans= li.findChildren()
-                                spans[1] = spans[1].findChild()
-                                task_activities += [str(spans[0].get_text()) + " " + str(spans[1].get_text())] 
-                        # Group details by each card
-                        print(f"User: {created_by}\nDate: {date_changed}")
-                        print(f"Activities:\n\t{task_activities}")
-
-        # Check if needs to be added as a new task or just update work notes, short desc, desc, and ? What other attrs? 
-        name = soup.find(name="input", attrs={"id":"sc_task.number", "name":"sc_task.number", "class":"form-control"})#.attrs["value"]
-        # First Grab cards then check name, if not there collect other stuff otherwise just add onto task object
-        # if name is in names --> add all attrs               
-        #         assigned_to= soup.find(name="input", attrs={"id"="sys_display.sc_task.assigned_to", "name"="sys_display.sc_task.assigned_to"})    
-        #         priority= soup.find(name="select", attrs={"class":"form-control", "id":"sc_task.priority"})
-
-                  
-                
-        # Update info 
-
-        except NoSuchAttributeException as e:
-                print(f"Error: Attribute attribute requested, {e}")
-        except Exception as e:
-                print(f"SCRAPING ERROR: {e}")
-
-
+# Still doesnt go next page
 def scrape_task_list(html):
-# grabs what it can from table and returns True if there are more tasks on next page, and false when finished
-# later, if neccessary can go back for any incomplete data (desc, worknotes, ... ) after notifying user
+# Scrapes what it can from table, based on whats already set in filter, to establish list of tasks 
         soup= BeautifulSoup(html, features="lxml")
+        field_order= [] 
 
         # Gets column headers from table header tags
-        field_order= [] 
         for col in soup.find("tr", attrs={"id" : "hdr_sc_task"}):
                 try: 
                         field_order.append(col.attrs['name'])    
                 except Exception:
                         field_order.append("No Attribute")
         fields = field_order[2:]
-################### Skipped - just gonna keep hitting down arrow on task page to get next task till data matches
-        # Check vcr_controls div and return value for more tasks on next page or not
-        div = soup.find("div", attrs={"class":"vcr_controls"}).findChild()
-        #print(div)
 
         # Find and scrape table body based on header fields
         try:
                 table= soup.find("tbody", attrs={"class":"list2_body"})
                 rows = table.findChildren("tr")
-
-                # Pulled from EZTask
+                tasks=[]
                 # grab text from each field(td) in each row of table(tr) and assign to data in task obj
                 for task in rows:
                         # Grab Task attributes
@@ -255,174 +252,77 @@ def scrape_task_list(html):
                                         task_attrs[str(fields[k])] = 'N/A'
                                 k=k+1
                         tasks += [Task(task_attrs[str(fields[0])], task_attrs, l)]
-                for i in tasks:
-                        pass#i.show()
+                return tasks
         except Exception as e:
-                print(f"Go Loop Error: {e}")
-                # parse table data w/ panda or apace poi
+                print(f"Task Table Scraping Error: {e}")
 
-############ LAST ##################  https://docs.python.org/3/library/re.html        
-#-----> 
-        
-        #for span in navbar.Children("span", attrs={"id": re.compile()}) # Use re to find first span - Re docs in bookmarks
+# Still needs to grab data for a new task - unless we're sure all tasks will be documented by the table scrape                    
+def scrape_Task(html, update_task=None):
+        # Returns task object
+        soup = BeautifulSoup(html, features="lxml")
+        activity_cards = []
+        try:
+        # Grabbing Activities
+                created_by, status_changes, date_changed = {},{},{}
+                activities = soup.find(name='ul', attrs={"class":"h-card-wrapper activities-form"}).findChildren(name='li',
+                        attrs={"class":"h-card h-card_md h-card_comments"})
+                for card in activities:
+                        created_by= card.findChild(name='span', attrs={"class":"sn-card-component-createdby"}).get_text()
+                        date_changed = card.findChild(name='div', attrs={"class":"date-calendar"}).get_text()
+                        status_changes = card.findChild(name='ul',
+                                attrs={"class":"sn-widget-list sn-widget-list-table"}).findChildren("li")
+                        task_changes= []
+                        for li in status_changes:
+                                spans= li.findChildren()
+                                spans[1] = spans[1].findChild()
+                                task_changes += [str(spans[0].get_text()) + " " + str(spans[1].get_text())] 
+                        
+                        # Group activity details by each card and add card to activity list of respective Task object 
+                        activity_cards += [TaskActivity(created_by, date_changed, task_changes)]
+                if (update_task): 
+                # if Task to update is provided just append cards                        
+                        update_task.activity_cards= activity_cards
+                        return update_task
+                else: 
+                # if newTask get detailed info and return new task object
+                        return Task("TESTER-TASK2132", {"sad":"sdSZd"}, [0,1])
+        except NoSuchAttributeException as e:
+                print(f"Error: Attribute attribute requested, {e}")
+        except Exception as e:
+                print(f"Individual Task Scraping Error: {e}")
 
-        # Needs error looping for unloaded data
-
-# Alt option: Set gear filter before grabbing, use only fields garunteed to be there 
-# Last option: just grab name and basics and present list to user, allow them to specify the extra fields needed and start slower 2nd round of scraping(w/ error checking loops w/ max cap)
-
-
-# Class for testing in instance
-class EZTask:
-        list_url= "https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"
-        buffer_wait = 2 # Seconds
-
-        USER_NAME="admin"
-        USER_PASSWORD= 'Veryhap1*'
-
-        def __init__(self):
-                def exec_window_prefs(driver):
-                        driver.set_window_position(0, 0)
-                        driver.set_window_size(325, 250)
-                        return driver
-                self.browser= exec_window_prefs(webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe'))
-        def get_list_soup(self, failed_start_threshold=5 ):
-                BROWSER_TIMEOUT = 45 # seconds
-                go = True
-                failed_starts= 0
-                html= ""
-                while (go==True and failed_starts < failed_start_threshold ):
-                        try:
-                                # Try to start task crawl
-                                t = time.time()
-                                self.browser.set_page_load_timeout(20)
-                                self.browser.get(self.list_url)
-                                print('Time consuming: ', time.time() - t)
-
-                                ## Log in to SN using credintials
-                                time.sleep(self.buffer_wait)
-                                WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
-                                
-                                # Change to wait until uname and password appear - should fix random errors
-                                time.sleep(self.buffer_wait)
-                                (self.browser.find_element_by_name("user_name")).send_keys(self.USER_NAME)
-                                (self.browser.find_element_by_id("user_password")).send_keys(self.USER_PASSWORD + Keys.RETURN)
-                                print('Time consuming: ', time.time() - t)
-                                time.sleep(self.buffer_wait*2)
-
-                                # Scrape tasks list
-                                self.browser.switch_to_default_content()
-                                time.sleep(self.buffer_wait)
-                                WebDriverWait(self.browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
-                                print('Time consuming: ', time.time() - t) 
-                                time.sleep(self.buffer_wait*3)
-                                html = self.browser.page_source
-                                self.browser.close()
-                                go= False
-                        except Exception as e:
-                                print(f"Exploration Error: {e}")
-                                self.browser.close
-                                go = True
-                                failed_starts += 1
-                return BeautifulSoup(html, features="lxml")
-   
-        def get_browser(self, failed_start_threshold=3):
-                BROWSER_TIMEOUT = 45 # seconds
-                cont_loop = True
-                failed_starts= 0
-                browser= self.browser
-                while (cont_loop==True and failed_starts < failed_start_threshold ):
-                        try:
-                                # Try to start task crawl - Takes average of 20 secs to login
-                                browser.set_page_load_timeout(20)
-                                browser.get(list_url)
-                                time.sleep(buffer_wait)
-                                WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
-                                
-                                # Change to wait until uname and password appear - should fix random errors
-                                time.sleep(buffer_wait)
-                                (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
-                                (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
-                                time.sleep(buffer_wait*2)
-
-                                return browser
-                        except Exception as e: 
-                                print(f"Error returning browser: {e}")
-   
-
-        def setEm(self):
-                def get_table_columns(soup): # Gets field headers
-                        table_header= soup.find("tr", attrs={"id" : "hdr_sc_task"})
-                        field_order= []
-                        for col in table_header:
-                                try: 
-                                        field_order.append(col.attrs['name'])    
-                                except Exception:
-                                        field_order.append("Missing Attribute")
-                        return field_order[2:]
-                soup= self.get_list_soup()
-                self.fields =get_table_columns(soup)
-                self.table= soup.find("table")
-                self.tbody = soup.find("tbody", attrs={"class":"list2_body"})
-        
-## NEXT UP: Issue: Some tasks are not being, THEN: press button and go to next page, if data matches prev page toss it
-## Will be followed by Showing data in gui then asking about follow up individual tasks scrape
-## Issue: Some tasks are not being included at all in the html - Not webwait(no new items appear), Not panda(Doesnt understand field structure)
-
-## Debugging: Where are the other tasks going? How many are missing? ; try: find(text="Task1111") to find it, scrolling table (not likely) 
-# try loading html in browser, try just decomposing unneccessary tags, check num rows is consistent(7 vs 10)
-
-# Dcoumentation - easy install sphinx: https://pythonhosted.org/an_example_pypi_project/sphinx.html
-                self.rows = self.table.contents# self.table.find_all("tr")
-                t=soup
-                # Show for debugging
-                print(f"Children: {len(t.findChildren())}")
-                print(f"T is : {len(t)}")
-                print(f"First Child: \n{t.findChildren()[0]}")
-                print(f"All Table Contents ({len(t.find_All())}): \n{len(t.find_All())}")
-                print(f"Table itself: \n{t}")
-        
-                # grab text from each field(td) in each row of table(tr) and assign to data in task obj
-                self.tasks= []
-                for task in self.rows:
-                        # Grab Task attributes
-                        task_data= task.findChildren("td")
-                        task_data= task_data[2:(len(task_data)-4)] # frst of 3 datex is [20:]
-                        task_attrs= {}
-                        k=0
-                        l= len(task_data)
-                        for attr in task_data:
-                                task_attrs[str(self.fields[k])] = attr.get_text() # IndexError: list index out of range
-                                if attr.get_text() == None or attr.get_text() == re.compile("(empty)") or attr.get_text()== "" : # make sure attr are properly assigned
-                                        task_attrs[str(self.fields[k])] = 'N/A'
-                                k=k+1
-                        self.tasks += [Task(task_attrs[str(self.fields[0])], task_attrs, l)]
-
-                        # Adding blanks as temp fix for indexing error in fields(3 less than )
-                for i in self.tasks:
-                        pass # i.show()
-                         
-                   
+# Its not really neccessary until it becomes a prob, 
+# but concerning Exporting to CSV: you can send it to a txt for backup 
+# (incase of runtime interruption) then csv once complete, really just reread csv and ignore those already fully updated
 class Task:                                             
-        def __init__(self, number, task_attributes, numTags):
+        def __init__(self, number, task_attributes, activity_cards):
                 self.number= number
                 self.task_attributes= task_attributes
-                self.numTags= numTags
+                self.activity_cards = activity_cards
         
         def show(self):
-                print(f"\n## {self.number} ... attrs: {len(self.task_attributes)} out of {self.numTags} Tags")
+                print(f"\n## {self.number} ... attrs: {len(self.task_attributes)}")
                 for i in self.task_attributes: 
                         print(f"\t- {i}:  {self.task_attributes[i]}")
+                print("Activities: ")
+                self.activity_cards.show()
+
+class TaskActivity:
+        # Contains activity information from each card 
+        def __init__(self, created_by, date_changed, changes_list):
+                self.created_by = created_by
+                self.date_changed = date_changed
+                self.changes_list = changes_list
+
+        def show(self, created_by, date_changed, changes_list):
+                print(f"\tUser: {self.created_by}\n \tDate: {self.date_changed}\n \tChanges: {self.changes_list}")
+        
 
 def main():
         # Catch Errors: Webdriver - Permisson denied(for update or other browser error),
         # NoSuchElem for uname login,
         # Message: connection refused for random browser error
         # Timeout excep loop with counter for resets on connection
-        '''
-        t= EZTask()
-        soup= t.setEm()
-        '''
         go_scrape()
 
 if __name__ == "__main__":
