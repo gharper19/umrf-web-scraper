@@ -1,0 +1,702 @@
+<html class="ltr js canvas canvastext no-touch postmessage indexeddb hashchange history draganddrop websockets video audio localstorage webworkers applicationcache ng-scope" data-devicetype="doctype" data-doctype="true" dir="ltr" lang="en" style="">
+ <head>
+  <style type="text/css">
+   @charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}
+  </style>
+  <title>
+   ServiceNow
+  </title>
+  <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="public" http-equiv="cache-control"/>
+  <link href="favicon.ico?v=4" rel="shortcut icon"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0" name="viewport"/>
+  <link href="/styles/notification_preference/notification_preference.cssx?v=09-12-2018_0933&amp;c=2015-08-22_14:42:14_8cbc31eedb122300dd93fe1b68961906&amp;theme=null" rel="stylesheet" type="text/css"/>
+  <link href="/styles/sn/concourse/css_includes_concourse.cssx?v=09-12-2018_0933&amp;c=2015-08-22_14:42:14_8cbc31eedb122300dd93fe1b68961906&amp;theme=null" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/sn/concourse/js_includes_concourse.jsx?v=09-12-2018_0933&amp;lp=Mon_Nov_05_20_47_09_PST_2018&amp;c=4_50" type="text/javascript">
+  </script>
+  <script data-description="globals population" type="text/javascript">
+   window.NOW = window.NOW || {};
+	var g_loadTime = new Date();
+	var lastActivity = new Date();
+	var g_lang = 'en';
+	var g_system_lang = 'en';
+	var g_enhanced_activated = 'true';
+	  var g_popup_timeout = parseInt(100);
+	var g_export_warn_threshold = parseInt(10000);
+	  var g_event_handler_ids = {};
+	var g_event_handlers = [];
+	var g_event_handlers_onLoad = [];
+	var g_event_handlers_onSubmit = [];
+	var g_event_handlers_onChange = [];
+	var g_event_handlers_onCellEdit = {};
+	var g_event_handlers_localCache = {};
+	var g_event_handlers_queryTracking = true;
+	var g_user_date_time_format = "yyyy-MM-dd HH:mm:ss";
+	var g_user_date_format = "yyyy-MM-dd";
+	var g_user_decimal_separator = ".";
+	var g_user_grouping_separator = ",";
+	var g_glide_list_separator = ", ";
+	var g_tz_offset = -28800000;
+	  var g_tz_user_offset = true;
+	var g_first_day_of_week = parseInt(1, 10);
+	var g_date_picker_first_day_of_week = parseInt(0, 10);
+	  var g_full_calendar_edit = true;
+	var g_submitted = false;
+	var g_max_table_length = 80;
+	var g_fontSizePreference = "";
+	var g_fontSize = "10pt";
+	// use to be the sys_property glide.ui.js_error_notify, hard coded for PRB603998
+	var g_jsErrorNotify = "true";
+	var g_cancelPreviousTransaction = true;
+	var g_text_direction = "ltr";
+	var g_glide_list_filter_max_length =  parseInt("0", 10);
+	var g_accessibility = false;
+	var g_accessibility_visual_patterns = false;
+	var g_detail_row = false;
+	window.g_load_functions = [];
+	window.g_render_functions = [];
+	window.g_late_load_functions = [];
+
+	
+	var g_ck = '45f10ae2db522300dd93fe1b6896193354436a61e1a0315b03c9b014096276bfffb70e7c';
+	
+
+	
+	var g_acWaitTime = parseInt(250);
+	
+
+	var g_autoRequest = '';
+
+	try {
+		window.NOW.dateFormat = JSON.parse("{\"timeAgo\": false, \"dateBoth\": false}");
+	} catch (e) {
+		window.NOW.dateFormat = {timeAgo: false, dateBoth: false};
+	}
+
+	window.NOW.shortDateFormat = false;
+	window.NOW.listTableWrap = true;
+	window.NOW.compact = false;
+  	window.NOW.templateToggle = false;
+	window.NOW.tabbed = true;
+	window.NOW.permalink = true;
+	window.NOW.useSimpleStorage = true;
+	window.NOW.simpleStorageSynch = "fa182122db122300dd93fe1b68961926";
+	window.NOW.language =  'en';
+	window.NOW.listOpenInAppTab = false;
+	window.NOW.floatingScrollbars = false;
+	
+	window.NOW.user = {};
+	window.NOW.user.preferences = [];
+	window.NOW.user.roles = '';
+	window.NOW.user.allRoles = '';
+	window.NOW.user.userID = '5136503cc611227c0183e96598c4f706';
+	window.NOW.user.departmentID = '221db0edc611228401760aec06c9d929';
+	window.NOW.user.firstName = '';
+	window.NOW.user.lastName = 'Guest';
+	window.NOW.user.name = 'guest';
+    window.NOW.batch_glide_ajax_requests = 'true' === 'true';
+    window.NOW.batch_glide_ajax_requests_max_time_in_queue = ~~'50';
+    window.NOW.batch_glide_ajax_disable_time = ~~'1000';
+
+	window.NOW.currency = {};
+    window.NOW.currency.code = 'USD';
+    window.NOW.locale = {};
+	window.NOW.locale.code = 'en_US';
+  </script>
+  <script data-comment="GlideUser initialization">
+   (function() {
+		 g_render_functions.push(setGlideUser);
+		function setGlideUser() {
+			if (window.g_user || !window.GlideUser)
+		return;
+
+		window.g_user = new GlideUser(NOW.user.name,
+			  NOW.user.firstName,
+			  NOW.user.lastName,
+			  NOW.user.roles,
+			  NOW.user.userID,
+			  NOW.user.departmentID);
+		window.g_user.setRoles(NOW.user.allRoles, true);
+		}
+	})();
+  </script>
+  <script data-description="NOW glide web analytics siteid and url">
+   window.NOW = window.NOW || {};
+		// glide web analytics config
+		window.NOW.webaConfig = {};
+		window.NOW.webaConfig.siteId = "";
+		window.NOW.webaConfig.trackerURL = "";
+		window.NOW.webaConfig.webaScriptPath = "scripts/piwik-2.16/thirdparty/piwik.min.js";
+  </script>
+  <script src="/scripts/notification_preference/js_includes_notification_preference.jsx?v=09-12-2018_0933&amp;lp=Mon_Nov_05_20_47_09_PST_2018&amp;c=4_50" type="text/javascript">
+  </script>
+  <script data-description="NOW session, user_name, etc">
+   window.NOW = window.NOW || {};
+		// record watch / presence
+		window.NOW.session_id = '01F10AE2DB522300DD93FE1B68961933';
+		window.NOW.user_name = 'guest';
+		window.NOW.user_id = '5136503cc611227c0183e96598c4f706';
+		window.NOW.user_display_name = 'Guest';
+		window.NOW.user_initials = 'G';
+		window.NOW.user_avatar = '';
+		window.NOW.presence_interval = 15;
+		window.NOW.record_presence_interval = 20;
+		window.NOW.ambConnected = false;
+  </script>
+  <script type="text/javascript">
+   var DevStudio = (function(win, openMode) {
+		'use strict';
+		var openStudioWindows = {};
+		var launchDebounced = debounce(launch, 200);
+
+		return {
+			launch: function() {
+				try {
+					launchDebounced();
+				} catch (e) {
+					console && console.warn('Could not launch Studio: ' + e.message);
+				}
+			},
+			getAllWindows: function() {
+				return openStudioWindows;
+			},
+			getWindow: function(name) {
+				return openStudioWindows[name];
+			},
+			addWindow: function(name, ref) {
+				openStudioWindows[name] = ref;
+				addUnloadHandler(name);
+			},
+			isOpen: function(name) {
+				return isOpen(name);
+			},
+			navigatedAway: function(name) {
+				return navigatedAway(name);
+			}
+		};
+
+		function debounce(func, wait) {
+			var timeout;
+			return function() {
+				var now = !timeout;
+
+				clearTimeout(timeout);
+
+				timeout = setTimeout(function() {
+					timeout = null;
+				}, wait);
+
+				if (now) func.apply(this, arguments);
+			};
+		}
+
+		function launch() {
+			var width = win.top.innerWidth - 40,
+				height = win.top.innerHeight,
+				x = win.top.screenX + 20,
+				y = win.top.screenY + 20,
+				studioUrl = '$studio.do?sysparm_nostack=true&sysparm_transaction_scope=global',
+				features = 'width=' + width + ',height=' + height +
+					',toolbar=no,status=no,directories=no,menubar=no,resizable=yes,scrollbars=1,screenX=' +
+					x + ',left='+ x +',screenY='+ y +',top='+ y,
+				winName = 'studio';
+
+			if (!isOpen(winName) || navigatedAway(winName)) {
+				openStudioWindows[winName] = (openMode === 'tab')
+					? openTab(studioUrl)
+					: openWindow(winName, studioUrl, features);
+
+				addUnloadHandler(winName);
+			}
+			focusWindow(winName);
+		}
+
+		function openTab(url) {
+			return win.open(url);
+		}
+
+		function openWindow(name, url, opts) {
+			return win.open(url, name, opts, false);
+		}
+
+		function addUnloadHandler(name) {
+			openStudioWindows[name] && openStudioWindows[name].addEventListener('beforeunload', function rem(e) {
+				openStudioWindows[name].removeEventListener('beforeunload', rem);
+				delete openStudioWindows[name];
+			});
+		}
+
+		function focusWindow(name) {
+			openStudioWindows[name].focus();
+		}
+
+		function isOpen(name) {
+			return openStudioWindows[name] && !openStudioWindows[name].closed;
+		}
+
+		function navigatedAway(name) {
+			try {
+				return openStudioWindows[name] && openStudioWindows[name].location.pathname !== '/$studio.do';
+			} catch(e) {
+				// blocked, most likely to same-origin policy
+				// (user navigated away from the instance domain)
+				return true;
+			}
+		}
+	})(this, 'tab');
+  </script>
+  <script>
+   // Don't let the navpage intercept links targeted for the main frame.
+				if (window.name == "gsft_main")
+					window.name = "";
+  </script>
+  <style>
+  </style>
+  <style>
+  </style>
+ </head>
+ <body>
+  <div class="navpage-layout firefox windows navpage-nav-hidden navpage-right-hidden navpage-bottom-hidden small-height">
+   <div ng-non-bindable="">
+    <div class="ng-scope" concourse-compilation-target="concourse_core">
+     <header class="navpage-header" role="banner">
+      <div class="navbar navbar-default sn-frameset-header">
+       <div class="container-fluid">
+        <a class="skip-links sr-only sr-only-focusable ng-binding ng-isolate-scope" confirm="To enable accessibility, the page must be reloaded" href="#" label="Enable Accessibility">
+         Enable Accessibility
+        </a>
+        <a class="skip-links sr-only sr-only-focusable" href="#gsft_main" onclick="top.gsft_main.focus();">
+         Skip to main content
+        </a>
+        <a class="skip-links sr-only sr-only-focusable" href="javascript:void(0)" onclick="document.getElementById('filter').focus();">
+         Skip to navigator
+        </a>
+        <div class="navbar-header" nav-banner-logo="">
+         <a class="navbar-brand" data-original-title="ServiceNow Home Page" data-sys-properties="glide.product.image.light" href="home.do" style="background-image: url('images/logos/logo_service-now_light.png');" target="gsft_main" title="ServiceNow Home Page">
+          <img alt="" id="mainBannerImage16" src="images/logos/logo_service-now_light.png" style="height: 20px; visibility: hidden;"/>
+          <span class="sr-only">
+           ServiceNow Home Page
+          </span>
+         </a>
+         <span class="banner-text h5 hidden-xs" data-sys-properties="glide.product.description">
+          Service Management
+         </span>
+        </div>
+        <div class="collapse navbar-collapse">
+         <div class="nav navbar-right">
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="navbar-divider">
+      </div>
+      <request-manager class="request-manager-container ng-isolate-scope" timer-delay="15">
+       <div class="notification notification-warning navigation-notification" id="transaction_cancel" ng-class="{'visible':showAlert}">
+        <span class="pointerhand" id="request_manager_output">
+         <span class="pointerhand" id="request_manager_output">
+          <span class="request_message ng-binding">
+          </span>
+          <span class="ng-binding" id="request_timer" style="cursor:default;">
+          </span>
+         </span>
+        </span>
+        <button class="btn-cancel-transaction btn btn-danger" data-dismiss="modal" id="cancel_transaction_button" ng-class="{'hidden':hideButton}" ng-click="handleRequestCancel()" style="display:inline">
+         Cancel
+        </button>
+       </div>
+      </request-manager>
+     </header>
+     <nav aria-label="Primary" class="navpage-nav">
+      <script type="text/javascript">
+       window.top.Magellan = window.top.Magellan || {};
+			window.top.Magellan.globals = window.top.Magellan.globals || {};
+			window.top.Magellan.globals.navColors = ["purple","blue","cyan","aquamarine","green","yellow","orange","burnt-orange","red","pink","fuschia","white"];
+			window.top.Magellan.globals.navIcons = ["article-document","user","user-group","lightbulb","home","mobile","comment","mail","locked","database","book","drawer","folder","catalog","tab","cards","tree-right","tree","book-open","paperclip","edit","trash","image","search","power","cog","star","star-empty","new-ticket","dashboard","cart-full","view","label","filter","calendar","script","add","delete","help","check-circle","alert","sort-ascending","console","list","form","livefeed","key","hr"];
+			window.top.Magellan.globals.paramBlacklist = ["sysparm_no_stack","sysparm_userpref_module","sysparm_record_target","sysparm_record_row","sysparm_record_rows","sysparm_record_list"];
+		
+
+		window.top.Magellan.globals.messages = {
+		 	add_to_favorites: "Add To Favorites",
+		 	remove_from_favorites: "Remove from favorites",
+		 	edit_application: "Edit Application",
+			edit_module: "Edit Module"
+		};
+      </script>
+     </nav>
+     <main aria-label="Main content" class="navpage-main">
+      <div class="navpage-main-left ng-isolate-scope" concourse-main-pane="true" enable-extensions="false" initial-url="welcome.do">
+       <iframe allowfullscreen="true" data-original-title="Main Content" id="gsft_main" main-pane="true" name="gsft_main" src="welcome.do" title="Main Content">
+       </iframe>
+       <div class="extension-pane-container" style="height: 100%; display: none;">
+       </div>
+      </div>
+     </main>
+     <div>
+      <div class="modal breakpoint-hit-modal" id="breakpoint_hit_modal">
+       <div class="modal-dialog modal-alert">
+        <div class="modal-content clearfix">
+         <header class="modal-header">
+          <h4 class="modal-title">
+           ServiceNow Script Debugger
+          </h4>
+         </header>
+         <div class="modal-body container-fluid">
+          <div style="text-align:left;">
+           <br/>
+           <div>
+            Transaction paused at breakpoint.
+           </div>
+           <br/>
+          </div>
+          <div class="modal-footer" style="text-align:center">
+           <button class="btn btn-info" id="ok_to_debug" style="min-width: 10em">
+            Start Debugging
+           </button>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <script type="text/javascript">
+      document.getElementById("ok_to_debug").addEventListener('click', function() {
+			window.open('', 'sn_ScriptDebugger').focus();
+			window.top.breakpointHitAlert(false);
+		});
+
+		window.top.breakpointHitAlert = function (show) {
+			var display = show ? 'show' : 'hide';
+			$j('#breakpoint_hit_modal').modal(display);
+		};
+
+		var launchScriptDebuggerOK = true;
+		window.top.launchScriptDebugger = function(id, type, field) {
+			function _launch() {
+				var width = window.innerWidth - 40,
+				height = window.innerHeight,
+				x = window.screenX + 20,
+				y = window.screenY + 20,
+				features = 'width=' + width + ',height=' + height + ',toolbar=no,status=no,directories=no,menubar=no,resizable=yes,screenX=' + x +',left='+ x +',screenY='+ y +',top='+ y;
+
+				var debuggerWind = window.open('', 'sn_ScriptDebugger', features, false),
+				prevFullUrl = debuggerWind.location.href,
+				reload = false;
+
+				if (prevFullUrl === 'about:blank') {
+					// Debugger doesn't exist or is opened by other window (can't get reference)
+					try {
+						var storedTime = localStorage.getItem('sn_ScriptDebugger'),
+						currentTime = new Date().getTime();
+						if (storedTime && 60000 > currentTime - storedTime) {
+						// Debugger exists - Most recent storedTime is within one Interval of setting localStorage
+						debuggerWind.close();
+						localStorage.setItem('sn_ScriptDebuggerExist_ShowNotification', new Date().getTime());
+						return;
+						}
+					}
+					catch (e) {
+						// consoel.log(e);
+					}
+
+					reload = true; //debugger window doesn't exist
+				}
+
+				var url = '/$jsdebugger.do?sysparm_nostack=true';
+
+				if (id && type && field) {
+					url = '/$jsdebugger.do?scriptId=' + id + '&&scriptType=' + type + '&&scriptField=' + field + '&&sysparm_nostack=true';
+
+					if (!reload) {
+						//Debugger window is open
+						try {
+							localStorage.setItem('sn_ScriptDebugger_url', url);
+						}
+						catch(e) {
+							var prevUrl = prevFullUrl.slice(prevFullUrl.indexOf('$jsdebugger.do'));
+							if (prevUrl != url)	reload = true;
+						}
+					}
+				}
+
+				if (reload) {
+					// Handle the first launch and localStorage exception
+					debuggerWind = window.open(url, 'sn_ScriptDebugger', features, false);
+				}
+
+				debuggerWind.focus();
+				debuggerWind.setTimeout(focus, 1);
+			}
+
+			if (launchScriptDebuggerOK) {
+				launchScriptDebuggerOK = false;
+				try {_launch();}
+				catch(e) {
+				//	console.log(e);
+				}
+				launchScriptDebuggerOK = true;
+			}
+		};
+     </script>
+    </div>
+   </div>
+  </div>
+  <script>
+   jQuery(document).ready(function() {
+					// add these modules to the navpage Angular
+					window.NOW = window.NOW || {};
+					window.NOW.ngLoadModules = window.NOW.ngLoadModules || [];
+					NOW.ngLoadModules.push('Magellan', 'sn.concourse', 'sn.overviewhelp');
+				});
+  </script>
+  <script>
+   window.NOW.isEmbeddedHelpActive = true;
+  </script>
+  <now-message key="%d ago" value="%d ago">
+  </now-message>
+  <now-message key="%d from now" value="%d from now">
+  </now-message>
+  <now-message key="less than a minute" value="less than a minute">
+  </now-message>
+  <now-message key="just now" value="just now">
+  </now-message>
+  <now-message key="about a minute" value="%dm">
+  </now-message>
+  <now-message key="%d minutes" value="%dm">
+  </now-message>
+  <now-message key="about an hour" value="about an hour">
+  </now-message>
+  <now-message key="about %d hours" value="%dh">
+  </now-message>
+  <now-message key="a day" value="a day">
+  </now-message>
+  <now-message key="%d days" value="%dd">
+  </now-message>
+  <now-message key="about a month" value="about a month">
+  </now-message>
+  <now-message key="%d months" value="%dmo">
+  </now-message>
+  <now-message key="about a year" value="about a year">
+  </now-message>
+  <now-message key="%d years" value="%dy">
+  </now-message>
+  <now-message key="today" value="Today">
+  </now-message>
+  <now-message key="{0} is typing" value="{0} is typing">
+  </now-message>
+  <now-message key="{0} is viewing" value="{0} is viewing">
+  </now-message>
+  <now-message key="{0} has entered" value="{0} has entered">
+  </now-message>
+  <now-message key="{0} has probably left" value="{0} has probably left">
+  </now-message>
+  <now-message key="{0} has exited" value="{0} has exited">
+  </now-message>
+  <now-message key="{0} is offline" value="{0} is offline">
+  </now-message>
+  <now-message key="entered" value="entered">
+  </now-message>
+  <now-message key="online" value="Online">
+  </now-message>
+  <now-message key="viewing" value="viewing">
+  </now-message>
+  <now-message key="maybe offline" value="maybe offline">
+  </now-message>
+  <now-message key="probably offline" value="probably offline">
+  </now-message>
+  <now-message key="offline" value="Offline">
+  </now-message>
+  <now-message key="Activities: {0}" value="Activities: {0}">
+  </now-message>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=concourse_request_manager.xml" type="text/ng-template">
+   <div id="transaction_cancel" class="notification notification-warning navigation-notification" ng-class="{'visible':showAlert}">
+			<span class="pointerhand" id="request_manager_output">
+				
+				<span class="pointerhand" id="request_manager_output">
+					<span class="request_message">{{statusMessage}}</span>
+					<span id="request_timer" style="cursor:default;">{{timer}}</span></span></span>
+			<button id="cancel_transaction_button" data-dismiss="modal" class="btn-cancel-transaction btn btn-danger" style="display:inline" ng-class="{'hidden':hideButton}" ng-click="handleRequestCancel()">
+				Cancel
+			</button></div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_avatar.xml" type="text/ng-template">
+   <div class="avatar-container" ng-class="avatarType()" title="{{ avatartooltip() }}">
+
+		<div class="avatar soloAvatar top" ng-if="(users.length &gt; 1 &amp;&amp; !groupAvatar)" context-menu="contextOptions">
+			<div class="sub-avatar" ng-style="getBackgroundStyle(users[1])">
+				<span ng-if="!users[1].avatar">{{ users[1].initials }}</span></div></div>
+
+		<div class="avatar soloAvatar bottom" context-menu="contextOptions">
+			<div class="sub-avatar" ng-style="getBackgroundStyle(users[0] || primary)">
+				<span ng-if="(!users[0].avatar &amp;&amp; !groupAvatar)">{{ users[0].initials }}</span></div></div>
+
+		<div class="avatar soloAvatar top" ng-if="users.length &gt; 2 &amp;&amp; !groupAvatar" context-menu="contextOptions">
+			<div class="sub-avatar" ng-style="getBackgroundStyle(users[2])">
+				<span ng-if="!users[2].avatar">{{ users[2].initials }}</span></div></div>
+
+		<div class="avatar soloAvatar top" ng-if="users.length &gt; 3 &amp;&amp; !groupAvatar" context-menu="contextOptions">
+			<div class="sub-avatar" ng-style="getBackgroundStyle(users[3])">
+				<span ng-if="!users[3].avatar">{{ users[3].initials }}</span></div></div>
+
+		<span class="inner-details" ng-transclude=""></span>
+		<sn-presence ng-if="::presenceEnabled" user="(users[0].userID || users[0].document)"></sn-presence></div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_avatar_popover.xml" type="text/ng-template">
+   <span class="avatar-container" ng-class="avatarType()"><sn-complex-popover ng-if="!noPopover()" template="sn_avatar_content.xml" button-template="sn_avatar_button.xml"></sn-complex-popover><sn-complex-popover ng-if="noPopover()" button-template="sn_avatar_button.xml"></sn-complex-popover></span>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_avatar_button.xml" type="text/ng-template">
+   <a class="sn-popover-complex" ng-style="{'cursor': popoverCursor}" style="background-color: transparent"><div class="avatar soloAvatar top" ng-if="users.length &gt; 1 &amp;&amp; !groupAvatar"><div aria-label="{{ users[0].displayName }} {{ users[0].status }}" user-avatar-id="{{users[0].userID}}" ng-click="loadFullProfile(); togglePopover($event); stopPropCheck($event);" role="button" tabindex="0" title="{{ avatartooltip() }}" aria-haspopup="true" class="sub-avatar" ng-style="getBackgroundStyle(users[1])"><span ng-if="!users[1].avatar">{{ users[1].initials }}</span></div></div><div class="avatar soloAvatar bottom"><div aria-label="{{ users[0].displayName }} {{ users[0].status }}" user-avatar-id="{{users[0].userID}}" ng-click="loadFullProfile(); togglePopover($event); stopPropCheck($event);" role="button" tabindex="0" title="{{ avatartooltip() }}" aria-haspopup="true" class="sub-avatar" ng-style="getBackgroundStyle(users[0] || primary)"><span ng-if="!users[0].avatar &amp;&amp; !groupAvatar">{{ users[0].initials }}</span></div></div><div class="avatar soloAvatar top" ng-if="users.length &gt; 2 &amp;&amp; !groupAvatar"><div aria-label="{{ users[0].displayName }} {{ users[0].status }}" user-avatar-id="{{users[0].userID}}" ng-click="loadFullProfile(); togglePopover($event); stopPropCheck($event);" role="button" tabindex="0" title="{{ avatartooltip() }}" aria-haspopup="true" class="sub-avatar" ng-style="getBackgroundStyle(users[2])"><span ng-if="!users[2].avatar">{{ users[2].initials }}</span></div></div><div class="avatar soloAvatar top" ng-if="users.length &gt; 3 &amp;&amp; !groupAvatar"><div aria-label="{{ users[0].displayName }} {{ users[0].status }}" user-avatar-id="{{users[0].userID}}" ng-click="loadFullProfile(); togglePopover($event); stopPropCheck($event);" role="button" tabindex="0" title="{{ avatartooltip() }}" aria-haspopup="true" class="sub-avatar" ng-style="getBackgroundStyle(users[3])"><span ng-if="!users[3].avatar">{{ users[3].initials }}</span></div></div><sn-presence ng-if="::presenceEnabled" user="users[0].userID || users[0].document" display-name="users[0].displayName"></sn-presence></a>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_attachment_preview.xml" type="text/ng-template">
+   <sn-modal class="sn-light-box" name="attachment_preview">
+		<div class="modal-dialog modal-95">
+			<div class="modal-content" ng-if="image">
+				<header class="modal-header">
+					<button type="button" data-dismiss="modal" title="Close" data-toggle="tooltip" data-placement="auto" class="btn btn-icon close icon-cross sn-tooltip-basic">
+						<span class="sr-only">Close</span></button>
+					<h4 class="modal-title">{{image.file_name}} ({{image.imageSize || image.size}})</h4></header>
+				<div class="modal-body">
+					<div class="sn-attachment-preview-image">
+						<a href="/{{image.sys_id}}.iix" target="_blank">
+							<img ng-src="{{image.sys_id + '.iix'}}" alt="{{ image.file_name }}"></img></a></div></div>
+				<footer class="modal-footer">
+					<a class="btn btn-default btn-icon icon-download" download="{{ ::image.file_name }}" href="sys_attachment.do?sys_id={{image.sys_id}}"></a></footer></div></div></sn-modal>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=ng_overview_help.xml" type="text/ng-template">
+   <div class="overview-help-background" ng-if="active" role="modal" aria-label="overview-help-title-{{ pageName }}"><button class="close icon-cross" ng-click="close()"><span class="sr-only">Close</span></button><div ng-if="loaded"><div id="overview-help-{{ pageName }}" class="carousel slide"><h1 class="sr-only" ng-bind="panels[0].title" id="overview-help-title-{{ pageName }}"></h1><div class="sn-overview-carousel carousel-inner" role="listbox"><div ng-repeat="panel in panels track by $index" class="item" ng-class="{ 'active': $first }" data-panel-number="{{ $index }}"><img ng-src="{{ panel.image }}" alt=""></img><h1 ng-bind-html="panels[currentPanel].title" ng-if="panels[currentPanel].is_title &amp;&amp; panels[currentPanel].show_title"></h1></div></div><div class="footer text-center" ng-attr-style="background-image: url({{footer_bg}})"><ol class="carousel-indicators" ng-class="icon_buttons ? 'icon-buttons' : ''"><li ng-repeat="panel in panels" ng-hide="panel.is_title" ng-class="[icon_buttons ? panel.icon : '', {'active': $first || $index == currentPanel}]" data-target="#overview-help-{{ pageName }}" data-slide-to="{{ $index }}" tabindex="0"><span ng-if="icon_buttons" class="hover-text" ng-bind="panel.icon_text"></span></li></ol><div class="carousel-caption"><h2 class="h1" ng-hide="panels[currentPanel].is_title" ng-bind="panels[currentPanel].title"></h2><p class="lead" ng-bind-html="panels[currentPanel].text"></p></div><button ng-if="!icon_buttons" class="btn btn-primary" data-slide="prev" data-target="#overview-help-{{ pageName }}"><i class="icon-chevron-left"></i><span class="sr-only">Previous</span></button>
+				 
+				<button class="btn btn-primary" ng-click="close()">Get Started</button>
+				 
+				<button ng-if="!icon_buttons" class="btn btn-primary" data-slide="next" data-target="#overview-help-{{ pageName }}"><i class="icon-chevron-right"></i><span class="sr-only">Next</span></button></div></div></div></div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_embedded_help_content.xml" type="text/ng-template">
+   <div class="sn-embedded-help-pane-content loading">
+		<div class="sn-aside sn-aside_themed sn-aside_left sn-aside_open sn-pane-content sn-help-aside">
+			<div class="sn-aside-header">
+				<span aria-label="Help">
+					Help
+					<div class="icon-loading hidden" ng-class="{ 'hidden': $parent.loaded }"></div></span>
+				<button id="embeddedHelpDropdown" class="btn btn-icon help-aside dropdown-toggle" data-toggle="dropdown" ng-if="($parent.content || $parent.showAddHelpArticle)" ng-blur="unclick()" ng-click="click()">
+					<div class="help-aside-btn icon-ellipsis-vertical"></div></button>
+				<div class="sn-aside-btn help-remove-padding">
+					<sn-embedded-help-menu label="embeddedHelpDropdown" is-context-menu="true"></sn-embedded-help-menu></div></div>
+			
+				<div ng-if="$parent.showAddHelpArticle" class="help-content">
+					<div class="articlediv">
+						<div class="sn-widget-list-content oval">
+		                   	<span class="sn-widget-list-icon icon icon-form article-icon" aria-hidden="true"></span></div></div>   	 
+						<span class="title topictitle1 articletitle">No Help Article Associated</span>
+						<p class="article">
+							There is no help article associated with this view. You can add an article to this view by clicking the <b>Add Help Article</b> button.
+					   </p>
+					<div class="sn-widget sn-widget-button sn-widget-button_stacked">    
+					<div class="sn-widget sn-widget-button sn-widget-button_stacked">   
+				   		<button class="btn btn-primary helpbtn helpbtn-primary" ng-click="addHelpArticle()" role="button" aria-label="Add Help Article">Add Help Article</button></div></div></div>
+			<div class="help-content-container sn-widget sn-aside sn-aside_themed sn-aside_header sn-aside_open" ng-class="{ 'disabled': $parent.showLanguageWarning }">
+				<div class="help-content overlay warning" ng-if="$parent.showLanguageWarning">
+					<div class="help-language-warning">
+						<div>
+							<span class="title topictitle1">Information</span>
+							<p>
+								Embedded help is only available in English at this time.  When the content becomes available in your preferred language, you will see it here.
+						   </p></div>
+						<div>
+							<div class="input-suppress-warning">
+								<input id="hideLanguageWarning" type="checkbox" ng-model="suppressLanguageWarning.suppress"></input>
+								<label for="hideLanguageWarning">Do not show this warning again</label></div>
+							<div class="help-action">
+								<button class="helpbtn helpbtn-primary" ng-click="onConfirmLanguageWarningClick()" role="button" aria-label="Continue">Continue</button></div></div></div></div>
+				<div class="help-content" ng-bind-html="$parent.content" ng-show="$parent.content"></div>
+				<div class="sn-widget" ng-if="!($parent.content || $parent.showAddHelpArticle)">
+					<sn-embedded-help-menu></sn-embedded-help-menu></div></div></div>
+		<div id="tooltipPrison" class="hide"></div></div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_embedded_help_pane.xml" type="text/ng-template">
+   <div sn-focus-esc="toggleHelpPane()" class="sn-embedded-help-pane help-frameset-pane" ng-class="{'sn-pane_collapse': paneCollapsed, 'sn-pane_left': panePosition == 'left', 'sn-pane_right': panePosition == 'right', 'sn-pane_center': panePosition == 'center'}" role="complementary" aria-labelledby="embedded-help-sidebar-title" aria-hidden="{{!!paneCollapsed}}">
+        <h2 id="embedded-help-sidebar-title" class="sr-only">Help Sidebar - Press escape to close</h2>
+        <div class="sn-pane-container" ng-transclude=""></div>
+        <sn-embedded-help-action-list></sn-embedded-help-action-list>
+        <div class="sn-pane-footer">
+            <div class="sn-pane-footer-content">
+                <a class="sn-pane-action icon-arrow-right-rounded sn-tooltip-basic" data-toggle="tooltip" data-placement="top" href="javascript:void(0);" title="Close Help Sidebar" aria-label="Close Help Sidebar" role="button" ng-click="toggleHelpPane()" ng-keypress="toggleHelpPane()"></a></div></div></div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_embedded_help_menu.xml" type="text/ng-template">
+   <div label="{{::label}}" ng-attr-role="{{ isContextMenu ? 'menu' : undefined }}" ng-class="{ 'dropdown-menu': isContextMenu, 'dropdown-menu-right': isContextMenu&amp;&amp;isLeft, 'dropdown-menu-left': isContextMenu&amp;&amp;!isLeft}" class="sn-widget-list_v2">
+        
+        
+            
+        
+        
+            
+                <a ng-attr-role="{{ isContextMenu ? 'menuitem' : undefined }}" href="/$h.do?sysparm_id=basics" target="user_guide_frame" class="sn-widget-list-item" ng-click="trackUserGuideEvent()">
+                    <div class="sn-widget-list-content sn-widget-list-content_static">
+                        <span class="sn-widget-list-icon icon icon-default-knowledge-base" aria-hidden="true"></span></div>
+                    <div class="sn-widget-list-content">
+                        <span class="sn-widget-list-title">User Guide</span></div></a>
+        
+            <a ng-attr-role="{{ isContextMenu ? 'menuitem' : undefined }}" ng-href="{{ documentationLink }}" target="_blank" class="sn-widget-list-item" ng-click="trackSearchDocEvent()">
+                <div class="sn-widget-list-content sn-widget-list-content_static">
+                    <span class="sn-widget-list-icon icon icon-search" aria-hidden="true"></span></div>
+                <div class="sn-widget-list-content">
+                    <span class="sn-widget-list-title">Search Documentation</span></div></a>
+            </div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=sn_embedded_help_action_list.xml" type="text/ng-template">
+   <div class="help-action" ng-show="$parent.actions.length || $parent.tours.length || isGuidedSetupSticky" ng-class="{ 'disabled': $parent.showLanguageWarning }"><div class="helpalert"><div class="sn-widget sn-widget-button sn-widget-button_stacked"><div class="sn-widget sn-widget-button sn-widget-button_stacked"><p class="help_truncate"><span style="color:white" ng-show="activeTourSysId">Current Tour: {{activeTourName}}</span></p><button class="btn btn-primary helpbtn helpbtn-primary" ng-show="activeTourSysId" ng-model="$parent.tours[0]" ng-click="endTour()" role="button" aria-label="End Tour">End Tour</button><button class="btn btn-primary helpbtn helpbtn-primary" ng-show="!activeTourSysId &amp;&amp; $parent.tours.length === 1" ng-model="$parent.tours[0]" ng-click="startTour($parent.tours[0]); trackTourEvent()" role="button" aria-label="Take a Tour">Take a Tour</button><div class="sn-widget sn-widget-button sn-widget-button_stacked" ng-class="(isGuidedSetupSticky) ? 'dropdown' : 'dropup'"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" ng-model="tour" ng-show="!activeTourSysId &amp;&amp; $parent.tours.length &gt; 1" aria-label="Select Tour" aria-haspopup="true" aria-expanded="false">
+		Select Tour 
+		<span class="caret"></span></button><ul class="dropdown-menu help_touroptions col-xs-12 help_guidedtours" role="menu"><li ng-repeat="tour in $parent.tours" ng-click="startTour(tour)"><a class="help_truncate" href="#">{{tour.name}}</a></li></ul></div></div><div class="sn-widget sn-widget-button sn-widget-button_stacked" ng-if="isGuidedSetupSticky"><div class="sn-widget sn-widget-button sn-widget-button_stacked" ng-repeat="gsAction in guidedSetupActions"><button class="btn btn-default helpbtn helpbtn-default" ng-show="gsAction.name == helpEvents.GUIDED_SETUP_ACTION_COMPLETE" ng-click="onGuidedSetupActionClick(helpEvents.GUIDED_SETUP_ACTION_COMPLETE)" role="button" aria-label="Mark as Complete">Mark as Complete</button><button class="btn btn-default helpbtn helpbtn-default" ng-show="gsAction.name == helpEvents.GUIDED_SETUP_ACTION_INCOMPLETE" ng-click="onGuidedSetupActionClick(helpEvents.GUIDED_SETUP_ACTION_INCOMPLETE)" role="button" aria-label="Mark as Incomplete">Mark as Incomplete</button><button class="btn btn-default helpbtn helpbtn-default" ng-show="gsAction.name == helpEvents.GUIDED_SETUP_ACTION_SKIP" ng-click="onGuidedSetupActionClick(helpEvents.GUIDED_SETUP_ACTION_SKIP)" role="button" aria-label="Skip this Configuration">Skip this Configuration</button></div><button class="btn btn-default helpbtn helpbtn-default ng-class:{'last-button': guidedSetupActions.length&gt;0};" ng-show="guidedSetupActions.length&gt;=0" ng-click="onGuidedSetupActionClick(helpEvents.GUIDED_SETUP_ACTION_BACK)" role="button" aria-label="Back to Guided Setup">Back to Guided Setup</button><button class="btn btn-default helpbtn helpbtn-default last-button" ng-show="guidedSetupActions.length==0" ng-click="onGuidedSetupActionClick(helpEvents.GUIDED_SETUP_ACTION_EXIT)" role="button" aria-label="Exit Guided Setup">Exit Guided Setup</button></div></div><div class="sn-widget sn-widget-button sn-widget-button_stacked" ng-repeat="action in $parent.actions"><button class="btn btn-primary helpbtn helpbtn-primary" ng-show="action.actionType == 1" ng-click="onActionClick(action.onClick)" role="button" aria-label="{{action.text}}">{{action.text}}</button><p><a href="{{action.url}}" ng-show="action.actionType == 2" aria-label="{{action.text}}">{{action.text}}</a></p></div></div></div>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=embedded_help_bar_toggle.xml" type="text/ng-template">
+   <button class="btn btn-icon icon-help embedded-help-toggle sn-tooltip-basic" type="button" ng-class="{ 'state-selected' : state === 'open' }" ng-click="toggleHelpPane()" title="Toggle Help Sidebar" data-toggle="tooltip" aria-label="Toggle Help Sidebar" data-placement="bottom"><span class="sr-only">Toggle Help Sidebar</span><span class="sn-badge default icon icon-ellipsis" ng-if="state !== 'open' &amp;&amp; contentExists"></span></button>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=connectConversationBarToggle.xml" type="text/ng-template">
+   <button class="btn btn-icon icon-collaboration connect_toggle sn-tooltip-basic" type="button" id="connect_toggle_sidebar_header_button" ng-class="{ 'state-selected' : state == 'open' }" ng-click="toggleConversationList()" title="Toggle Connect Sidebar" data-toggle="tooltip" aria-label="Toggle Connect Sidebar" data-placement="bottom"><span class="sr-only">Toggle Connect Sidebar</span><span class="sn-badge default" ng-if="unreadMessages &gt; 0 &amp;&amp; state == 'closed'"><span class="sr-only">Unread messages:&nbsp;</span>{{formattedUnreadCount(unreadMessages)}}</span></button>
+  </script>
+  <script id="angular.do?sysparm_type=get_partial&amp;name=concourse_main_pane.xml" type="text/ng-template">
+   <div>
+		<iframe id="gsft_main" main-pane="true" name="gsft_main" title="Main Content" src="about:blank"></iframe>
+
+		<div class="extension-pane-container" style="height: 100%"></div></div>
+  </script>
+  <script>
+   angular.module('sn.concourse').run(function(userPreferences) {
+			
+
+			userPreferences.addToCache('navigator.activeView', 'null');userPreferences.addToCache('table.wrap', 'true');userPreferences.addToCache('glide.ui.accessibility', 'false');userPreferences.addToCache('glide.ui.short_date_format', 'null');userPreferences.addToCache('glide.ui.date_format', 'null');userPreferences.addToCache('glide.ui.compact', 'null');userPreferences.addToCache('glide.ui.default_list_mode', 'null');userPreferences.addToCache('tabbed.forms', 'true');userPreferences.addToCache('glide.ui.related_list_timing', 'null');userPreferences.addToCache('glide.ui.listFormModal', 'null');userPreferences.addToCache('navigator.collapsed', 'null');userPreferences.addToCache('glide.ui.list_v3.row_stripes', 'null');userPreferences.addToCache('my_home_navigation_page', 'null');userPreferences.addToCache('glide.ui.field_style_circles', 'true');userPreferences.addToCache('embedded_help:language_warning.suppress', 'false');userPreferences.addToCache('embedded_help:help_pane.opened', 'false');userPreferences.addToCache('glide.ui.edit_favorites.hide_confirm', 'null');userPreferences.addToCache('connect.notifications.mobile', 'true');userPreferences.addToCache('connect.notifications.desktop', 'false');userPreferences.addToCache('connect.notifications.email', 'true');userPreferences.addToCache('connect.notifications.audio', 'true');userPreferences.addToCache('connect:conversation_list.opened', 'false');userPreferences.addToCache('connect.conversation_list.active_list.frameSet.id', 'null');userPreferences.addToCache('connect.conversation_list.active_list.frameSet.chat.id', 'null');userPreferences.addToCache('connect.conversation_list.active_list.frameSet.support.id', 'null');
+
+
+		});
+  </script>
+  <script>
+   /*! RESOURCE: /scripts/concourse/delayedAngularBootstrapper.jsx */
+(function (angular, window) {
+function scheduleCompilation($targets) {
+var injector = angular.element(document.documentElement).injector();
+var $compile = injector.get('$compile');
+var $scope = injector.get('$rootScope').$new();
+$targets.each(function(item, target) {
+var timeoutAttr = target.getAttribute('concourse-compilation-target-timeout')
+var timeout = timeoutAttr ? parseInt(timeoutAttr, 10) : 0;
+var name = target.getAttribute('concourse-compilation-target');
+setTimeout(function compileConcourseTarget() {
+$compile(target)($scope);
+}, timeout);
+})
+}
+function bootstrap() {
+if (!window.NOW || !window.NOW.ngLoadModules) {
+return;
+}
+window.NOW.ngLoadModules.push('sn.base');
+var $targets = angular.element('*[concourse-compilation-target]');
+var bootstrapModule = angular.module('appBootstrap', window.NOW.ngLoadModules);
+angular.bootstrap(document.documentElement, [bootstrapModule.name]);
+scheduleCompilation($targets);
+}
+angular.element(document).ready(function() {
+setTimeout(bootstrap)
+});
+})(angular, window);
+;
+  </script>
+ </body>
+</html>
