@@ -9,8 +9,9 @@ Past Issues:
 - Nov 29 - SN Service Interruption: This instance is unavailable.
 - index error fixed by removing first 2 table cols from fields, and first 2 and last 3 tags from each task (tr)
 - Before Dec 4: During Table scrape, all tasks except top one would be Pulled in - FIX: idk but that task is gone from catalouge 
-*- Window cannot be minimized while trying to click on first task
+- Any window size other than maximized causes a problem while trying to click on first task
 
+- NVM I just had debugger set to stopped on caught exceptions: for col in soup.find("tr", attrs={"id" : "hdr_sc_task"}): field_order.append(col.attrs['name']) inside scrape_task_list() - Throws Key error Exception when running in debugger 
 
 TODO: Tasks
 LAST: 
@@ -91,14 +92,13 @@ buffer_wait = 2 # Seconds
 # For testing
 task_demo_url = 'https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task.do%3Fsys_id%3Ddfed669047801200e0ef563dbb9a712b%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dsc_task%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Drequest_item%253Daeed229047801200e0ef563dbb9a71c2%255EORDERBYDESCnumber'
 restart_limit = 5
-task_page_limit= 3
+task_page_limit= 0
 
 # Replace url with given Task Page url in GUI
 def get_browser_driver(url=list_url):
 # Creates and returns selenium browser window
         driver= webdriver.Firefox(executable_path='.\\web_drivers\\geckodriver.exe')
-        # driver.set_window_position(0, 0)      # Causes issue with clicking on Task to start single page scrape 
-        # driver.set_window_size(325, 250)
+        driver.maximize_window()
         driver.set_page_load_timeout(20)
         driver.get(url)
         return driver
@@ -117,52 +117,83 @@ def go_scrape(failed_start_threshold=restart_limit):
         while (cont_loop==True and failed_starts < failed_start_threshold ):
                 try:
                         browser= get_browser_driver()
-
-                        # Try to start task crawl - Takes average of 20 secs to login
-                        time.sleep(buffer_wait)
-                        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
+                        try: 
+                                # Try to start task crawl - Takes average of 20 secs to login
+                                time.sleep(buffer_wait)
+                                WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((0)))
+                                
+                                # Change to wait until uname and password appear - should fix random errors
+                                time.sleep(buffer_wait)
+                                (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
+                                (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
+                                time.sleep(buffer_wait*2)
+                        except Exception as e: 
+                                print(f"Scraping Loop - Error During Login: {e}")
+                        try:
+                                # Scrape tasks table and return list
+                                browser.switch_to.default_content() 
+                                time.sleep(buffer_wait)
+                                WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
+                                time.sleep(buffer_wait)
+                                catalog_tasks= scrape_task_list(browser.page_source)
+                                
+                                # Click first task and start individual task page scrape loop 
+                                browser.find_element_by_xpath("//a[@class='linked formlink']").click()
+                        except Exception as e: 
+                                print(f"Scraping Loop - Error Clicking on Task Link: {e}")           
                         
-                        # Change to wait until uname and password appear - should fix random errors
-                        time.sleep(buffer_wait)
-                        (browser.find_element_by_name("user_name")).send_keys(USER_NAME)
-                        (browser.find_element_by_id("user_password")).send_keys(USER_PASSWORD + Keys.RETURN)
-                        time.sleep(buffer_wait*2)
-
-                        # Scrape tasks table and return list
-                        browser.switch_to.default_content() 
-                        time.sleep(buffer_wait)
-                        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
-                        time.sleep(buffer_wait)
-                        catalog_tasks= scrape_task_list(browser.page_source)
-                                                
                         # For Checking next page of task table - Check vcr_controls div and return value for more tasks on next page or not
                         # div = soup.find("div", attrs={"class":"vcr_controls"}).findChild()
                         # print(div)
-                        
-                        # Click first task and start individual task page scrape loop 
-                        browser.find_element_by_xpath("//a[@class='linked formlink']").click()
-                        cont_task= True; num_tasks=0
 
+                        # set task limit to number of active tasks if no limit is specified
+                        task_page_limit= 8
+
+                        cont_task= True; num_tasks=0
                         while(cont_task and num_tasks < task_page_limit):
                         # Iterate through tasks and pass to scrape task with a flag for new/updated
-                                time.sleep(buffer_wait) 
-                                soup = BeautifulSoup(browser.page_source, features="lxml")
+                                soup = ""
+                                try:
+                                        # Switch browser focus to main frame and scrape task html
+                                        time.sleep(buffer_wait) 
+                                        browser.switch_to.default_content()
+                                        time.sleep(buffer_wait)
+                                        WebDriverWait(browser, BROWSER_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it("gsft_main"))
+                                        time.sleep(buffer_wait*3)
+
+                                        # Find "Next Task" button and check if next is last page
+                                        next_button= browser.find_element_by_xpath("//button[@class='btn btn-icon icon-arrow-down']")
+                                        
+                                        soup = BeautifulSoup(browser.page_source, features="lxml")
                                 
+                                # Exceptions: On Timeout - Wrong frame, On NoSuchElement - Not loaded or Wrong frame 
+                                except Exception as e: 
+                                        print(f"Scraping Loop - Error Finding Next Task button: {e}")  
+
+# Problem - all Activities before last task's added to new tasks bc name isnt valid
+# either just hit next Task button until it dissapears or 
+# get total number of Tasks from Table first then set that as cap if none is specified
+  
                                 # Check if task number is already in Catalog_tasks list to determine whether to grab extra details with Tasks Activities
-                                name = soup.find(name="input", attrs={"id":"sc_task.number", "name":"sc_task.number", "class":"form-control"}).get_text()
+                                name = soup.find(name="input", attrs={"id":"sc_task.number", "name":"sc_task.number", "class":"form-control"}).attrs['value']
                                 update_index=-1
                                 for task_index in range(len(catalog_tasks)): 
                                         if catalog_tasks[task_index].number == name: update_index= task_index
 
-                                # Switch browser focus to main frame and scrape task html
-                                time.sleep(buffer_wait) 
-                                browser.switch_to.default_content()
-                                time.sleep(buffer_wait*3) 
-
-                                if (update_index == -1) : catalog_tasks += [scrape_Task(browser.page_source)]
+                                # Scrape Task Page and create new task obj if not in catalog task, otherwise update task  
+                                if (update_index == -1) : 
+                                        catalog_tasks += [scrape_Task(browser.page_source)]
                                 elif (update_index >= 0): 
                                         catalog_tasks[update_index] = scrape_Task(browser.page_source, catalog_tasks[update_index])
-                                        
+                                num_tasks += 1
+                                
+                                try: next_button.click()
+                                except Exception as e:
+                                        print("Error cannot iterate Task, button not found: ", int(time.time()-t))
+                                        cont_loop = True
+                                        failed_starts += 1
+                                # Also check button text for next page being last
+
 ####    Iteratting through Task pages - down button DOES disappear and become unclickable on last task in single page list. 
         # So you'll have to check one iteration beforehand and signal that the next is the last one
         # Also the page that it shows as text is the next page after not current task page 
@@ -171,7 +202,7 @@ def go_scrape(failed_start_threshold=restart_limit):
                                 # records = [int(s) for s in records_str if s.isdigit()] # Next record (\d of \d)
                                 # if (records[0] == records[1]): cont_task=False # Stop Task Scraping loop
                                 # print(records)
-                                try: 
+                                
 ####    Clicking the down button, this ones having issues clicking, it did it once but once I looped it it started bugging. 
         # try: timed waits, double clicking, window size
         # MORE SPECIFIC XPATH, that worked last time 
@@ -182,20 +213,16 @@ def go_scrape(failed_start_threshold=restart_limit):
         # to think about later: I would add some verifiers or assertions so we can get some consistency going as far as running.
         # Maybe setup a temporary log, also look at gecko logs               
                                         # Iterate tasks by clicking down arrow
-                                        browser.find_element_by_xpath("//button[@class='btn btn-icon icon-arrow-down']").click()
-                                        break
+                                  
+                                        
 ####    On another note one error throws off entire scraping loop. Either split up with try-catch loops so data does'nt get lost
         # Or just load each entry into csv and pick up where you left off when you run again
-                                except Exception as e:
-                                        print("Error cannot iterate Task, button not found: ", int(time.time()-t))
-                                        browser.close()  
-                                        cont_loop = True
-                                        failed_starts += 1
-                                time.sleep(buffer_wait)
-                                num_tasks += 1
+                                
                         # Stop main scraper loop
                         cont_loop = False
-                        for i in catalog_tasks: i.show() 
+                        browser.close()
+                        for i in catalog_tasks: i.show()
+                        print(f"Total Tasks Scraped: {len(catalog_tasks)}") 
                 except TimeoutError:
                         print(f"Timeout Error: {int(time.time()-t)}")
                         browser.close()  
@@ -212,8 +239,7 @@ def go_scrape(failed_start_threshold=restart_limit):
                         cont_loop = True
                         failed_starts += 1
                 finally:
-                        browser.close()
-                        print(f"Total Exception Restarts: {failed_starts}\n")
+                        pass # print(f"Total Scraping Loop Restarts: {failed_starts}\n")
 
 # Still doesnt go next page
 def scrape_task_list(html):
@@ -237,21 +263,16 @@ def scrape_task_list(html):
                 # grab text from each field(td) in each row of table(tr) and assign to data in task obj
                 for task in rows:
                         # Grab Task attributes
+                        k=0
+                        task_attrs= {}
                         task_data= task.findChildren("td")
                         task_data= task_data[2:(len(task_data)-4)] # frst of 3 datex is [20:]
-                        task_attrs= {}
-                        k=0
-                        l= len(task_data)
-                        # Stores link to first task page
-                        if rows[0] == task: 
-                                task_url=task_data[0].contents[0].attrs['href']
-                        # More task_data attr(td) than fields (col names)
                         for attr in task_data:
                                 task_attrs[str(fields[k])] = attr.get_text() # IndexError: list index out of range
-                                if attr.get_text() == None or attr.get_text() == re.compile("(empty)") or attr.get_text()== "" : # make sure attr are properly assigned
+                                if attr.get_text() == None or attr.get_text()== "" : # make sure attr are properly assigned
                                         task_attrs[str(fields[k])] = 'N/A'
                                 k=k+1
-                        tasks += [Task(task_attrs[str(fields[0])], task_attrs, l)]
+                        tasks += [Task(task_attrs[str(fields[0])], task_attrs, [])]
                 return tasks
         except Exception as e:
                 print(f"Task Table Scraping Error: {e}")
@@ -261,6 +282,10 @@ def scrape_Task(html, update_task=None):
         # Returns task object
         soup = BeautifulSoup(html, features="lxml")
         activity_cards = []
+        
+        print(f"Scraping {soup.find(name='input', attrs={'id':'sc_task.number', 'name':'sc_task.number', 'class':'form-control'}).attrs['value']} Page ...")
+     
+        
         try:
         # Grabbing Activities
                 created_by, status_changes, date_changed = {},{},{}
@@ -279,17 +304,25 @@ def scrape_Task(html, update_task=None):
                         
                         # Group activity details by each card and add card to activity list of respective Task object 
                         activity_cards += [TaskActivity(created_by, date_changed, task_changes)]
-                if (update_task): 
+                
+                if not (update_task==None): 
                 # if Task to update is provided just append cards                        
                         update_task.activity_cards= activity_cards
                         return update_task
                 else: 
-                # if newTask get detailed info and return new task object
-                        return Task("TESTER-TASK2132", {"sad":"sdSZd"}, [0,1])
+# Remove Tasks_page_limit and handle check for next page being last task page
+# if newTask get detailed info and return new task object
+                        return Task("Should Create New Task HERE", {"sad":"sdSZd"}, activity_cards)
         except NoSuchAttributeException as e:
                 print(f"Error: Attribute attribute requested, {e}")
         except Exception as e:
                 print(f"Individual Task Scraping Error: {e}")
+
+
+
+
+
+
 
 # Its not really neccessary until it becomes a prob, 
 # but concerning Exporting to CSV: you can send it to a txt for backup 
@@ -301,12 +334,13 @@ class Task:
                 self.activity_cards = activity_cards
         
         def show(self):
-                print(f"\n## {self.number} ... attrs: {len(self.task_attributes)}")
+                print(f"\n## {self.number}")
                 for i in self.task_attributes: 
                         print(f"\t- {i}:  {self.task_attributes[i]}")
-                print("Activities: ")
-                self.activity_cards.show()
-
+                print(f" Activity Cards: ")
+                try: 
+                        for s in self.activity_cards: s.show()
+                except Exception as e: print(e, self.activity_cards) # For debugging
 class TaskActivity:
         # Contains activity information from each card 
         def __init__(self, created_by, date_changed, changes_list):
@@ -314,8 +348,8 @@ class TaskActivity:
                 self.date_changed = date_changed
                 self.changes_list = changes_list
 
-        def show(self, created_by, date_changed, changes_list):
-                print(f"\tUser: {self.created_by}\n \tDate: {self.date_changed}\n \tChanges: {self.changes_list}")
+        def show(self):
+                print(f"\tUser: {self.created_by}\n \tDate: {self.date_changed}\n \tChanges: {self.changes_list}\n")
         
 
 def main():
