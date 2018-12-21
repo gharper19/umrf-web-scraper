@@ -11,7 +11,7 @@ Past Issues:
 - Before Dec 4: During Table scrape, all tasks except top one would be Pulled in - FIX: idk but that task is gone from catalouge 
 - Any window size other than maximized causes a problem while trying to click on first task
 
-- NVM I just had debugger set to stopped on caught exceptions: for col in soup.find("tr", attrs={"id" : "hdr_sc_task"}): field_order.append(col.attrs['name']) inside scrape_task_list() - Throws Key error Exception when running in debugger 
+- NVM on key error - I just had debugger set to stopped on caught exceptions: for col in soup.find("tr", attrs={"id" : "hdr_sc_task"}): field_order.append(col.attrs['name']) inside scrape_task_list() - Throws Key error Exception when running in debugger 
 
 TODO: Tasks
 LAST: 
@@ -65,7 +65,13 @@ number, opened closed title assignmentgroup,
 
 Activities: assigned to and state
 
-
+Commit Notes: 
+- Only prioritized task number, state, assigned_to, and all activity cards. I can still update descriptions and other details during indiviual page scrape
+- May be an issue with Assigned_Group - Since Scraper doesn't iterate table pages and assigned_group doesn't
+appear on task page; its not a problem if Assigned_to == Assigned group, but otherwise ill need to add in a table iterator first. 
+- field names will probably need to be renamed when combining updated(table scraped) and new(page scraped) Tasks, before export
+- No checks in place rn, a single error will throw off whole loop. Needs proper waits, checkpoints - maybe on start check current progress of csv,
+- needs initialization from user via config file (use/find a parser?) 
 
 '''
 # encoding: utf-8
@@ -103,14 +109,13 @@ def get_browser_driver(url=list_url):
         driver.get(url)
         return driver
 
-#  does the down task iter arrow, or the Next recs span, disappear when there is no more tasks? 
-#       if so, we dont need to check NumRecords for the while loop task_cont boolean
+
 # Change login to wait for username element; Tasks iteration needs testing with task table cutoff 
 # (does it include all tasks or just those on current table page),
 def go_scrape(failed_start_threshold=restart_limit):
         # Start selenium browser and begin scraping loop
         BROWSER_TIMEOUT = 45 # seconds
-        
+        catalog_tasks =[]
         cont_loop = True
         failed_starts= 0
         t=time.time()
@@ -137,17 +142,14 @@ def go_scrape(failed_start_threshold=restart_limit):
                                 time.sleep(buffer_wait)
                                 catalog_tasks= scrape_task_list(browser.page_source)
                                 
+        # HERE EMPTYING TASKS LISTS TO test "new task" single page scrape
+                                #catalog_tasks= catalog_tasks[5:]
+
+
                                 # Click first task and start individual task page scrape loop 
                                 browser.find_element_by_xpath("//a[@class='linked formlink']").click()
                         except Exception as e: 
                                 print(f"Scraping Loop - Error Clicking on Task Link: {e}")           
-                        
-                        # For Checking next page of task table - Check vcr_controls div and return value for more tasks on next page or not
-                        # div = soup.find("div", attrs={"class":"vcr_controls"}).findChild()
-                        # print(div)
-
-                        # set task limit to number of active tasks if no limit is specified
-                        task_page_limit= 8
 
                         cont_task= True; num_tasks=0
                         while(cont_task and num_tasks < task_page_limit):
@@ -189,11 +191,9 @@ def go_scrape(failed_start_threshold=restart_limit):
                                 
                                 try: next_button.click()
                                 except Exception as e:
-                                        print("Error cannot iterate Task, button not found: ", int(time.time()-t))
-                                        cont_loop = True
-                                        failed_starts += 1
-                                # Also check button text for next page being last
-
+                                        if len(catalog_tasks) == task_page_limit:
+                                                print(f"Done. \nScraping loop took {int(time.time()-t)}s to complete.")
+                                        else: print("Error clicking on Task iteratoration arrow: ", e)
 ####    Iteratting through Task pages - down button DOES disappear and become unclickable on last task in single page list. 
         # So you'll have to check one iteration beforehand and signal that the next is the last one
         # Also the page that it shows as text is the next page after not current task page 
@@ -221,8 +221,7 @@ def go_scrape(failed_start_threshold=restart_limit):
                         # Stop main scraper loop
                         cont_loop = False
                         browser.close()
-                        for i in catalog_tasks: i.show()
-                        print(f"Total Tasks Scraped: {len(catalog_tasks)}") 
+                        for i in catalog_tasks: i.show() 
                 except TimeoutError:
                         print(f"Timeout Error: {int(time.time()-t)}")
                         browser.close()  
@@ -239,9 +238,8 @@ def go_scrape(failed_start_threshold=restart_limit):
                         cont_loop = True
                         failed_starts += 1
                 finally:
-                        pass # print(f"Total Scraping Loop Restarts: {failed_starts}\n")
+                        print(f"\nTotal Scraping Loop Restarts: {failed_starts}\n")
 
-# Still doesnt go next page
 def scrape_task_list(html):
 # Scrapes what it can from table, based on whats already set in filter, to establish list of tasks 
         soup= BeautifulSoup(html, features="lxml")
@@ -249,11 +247,20 @@ def scrape_task_list(html):
 
         # Gets column headers from table header tags
         for col in soup.find("tr", attrs={"id" : "hdr_sc_task"}):
-                try: 
+                try: # REMEMBER THIS THROWS A KEY ERROR FOR FIRST 2
                         field_order.append(col.attrs['name'])    
                 except Exception:
                         field_order.append("No Attribute")
         fields = field_order[2:]
+
+        # Get number of tasks - synch limit 
+        max_tasks = int(soup.find("div", 
+                attrs={"class":"vcr_controls"}).findChildren("span")[1].findChildren("span")[1].get_text())
+        print(f"Total Tasks to Scrape: {max_tasks}")
+        # set task limit to number of active tasks if no limit is specified
+        global task_page_limit
+        if task_page_limit < 1:
+                task_page_limit= max_tasks
 
         # Find and scrape table body based on header fields
         try:
@@ -275,7 +282,7 @@ def scrape_task_list(html):
                         tasks += [Task(task_attrs[str(fields[0])], task_attrs, [])]
                 return tasks
         except Exception as e:
-                print(f"Task Table Scraping Error: {e}")
+                print(f"BS4 Error: Task Table Scrape failed: {e}")
 
 # Still needs to grab data for a new task - unless we're sure all tasks will be documented by the table scrape                    
 def scrape_Task(html, update_task=None):
@@ -283,11 +290,10 @@ def scrape_Task(html, update_task=None):
         soup = BeautifulSoup(html, features="lxml")
         activity_cards = []
         
-        print(f"Scraping {soup.find(name='input', attrs={'id':'sc_task.number', 'name':'sc_task.number', 'class':'form-control'}).attrs['value']} Page ...")
-     
-        
+        task_number = soup.find(name='input', attrs={'id':'sc_task.number', 'name':'sc_task.number', 'class':'form-control'}).attrs['value']
+        print(f"Scraping {task_number} Page ...")
         try:
-        # Grabbing Activities
+        # Grabbing Activity Cards
                 created_by, status_changes, date_changed = {},{},{}
                 activities = soup.find(name='ul', attrs={"class":"h-card-wrapper activities-form"}).findChildren(name='li',
                         attrs={"class":"h-card h-card_md h-card_comments"})
@@ -309,24 +315,21 @@ def scrape_Task(html, update_task=None):
                 # if Task to update is provided just append cards                        
                         update_task.activity_cards= activity_cards
                         return update_task
-                else: 
-# Remove Tasks_page_limit and handle check for next page being last task page
-# if newTask get detailed info and return new task object
-                        return Task("Should Create New Task HERE", {"sad":"sdSZd"}, activity_cards)
+                else: # if newTask get detailed info and return new task object
+                        new_task_attrs = {"number": task_number, 
+                                "State": soup.find("select", attrs={"name": "sc_task.state", "id": "sc_task.state"}).findChild("option", selected=True).get_text(),
+                                "Assigned_to": soup.find("input", attrs={"name": "sys_display.sc_task.assigned_to", "id": "sys_display.sc_task.assigned_to"}).get_text()
+                                }
+                        return Task(task_number, new_task_attrs, activity_cards)
         except NoSuchAttributeException as e:
                 print(f"Error: Attribute attribute requested, {e}")
         except Exception as e:
                 print(f"Individual Task Scraping Error: {e}")
 
-
-
-
-
-
-
 # Its not really neccessary until it becomes a prob, 
 # but concerning Exporting to CSV: you can send it to a txt for backup 
 # (incase of runtime interruption) then csv once complete, really just reread csv and ignore those already fully updated
+# ALSO MAY NEED TO GO THru EACH of TASKS Attrs to replace field names(for tasks grabbed from table) 
 class Task:                                             
         def __init__(self, number, task_attributes, activity_cards):
                 self.number= number
