@@ -221,7 +221,7 @@ def scrape_task_list(html):
                 print(f"BS4 Error: Task Table Scrape failed: {e}")
 
 def scrape_Task(html, update_task=None):
-# Grabs Activity cards from Task page and creates a lists of TaskActivity objects for Tasks, then returns task object with activity list based on update task
+        # Grabs Activity cards from Task page and creates a lists of TaskActivity objects for Tasks, then returns task object with activity list based on update task
         soup = BeautifulSoup(html, features="lxml")
         activity_cards = []
         
@@ -264,7 +264,7 @@ def scrape_Task(html, update_task=None):
 
 def export_tasks_list_csv(tasks): 
 # Turns catalog tasks data into a panda dataframe and writes frame to csv 
-        df = pd.DataFrame({})
+        df = pd.DataFrame({}) # , index=[i for i in range(len(tasks))] )
         i = 0
         for task in tasks:
                 details = task.task_attributes
@@ -276,7 +276,7 @@ def export_tasks_list_csv(tasks):
         return df
 
 class Task:
-# Has a Task number, a dictionary of collected attribute details, and a list of TaskActivity objects representing the Task's activities                                               
+# Has a T ask number, a dictionary of collected attribute details, and a list of TaskActivity objects representing the Task's activities                                               
         def __init__(self, number, task_attributes, activity_cards):
                 self.number= number
                 self.task_attributes= task_attributes
