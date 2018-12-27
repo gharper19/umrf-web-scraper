@@ -1,0 +1,24 @@
+### EPDSM and CSV Configuration Options
+# Login Details
+[USER_NAME]: admin
+[USER_PASSWORD]: Veryhap1*
+
+# Url of Catalog Tasks Table
+[list_url]: https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ
+
+# Name of CSV to which task data is sent
+[filename_for_export]: SN_Catalog_Tasks_Demo
+
+### Runtime Configuration Options
+
+# Amount of time in seconds that Selenium waits implicitly between browser actions
+[buffer_wait]: 2
+
+# Maximum number of seconds selenium waits for DOM web elements appear
+[BROWSER_TIMEOUT]: 20
+
+# Number of times selenium is willing to automatically restart the Main loop during runtime 
+[restart_limit]: 3
+
+# Number of task Pages selenium scrapes starting from the first entry in tasks table - Set anywhere below 1 to scrape all available task pages
+[task_page_limit]: 0
