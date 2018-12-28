@@ -3301,3 +3301,674 @@ console.error: BroadcastService:
 [
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
+1546025867333	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\gjhar\\AppData\\Local\\Temp\\rust_mozprofile.UU2E5Ec77B6k"
+1546025868771	Marionette	DEBUG	Received observer notification profile-after-change
+1546025868945	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1546025869039	Marionette	DEBUG	Received observer notification command-line-startup
+1546025869039	Marionette	DEBUG	Received observer notification nsPref:changed
+1546025869039	Marionette	DEBUG	Init aborted (running=false, enabled=true, finalUIStartup=false)
+1546025869382	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1546025871165	Marionette	DEBUG	Received observer notification sessionstore-windows-restored
+1546025871165	Marionette	DEBUG	Waiting for delayed startup...
+1546025871326	Marionette	DEBUG	Setting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer to true
+1546025871326	Marionette	DEBUG	Setting recommended pref apz.content_response_timeout to 60000
+1546025871327	Marionette	DEBUG	Setting recommended pref browser.download.panel.shown to true
+1546025871328	Marionette	DEBUG	Setting recommended pref browser.pagethumbnails.capturing_disabled to true
+1546025871329	Marionette	DEBUG	Setting recommended pref browser.search.update to false
+1546025871329	Marionette	DEBUG	Setting recommended pref toolkit.cosmeticAnimations.enabled to false
+1546025871330	Marionette	DEBUG	Setting recommended pref browser.tabs.disableBackgroundZombification to false
+1546025871330	Marionette	DEBUG	Setting recommended pref browser.tabs.warnOnCloseOtherTabs to false
+1546025871331	Marionette	DEBUG	Setting recommended pref browser.tabs.warnOnOpen to false
+1546025871331	Marionette	DEBUG	Setting recommended pref browser.usedOnWindows10.introURL to 
+1546025871332	Marionette	DEBUG	Setting recommended pref browser.urlbar.suggest.searches to false
+1546025871333	Marionette	DEBUG	Setting recommended pref datareporting.policy.dataSubmissionPolicyAccepted to false
+1546025871333	Marionette	DEBUG	Setting recommended pref dom.disable_beforeunload to true
+1546025871334	Marionette	DEBUG	Setting recommended pref dom.disable_open_during_load to false
+1546025871334	Marionette	DEBUG	Setting recommended pref dom.file.createInChild to true
+1546025871334	Marionette	DEBUG	Setting recommended pref dom.max_chrome_script_run_time to 0
+1546025871335	Marionette	DEBUG	Setting recommended pref dom.max_script_run_time to 0
+1546025871335	Marionette	DEBUG	Setting recommended pref extensions.getAddons.cache.enabled to false
+1546025871336	Marionette	DEBUG	Setting recommended pref extensions.webservice.discoverURL to http://%(server)s/dummy/discoveryURL
+1546025871337	Marionette	DEBUG	Setting recommended pref network.http.prompt-temp-redirect to false
+1546025871337	Marionette	DEBUG	Setting recommended pref network.http.speculative-parallel-limit to 0
+1546025871337	Marionette	DEBUG	Setting recommended pref security.fileuri.strict_origin_policy to false
+1546025871338	Marionette	DEBUG	Setting recommended pref security.notification_enable_delay to 0
+1546025871338	Marionette	DEBUG	Setting recommended pref signon.autofillForms to false
+1546025871338	Marionette	DEBUG	Setting recommended pref signon.rememberSignons to false
+1546025871495	Marionette	INFO	Listening on port 60433
+1546025871495	Marionette	DEBUG	Remote service is active
+1546025871709	Marionette	DEBUG	Accepted connection 0 from 127.0.0.1:60449
+1546025871715	Marionette	TRACE	0 -> [0,1,"WebDriver:NewSession",{"acceptInsecureCerts":true,"browserName":"firefox"}]
+1546025871717	Marionette	WARN	TLS certificate errors will be ignored for this session
+1546025871831	Marionette	DEBUG	[6442450945] Frame script loaded
+1546025871847	Marionette	DEBUG	[6442450945] Frame script registered
+1546025871854	Marionette	TRACE	0 <- [1,1,null,{"sessionId":"18fc8382-dfee-45e6-b0b0-f737cf7f33e2","capabilities":{"browserName":"firefox","browserVersion":"63.0. ... AppData\\Local\\Temp\\rust_mozprofile.UU2E5Ec77B6k","moz:useNonSpecCompliantPointerOrigin":false,"moz:webdriverClick":true}}]
+1546025871895	Marionette	TRACE	0 -> [0,2,"WebDriver:MaximizeWindow",{}]
+1546025871916	Marionette	TRACE	0 <- [1,2,null,{"x":-7,"y":-7,"width":1550,"height":838,"state":"maximized"}]
+1546025872157	Marionette	TRACE	0 -> [0,3,"WebDriver:SetTimeouts",{"pageLoad":20000}]
+1546025872158	Marionette	TRACE	0 <- [1,3,null,{"value":null}]
+1546025872165	Marionette	TRACE	0 -> [0,4,"WebDriver:Navigate",{"url":"https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"}]
+1546025872188	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for about:blank
+1546025872977	Marionette	DEBUG	[6442450945] Received DOM event pagehide for about:blank
+1546025876557	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/navpage.do
+1546025877765	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/navpage.do
+1546025877768	Marionette	TRACE	0 <- [1,4,null,{"value":null}]
+1546025879777	Marionette	TRACE	0 -> [0,5,"WebDriver:SwitchToFrame",{"id":0}]
+1546025879813	Marionette	TRACE	0 <- [1,5,null,{"value":null}]
+1546025881820	Marionette	TRACE	0 -> [0,6,"WebDriver:FindElement",{"using":"css selector","value":"[name=\"user_name\"]"}]
+1546025881827	Marionette	TRACE	0 <- [1,6,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"4a8c20b0-71e4-4271-b8a6-90bad7223938"}}]
+1546025881833	Marionette	TRACE	0 -> [0,7,"WebDriver:ElementSendKeys",{"id":"4a8c20b0-71e4-4271-b8a6-90bad7223938","text":"admin","value":["a","d","m","i","n"]}]
+1546025881906	Marionette	TRACE	0 <- [1,7,null,{"value":null}]
+1546025881910	Marionette	TRACE	0 -> [0,8,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"user_password\"]"}]
+1546025881915	Marionette	TRACE	0 <- [1,8,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"d1465b29-d248-49b3-8542-dc575e988f97"}}]
+1546025881918	Marionette	TRACE	0 -> [0,9,"WebDriver:ElementSendKeys",{"id":"d1465b29-d248-49b3-8542-dc575e988f97","text":"Veryhap1*","value":["V","e","r","y","h","a","p","1","*",""]}]
+1546025881990	Marionette	TRACE	0 <- [1,9,null,{"value":null}]
+JavaScript warning: https://dev58662.service-now.com/navpage.do, line 399: unreachable code after return statement
+1546025884004	Marionette	TRACE	0 -> [0,10,"WebDriver:SwitchToFrame",{}]
+1546025884350	Marionette	TRACE	0 <- [1,10,null,{"value":null}]
+1546025886366	Marionette	TRACE	0 -> [0,11,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025886508	Marionette	TRACE	0 <- [1,11,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025886517	Marionette	TRACE	0 -> [0,12,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025887034	Marionette	TRACE	0 <- [1,12,null,{"value":null}]
+1546025889044	Marionette	TRACE	0 -> [0,13,"WebDriver:GetPageSource",{}]
+1546025889078	Marionette	TRACE	0 <- [1,13,null,{"value":"<html class=\"ltr date-calendar tabbed\" data-doctype=\"true\" dir=\"ltr\" lang=\"en\"><head><script src ... a-controls=\"glide:timingBreakdown_widget\" data-original-title=\"\" title=\"\"></button></div></span></div></body></html>"}]
+1546025889246	Marionette	TRACE	0 -> [0,14,"WebDriver:FindElement",{"using":"xpath","value":"//a[@class='linked formlink']"}]
+1546025889252	Marionette	TRACE	0 <- [1,14,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"0dc194b5-6f4b-4da8-b611-87c156e44b14"}}]
+1546025889256	Marionette	TRACE	0 -> [0,15,"WebDriver:ElementClick",{"id":"0dc194b5-6f4b-4da8-b611-87c156e44b14"}]
+1546025889321	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task_list.do?sysparm_clear_stack=true&sysparm_query=active=true^EQ
+1546025890721	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task_list.do?sysparm_clear_stack=true&sysparm_query=active=true^EQ
+1546025890726	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task_list.do?sysparm_clear_stack=true&sysparm_query=active=true^EQ
+1546025892302	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546025892419	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546025892424	Marionette	TRACE	0 <- [1,15,null,{"value":null}]
+1546025894445	Marionette	TRACE	0 -> [0,16,"WebDriver:SwitchToFrame",{}]
+1546025894450	Marionette	TRACE	0 <- [1,16,null,{"value":null}]
+1546025894456	Marionette	TRACE	0 -> [0,17,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025894464	Marionette	TRACE	0 <- [1,17,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025894468	Marionette	TRACE	0 -> [0,18,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025894474	Marionette	TRACE	0 <- [1,18,null,{"value":null}]
+1546025896485	Marionette	TRACE	0 -> [0,19,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025896494	Marionette	TRACE	0 <- [1,19,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"fed965b6-84c1-457b-9cc1-81334eca3503"}}]
+1546025896499	Marionette	TRACE	0 -> [0,20,"WebDriver:GetPageSource",{}]
+1546025896538	Marionette	TRACE	0 <- [1,20,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025896675	Marionette	TRACE	0 -> [0,21,"WebDriver:GetPageSource",{}]
+1546025896703	Marionette	TRACE	0 <- [1,21,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025896840	Marionette	TRACE	0 -> [0,22,"WebDriver:ElementClick",{"id":"fed965b6-84c1-457b-9cc1-81334eca3503"}]
+1546025896869	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546025897474	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546025897480	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546025898495	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025898563	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025898565	Marionette	TRACE	0 <- [1,22,null,{"value":null}]
+1546025900573	Marionette	TRACE	0 -> [0,23,"WebDriver:SwitchToFrame",{}]
+1546025900581	Marionette	TRACE	0 <- [1,23,null,{"value":null}]
+1546025900588	Marionette	TRACE	0 -> [0,24,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025900639	Marionette	TRACE	0 <- [1,24,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025900643	Marionette	TRACE	0 -> [0,25,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025900646	Marionette	TRACE	0 <- [1,25,null,{"value":null}]
+1546025902651	Marionette	TRACE	0 -> [0,26,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025902696	Marionette	TRACE	0 <- [1,26,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"e57f677b-f0c5-4370-8ac6-51bf2c36d84e"}}]
+1546025902699	Marionette	TRACE	0 -> [0,27,"WebDriver:GetPageSource",{}]
+1546025902731	Marionette	TRACE	0 <- [1,27,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025902862	Marionette	TRACE	0 -> [0,28,"WebDriver:GetPageSource",{}]
+1546025902890	Marionette	TRACE	0 <- [1,28,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025903030	Marionette	TRACE	0 -> [0,29,"WebDriver:ElementClick",{"id":"e57f677b-f0c5-4370-8ac6-51bf2c36d84e"}]
+1546025903064	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025903518	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025903526	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025904856	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025904913	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025904915	Marionette	TRACE	0 <- [1,29,null,{"value":null}]
+1546025906923	Marionette	TRACE	0 -> [0,30,"WebDriver:SwitchToFrame",{}]
+1546025906926	Marionette	TRACE	0 <- [1,30,null,{"value":null}]
+1546025906932	Marionette	TRACE	0 -> [0,31,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025906941	Marionette	TRACE	0 <- [1,31,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025906945	Marionette	TRACE	0 -> [0,32,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025906949	Marionette	TRACE	0 <- [1,32,null,{"value":null}]
+1546025908953	Marionette	TRACE	0 -> [0,33,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025908999	Marionette	TRACE	0 <- [1,33,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"0028a192-4627-4067-8f88-84dd366d7986"}}]
+1546025909004	Marionette	TRACE	0 -> [0,34,"WebDriver:GetPageSource",{}]
+1546025909033	Marionette	TRACE	0 <- [1,34,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... ength === 0 && items.loading --><!-- ngIf: items.length === 0 && !items.loading --></ul></div></mentio-menu></body></html>"}]
+1546025909243	Marionette	TRACE	0 -> [0,35,"WebDriver:GetPageSource",{}]
+1546025909272	Marionette	TRACE	0 <- [1,35,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... ength === 0 && items.loading --><!-- ngIf: items.length === 0 && !items.loading --></ul></div></mentio-menu></body></html>"}]
+1546025909405	Marionette	TRACE	0 -> [0,36,"WebDriver:ElementClick",{"id":"0028a192-4627-4067-8f88-84dd366d7986"}]
+1546025909444	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025909992	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025910000	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025911207	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025911307	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025911309	Marionette	TRACE	0 <- [1,36,null,{"value":null}]
+1546025913317	Marionette	TRACE	0 -> [0,37,"WebDriver:SwitchToFrame",{}]
+1546025913321	Marionette	TRACE	0 <- [1,37,null,{"value":null}]
+1546025913325	Marionette	TRACE	0 -> [0,38,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025913333	Marionette	TRACE	0 <- [1,38,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025913337	Marionette	TRACE	0 -> [0,39,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025913340	Marionette	TRACE	0 <- [1,39,null,{"value":null}]
+1546025915344	Marionette	TRACE	0 -> [0,40,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025915351	Marionette	TRACE	0 <- [1,40,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"316b2b80-5901-45a8-a9c8-046d6372857c"}}]
+1546025915355	Marionette	TRACE	0 -> [0,41,"WebDriver:GetPageSource",{}]
+1546025915395	Marionette	TRACE	0 <- [1,41,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025915543	Marionette	TRACE	0 -> [0,42,"WebDriver:GetPageSource",{}]
+1546025915571	Marionette	TRACE	0 <- [1,42,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025915714	Marionette	TRACE	0 -> [0,43,"WebDriver:ElementClick",{"id":"316b2b80-5901-45a8-a9c8-046d6372857c"}]
+1546025915746	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025916159	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025916168	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025917264	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025917343	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025917344	Marionette	TRACE	0 <- [1,43,null,{"value":null}]
+1546025919349	Marionette	TRACE	0 -> [0,44,"WebDriver:SwitchToFrame",{}]
+1546025919353	Marionette	TRACE	0 <- [1,44,null,{"value":null}]
+1546025919356	Marionette	TRACE	0 -> [0,45,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025919363	Marionette	TRACE	0 <- [1,45,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025919368	Marionette	TRACE	0 -> [0,46,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025919372	Marionette	TRACE	0 <- [1,46,null,{"value":null}]
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:721:13
+
+1546025921380	Marionette	TRACE	0 -> [0,47,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025921422	Marionette	TRACE	0 <- [1,47,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"951f9c52-8f90-4ff9-9e91-a8fbd8e8a5e1"}}]
+1546025921425	Marionette	TRACE	0 -> [0,48,"WebDriver:GetPageSource",{}]
+1546025921456	Marionette	TRACE	0 <- [1,48,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025921581	Marionette	TRACE	0 -> [0,49,"WebDriver:GetPageSource",{}]
+1546025921613	Marionette	TRACE	0 <- [1,49,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025921756	Marionette	TRACE	0 -> [0,50,"WebDriver:ElementClick",{"id":"951f9c52-8f90-4ff9-9e91-a8fbd8e8a5e1"}]
+1546025921787	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025922155	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025922163	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025923280	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025923361	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025923362	Marionette	TRACE	0 <- [1,50,null,{"value":null}]
+1546025925367	Marionette	TRACE	0 -> [0,51,"WebDriver:SwitchToFrame",{}]
+1546025925370	Marionette	TRACE	0 <- [1,51,null,{"value":null}]
+1546025925374	Marionette	TRACE	0 -> [0,52,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025925380	Marionette	TRACE	0 <- [1,52,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025925384	Marionette	TRACE	0 -> [0,53,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025925387	Marionette	TRACE	0 <- [1,53,null,{"value":null}]
+1546025927392	Marionette	TRACE	0 -> [0,54,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025927398	Marionette	TRACE	0 <- [1,54,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"397175d7-79cc-4f44-87ba-9ce2516b8f2f"}}]
+1546025927402	Marionette	TRACE	0 -> [0,55,"WebDriver:GetPageSource",{}]
+1546025927438	Marionette	TRACE	0 <- [1,55,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025927581	Marionette	TRACE	0 -> [0,56,"WebDriver:GetPageSource",{}]
+1546025927608	Marionette	TRACE	0 <- [1,56,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025927747	Marionette	TRACE	0 -> [0,57,"WebDriver:ElementClick",{"id":"397175d7-79cc-4f44-87ba-9ce2516b8f2f"}]
+1546025927773	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025928199	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025928206	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025929196	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025929263	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025929264	Marionette	TRACE	0 <- [1,57,null,{"value":null}]
+1546025931268	Marionette	TRACE	0 -> [0,58,"WebDriver:SwitchToFrame",{}]
+1546025931276	Marionette	TRACE	0 <- [1,58,null,{"value":null}]
+1546025931280	Marionette	TRACE	0 -> [0,59,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025931296	Marionette	TRACE	0 <- [1,59,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025931298	Marionette	TRACE	0 -> [0,60,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025931321	Marionette	TRACE	0 <- [1,60,null,{"value":null}]
+1546025933324	Marionette	TRACE	0 -> [0,61,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025933444	Marionette	TRACE	0 <- [1,61,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"c981c19f-3491-4b6c-a8bb-7a47ec372eaf"}}]
+1546025933447	Marionette	TRACE	0 -> [0,62,"WebDriver:GetPageSource",{}]
+1546025933491	Marionette	TRACE	0 <- [1,62,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025933620	Marionette	TRACE	0 -> [0,63,"WebDriver:GetPageSource",{}]
+1546025933649	Marionette	TRACE	0 <- [1,63,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025933793	Marionette	TRACE	0 -> [0,64,"WebDriver:ElementClick",{"id":"c981c19f-3491-4b6c-a8bb-7a47ec372eaf"}]
+1546025933830	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025934205	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025934216	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025935285	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=92b4346edbe02300dd93fe1b6896190b&sysparm_view=&sysparm_record_row=8&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025935393	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=92b4346edbe02300dd93fe1b6896190b&sysparm_view=&sysparm_record_row=8&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546025935395	Marionette	TRACE	0 <- [1,64,null,{"value":null}]
+1546025937398	Marionette	TRACE	0 -> [0,65,"WebDriver:SwitchToFrame",{}]
+1546025937401	Marionette	TRACE	0 <- [1,65,null,{"value":null}]
+1546025937404	Marionette	TRACE	0 -> [0,66,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546025937408	Marionette	TRACE	0 <- [1,66,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"8063321b-43d9-4671-95c7-72932f1a06cd"}}]
+1546025937411	Marionette	TRACE	0 -> [0,67,"WebDriver:SwitchToFrame",{"element":"8063321b-43d9-4671-95c7-72932f1a06cd"}]
+1546025937414	Marionette	TRACE	0 <- [1,67,null,{"value":null}]
+1546025939418	Marionette	TRACE	0 -> [0,68,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546025939422	Marionette	TRACE	0 <- [1,68,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"fcb6aa7e-e34e-4c86-ab76-c52f9622dfe9"}}]
+1546025939425	Marionette	TRACE	0 -> [0,69,"WebDriver:GetPageSource",{}]
+1546025939455	Marionette	TRACE	0 <- [1,69,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025939659	Marionette	TRACE	0 -> [0,70,"WebDriver:GetPageSource",{}]
+1546025939687	Marionette	TRACE	0 <- [1,70,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546025939828	Marionette	TRACE	0 -> [0,71,"WebDriver:ElementClick",{"id":"fcb6aa7e-e34e-4c86-ab76-c52f9622dfe9"}]
+1546025939847	Marionette	TRACE	0 <- [1,71,{"error":"element click intercepted","message":"Element <button class=\"btn btn-icon icon-arrow-down\"> is not clickabl ... avigate@chrome://marionette/content/listener.js:407:13\nclickElement@chrome://marionette/content/listener.js:1207:5\n"},null]
+1546025939853	Marionette	TRACE	0 -> [0,72,"WebDriver:CloseWindow",{}]
+1546025939854	Marionette	TRACE	0 <- [1,72,null,[]]
+1546025939856	Marionette	TRACE	0 -> [0,73,"Marionette:Quit",{"flags":["eForceQuit"]}]
+1546025939857	Marionette	INFO	Stopped listening on port 60433
+1546025939946	Marionette	TRACE	0 <- [1,73,null,{"cause":"shutdown"}]
+[Child 27524, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child1546025940037	Marionette	DEBUG	Closed connection 0
+[Child 27[Parent 25408, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1546025940364	Marionette	DEBUG	Received observer notification xpcom-will-shutdown
+1546025940364	Marionette	DEBUG	Resetting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer
+1546025940364	Marionette	DEBUG	Resetting recommended pref apz.content_response_timeout
+1546025940364	Marionette	DEBUG	Resetting recommended pref browser.download.panel.shown
+1546025940364	Marionette	DEBUG	Resetting recommended pref browser.pagethumbnails.capturing_disabled
+1546025940364	Marionette	DEBUG	Resetting recommended pref browser.search.update
+1546025940365	Marionette	DEBUG	Resetting recommended pref toolkit.cosmeticAnimations.enabled
+1546025940365	Marionette	DEBUG	Resetting recommended pref browser.tabs.disableBackgroundZombification
+1546025940366	Marionette	DEBUG	Resetting recommended pref browser.tabs.warnOnCloseOtherTabs
+1546025940366	Marionette	DEBUG	Resetting recommended pref browser.tabs.warnOnOpen
+1546025940366	Marionette	DEBUG	Resetting recommended pref browser.usedOnWindows10.introURL
+1546025940366	Marionette	DEBUG	Resetting recommended pref browser.urlbar.suggest.searches
+1546025940367	Marionette	DEBUG	Resetting recommended pref datareporting.policy.dataSubmissionPolicyAccepted
+1546025940367	Marionette	DEBUG	Resetting recommended pref dom.disable_beforeunload
+1546025940367	Marionette	DEBUG	Resetting recommended pref dom.disable_open_during_load
+1546025940367	Marionette	DEBUG	Resetting recommended pref dom.file.createInChild
+1546025940367	Marionette	DEBUG	Resetting recommended pref dom.max_chrome_script_run_time
+1546025940367	Marionette	DEBUG	Resetting recommended pref dom.max_script_run_time
+1546025940368	Marionette	DEBUG	Resetting recommended pref extensions.getAddons.cache.enabled
+1546025940368	Marionette	DEBUG	Resetting recommended pref extensions.webservice.discoverURL
+1546025940368	Marionette	DEBUG	Resetting recommended pref network.http.prompt-temp-redirect
+1546025940368	Marionette	DEBUG	Resetting recommended pref network.http.speculative-parallel-limit
+1546025940368	Marionette	DEBUG	Resetting recommended pref security.fileuri.strict_origin_policy
+1546025940369	Marionette	DEBUG	Resetting recommended pref security.notification_enable_delay
+1546025940369	Marionette	DEBUG	Resetting recommended pref signon.autofillForms
+1546025940369	Marionette	DEBUG	Resetting recommended pref signon.rememberSignons
+1546025940369	Marionette	DEBUG	Remote service is inactive
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1546029771062	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\gjhar\\AppData\\Local\\Temp\\rust_mozprofile.IsfJlMMXMvLD"
+1546029771427	Marionette	DEBUG	Received observer notification profile-after-change
+1546029771562	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1546029771582	Marionette	DEBUG	Received observer notification command-line-startup
+1546029771582	Marionette	DEBUG	Received observer notification nsPref:changed
+1546029771582	Marionette	DEBUG	Init aborted (running=false, enabled=true, finalUIStartup=false)
+1546029771863	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1546029772471	Marionette	DEBUG	Received observer notification sessionstore-windows-restored
+1546029772471	Marionette	DEBUG	Waiting for delayed startup...
+1546029772540	Marionette	DEBUG	Setting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer to true
+1546029772541	Marionette	DEBUG	Setting recommended pref apz.content_response_timeout to 60000
+1546029772541	Marionette	DEBUG	Setting recommended pref browser.download.panel.shown to true
+1546029772541	Marionette	DEBUG	Setting recommended pref browser.pagethumbnails.capturing_disabled to true
+1546029772541	Marionette	DEBUG	Setting recommended pref browser.search.update to false
+1546029772541	Marionette	DEBUG	Setting recommended pref toolkit.cosmeticAnimations.enabled to false
+1546029772542	Marionette	DEBUG	Setting recommended pref browser.tabs.disableBackgroundZombification to false
+1546029772542	Marionette	DEBUG	Setting recommended pref browser.tabs.warnOnCloseOtherTabs to false
+1546029772542	Marionette	DEBUG	Setting recommended pref browser.tabs.warnOnOpen to false
+1546029772542	Marionette	DEBUG	Setting recommended pref browser.usedOnWindows10.introURL to 
+1546029772542	Marionette	DEBUG	Setting recommended pref browser.urlbar.suggest.searches to false
+1546029772542	Marionette	DEBUG	Setting recommended pref datareporting.policy.dataSubmissionPolicyAccepted to false
+1546029772542	Marionette	DEBUG	Setting recommended pref dom.disable_beforeunload to true
+1546029772542	Marionette	DEBUG	Setting recommended pref dom.disable_open_during_load to false
+1546029772542	Marionette	DEBUG	Setting recommended pref dom.file.createInChild to true
+1546029772542	Marionette	DEBUG	Setting recommended pref dom.max_chrome_script_run_time to 0
+1546029772542	Marionette	DEBUG	Setting recommended pref dom.max_script_run_time to 0
+1546029772543	Marionette	DEBUG	Setting recommended pref extensions.getAddons.cache.enabled to false
+1546029772543	Marionette	DEBUG	Setting recommended pref extensions.webservice.discoverURL to http://%(server)s/dummy/discoveryURL
+1546029772543	Marionette	DEBUG	Setting recommended pref network.http.prompt-temp-redirect to false
+1546029772543	Marionette	DEBUG	Setting recommended pref network.http.speculative-parallel-limit to 0
+1546029772543	Marionette	DEBUG	Setting recommended pref security.fileuri.strict_origin_policy to false
+1546029772543	Marionette	DEBUG	Setting recommended pref security.notification_enable_delay to 0
+1546029772543	Marionette	DEBUG	Setting recommended pref signon.autofillForms to false
+1546029772543	Marionette	DEBUG	Setting recommended pref signon.rememberSignons to false
+1546029772569	Marionette	INFO	Listening on port 49595
+1546029772569	Marionette	DEBUG	Remote service is active
+1546029772680	Marionette	DEBUG	Accepted connection 0 from 127.0.0.1:49605
+1546029772681	Marionette	TRACE	0 -> [0,1,"WebDriver:NewSession",{"acceptInsecureCerts":true,"browserName":"firefox"}]
+1546029772681	Marionette	WARN	TLS certificate errors will be ignored for this session
+1546029772706	Marionette	DEBUG	[6442450945] Frame script loaded
+1546029772708	Marionette	DEBUG	[6442450945] Frame script registered
+1546029772709	Marionette	TRACE	0 <- [1,1,null,{"sessionId":"4f195dcd-261f-4a65-93f8-ed4a1e2b04e9","capabilities":{"browserName":"firefox","browserVersion":"63.0. ... AppData\\Local\\Temp\\rust_mozprofile.IsfJlMMXMvLD","moz:useNonSpecCompliantPointerOrigin":false,"moz:webdriverClick":true}}]
+1546029772724	Marionette	TRACE	0 -> [0,2,"WebDriver:MaximizeWindow",{}]
+1546029772732	Marionette	TRACE	0 <- [1,2,null,{"x":-7,"y":-7,"width":1550,"height":838,"state":"maximized"}]
+1546029772767	Marionette	TRACE	0 -> [0,3,"WebDriver:SetTimeouts",{"pageLoad":20000}]
+1546029772769	Marionette	TRACE	0 <- [1,3,null,{"value":null}]
+1546029772779	Marionette	TRACE	0 -> [0,4,"WebDriver:Navigate",{"url":"https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"}]
+1546029772787	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for about:blank
+1546029773606	Marionette	DEBUG	[6442450945] Received DOM event pagehide for about:blank
+1546029774935	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/navpage.do
+1546029776122	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/navpage.do
+1546029776122	Marionette	TRACE	0 <- [1,4,null,{"value":null}]
+1546029778125	Marionette	TRACE	0 -> [0,5,"WebDriver:SwitchToFrame",{"id":0}]
+1546029778185	Marionette	TRACE	0 <- [1,5,null,{"value":null}]
+1546029780188	Marionette	TRACE	0 -> [0,6,"WebDriver:FindElement",{"using":"css selector","value":"[name=\"user_name\"]"}]
+1546029780192	Marionette	TRACE	0 <- [1,6,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"da117666-5d06-4d5a-ad00-32f464431d66"}}]
+1546029780195	Marionette	TRACE	0 -> [0,7,"WebDriver:ElementSendKeys",{"id":"da117666-5d06-4d5a-ad00-32f464431d66","text":"admin","value":["a","d","m","i","n"]}]
+1546029780217	Marionette	TRACE	0 <- [1,7,null,{"value":null}]
+1546029780220	Marionette	TRACE	0 -> [0,8,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"user_password\"]"}]
+1546029780222	Marionette	TRACE	0 <- [1,8,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"319c39d0-196a-487b-ae06-9026eead6eba"}}]
+1546029780225	Marionette	TRACE	0 -> [0,9,"WebDriver:ElementSendKeys",{"id":"319c39d0-196a-487b-ae06-9026eead6eba","text":"Veryhap1*","value":["V","e","r","y","h","a","p","1","*",""]}]
+1546029780254	Marionette	TRACE	0 <- [1,9,null,{"value":null}]
+1546029782257	Marionette	TRACE	0 -> [0,10,"WebDriver:SwitchToFrame",{}]
+1546029782260	Marionette	TRACE	0 <- [1,10,null,{"value":null}]
+1546029784266	Marionette	TRACE	0 -> [0,11,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029784271	Marionette	TRACE	0 <- [1,11,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"c786489d-f331-4f6e-adc2-8e120f4ef535"}}]
+1546029784276	Marionette	TRACE	0 -> [0,12,"WebDriver:SwitchToFrame",{"element":"c786489d-f331-4f6e-adc2-8e120f4ef535"}]
+1546029784280	Marionette	TRACE	0 <- [1,12,null,{"value":null}]
+1546029786284	Marionette	TRACE	0 -> [0,13,"WebDriver:GetPageSource",{}]
+1546029786287	Marionette	TRACE	0 <- [1,13,null,{"value":"<html class=\"ltr date-calendar tabbed\" data-doctype=\"true\" dir=\"ltr\" lang=\"en\"><head><title>Serv ... a-controls=\"glide:timingBreakdown_widget\" data-original-title=\"\" title=\"\"></button></div></span></div></body></html>"}]
+1546029786293	Marionette	TRACE	0 -> [0,14,"WebDriver:CloseWindow",{}]
+1546029786294	Marionette	TRACE	0 <- [1,14,null,[]]
+1546029786295	Marionette	TRACE	0 -> [0,15,"Marionette:Quit",{"flags":["eForceQuit"]}]
+1546029786295	Marionette	INFO	Stopped listening on port 49595
+1546029786340	Marionette	TRACE	0 <- [1,15,null,{"cause":"shutdown"}]
+[Parent 19552, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 9368, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 9368, Chrome_C1546029786378	Marionette	DEBUG	Closed connection 0
+[Parent 19552, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 24048, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 24048,[Parent 19552, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 25772, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 25772, Chrome_ChildThread] WARNIN1546029786646	Marionette	DEBUG	Received observer notification xpcom-will-shutdown
+1546029786646	Marionette	DEBUG	Resetting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer
+1546029786646	Marionette	DEBUG	Resetting recommended pref apz.content_response_timeout
+1546029786646	Marionette	DEBUG	Resetting recommended pref browser.download.panel.shown
+1546029786646	Marionette	DEBUG	Resetting recommended pref browser.pagethumbnails.capturing_disabled
+1546029786646	Marionette	DEBUG	Resetting recommended pref browser.search.update
+1546029786646	Marionette	DEBUG	Resetting recommended pref toolkit.cosmeticAnimations.enabled
+1546029786647	Marionette	DEBUG	Resetting recommended pref browser.tabs.disableBackgroundZombification
+1546029786647	Marionette	DEBUG	Resetting recommended pref browser.tabs.warnOnCloseOtherTabs
+1546029786647	Marionette	DEBUG	Resetting recommended pref browser.tabs.warnOnOpen
+1546029786647	Marionette	DEBUG	Resetting recommended pref browser.usedOnWindows10.introURL
+1546029786647	Marionette	DEBUG	Resetting recommended pref browser.urlbar.suggest.searches
+1546029786647	Marionette	DEBUG	Resetting recommended pref datareporting.policy.dataSubmissionPolicyAccepted
+1546029786647	Marionette	DEBUG	Resetting recommended pref dom.disable_beforeunload
+1546029786648	Marionette	DEBUG	Resetting recommended pref dom.disable_open_during_load
+1546029786648	Marionette	DEBUG	Resetting recommended pref dom.file.createInChild
+1546029786648	Marionette	DEBUG	Resetting recommended pref dom.max_chrome_script_run_time
+1546029786648	Marionette	DEBUG	Resetting recommended pref dom.max_script_run_time
+1546029786648	Marionette	DEBUG	Resetting recommended pref extensions.getAddons.cache.enabled
+1546029786648	Marionette	DEBUG	Resetting recommended pref extensions.webservice.discoverURL
+1546029786648	Marionette	DEBUG	Resetting recommended pref network.http.prompt-temp-redirect
+1546029786648	Marionette	DEBUG	Resetting recommended pref network.http.speculative-parallel-limit
+1546029786648	Marionette	DEBUG	Resetting recommended pref security.fileuri.strict_origin_policy
+1546029786648	Marionette	DEBUG	Resetting recommended pref security.notification_enable_delay
+1546029786648	Marionette	DEBUG	Resetting recommended pref signon.autofillForms
+1546029786648	Marionette	DEBUG	Resetting recommended pref signon.rememberSignons
+1546029786648	Marionette	DEBUG	Remote service is inactive
+[GP
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1546029824715	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\gjhar\\AppData\\Local\\Temp\\rust_mozprofile.F2gkRSJZ4vrs"
+1546029825110	Marionette	DEBUG	Received observer notification profile-after-change
+1546029825229	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1546029825248	Marionette	DEBUG	Received observer notification command-line-startup
+1546029825248	Marionette	DEBUG	Received observer notification nsPref:changed
+1546029825248	Marionette	DEBUG	Init aborted (running=false, enabled=true, finalUIStartup=false)
+1546029825469	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1546029826065	Marionette	DEBUG	Received observer notification sessionstore-windows-restored
+1546029826065	Marionette	DEBUG	Waiting for delayed startup...
+1546029826122	Marionette	DEBUG	Setting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer to true
+1546029826122	Marionette	DEBUG	Setting recommended pref apz.content_response_timeout to 60000
+1546029826123	Marionette	DEBUG	Setting recommended pref browser.download.panel.shown to true
+1546029826123	Marionette	DEBUG	Setting recommended pref browser.pagethumbnails.capturing_disabled to true
+1546029826123	Marionette	DEBUG	Setting recommended pref browser.search.update to false
+1546029826123	Marionette	DEBUG	Setting recommended pref toolkit.cosmeticAnimations.enabled to false
+1546029826123	Marionette	DEBUG	Setting recommended pref browser.tabs.disableBackgroundZombification to false
+1546029826123	Marionette	DEBUG	Setting recommended pref browser.tabs.warnOnCloseOtherTabs to false
+1546029826124	Marionette	DEBUG	Setting recommended pref browser.tabs.warnOnOpen to false
+1546029826124	Marionette	DEBUG	Setting recommended pref browser.usedOnWindows10.introURL to 
+1546029826124	Marionette	DEBUG	Setting recommended pref browser.urlbar.suggest.searches to false
+1546029826124	Marionette	DEBUG	Setting recommended pref datareporting.policy.dataSubmissionPolicyAccepted to false
+1546029826124	Marionette	DEBUG	Setting recommended pref dom.disable_beforeunload to true
+1546029826124	Marionette	DEBUG	Setting recommended pref dom.disable_open_during_load to false
+1546029826124	Marionette	DEBUG	Setting recommended pref dom.file.createInChild to true
+1546029826124	Marionette	DEBUG	Setting recommended pref dom.max_chrome_script_run_time to 0
+1546029826124	Marionette	DEBUG	Setting recommended pref dom.max_script_run_time to 0
+1546029826124	Marionette	DEBUG	Setting recommended pref extensions.getAddons.cache.enabled to false
+1546029826125	Marionette	DEBUG	Setting recommended pref extensions.webservice.discoverURL to http://%(server)s/dummy/discoveryURL
+1546029826125	Marionette	DEBUG	Setting recommended pref network.http.prompt-temp-redirect to false
+1546029826125	Marionette	DEBUG	Setting recommended pref network.http.speculative-parallel-limit to 0
+1546029826125	Marionette	DEBUG	Setting recommended pref security.fileuri.strict_origin_policy to false
+1546029826125	Marionette	DEBUG	Setting recommended pref security.notification_enable_delay to 0
+1546029826125	Marionette	DEBUG	Setting recommended pref signon.autofillForms to false
+1546029826125	Marionette	DEBUG	Setting recommended pref signon.rememberSignons to false
+1546029826152	Marionette	INFO	Listening on port 49712
+1546029826153	Marionette	DEBUG	Remote service is active
+1546029826339	Marionette	DEBUG	Accepted connection 0 from 127.0.0.1:49722
+1546029826341	Marionette	TRACE	0 -> [0,1,"WebDriver:NewSession",{"acceptInsecureCerts":true,"browserName":"firefox"}]
+1546029826341	Marionette	WARN	TLS certificate errors will be ignored for this session
+1546029826368	Marionette	DEBUG	[6442450945] Frame script loaded
+1546029826369	Marionette	DEBUG	[6442450945] Frame script registered
+1546029826371	Marionette	TRACE	0 <- [1,1,null,{"sessionId":"a91295e8-fed3-4ffc-8f9c-715a1c998e72","capabilities":{"browserName":"firefox","browserVersion":"63.0. ... AppData\\Local\\Temp\\rust_mozprofile.F2gkRSJZ4vrs","moz:useNonSpecCompliantPointerOrigin":false,"moz:webdriverClick":true}}]
+1546029826385	Marionette	TRACE	0 -> [0,2,"WebDriver:MaximizeWindow",{}]
+1546029826394	Marionette	TRACE	0 <- [1,2,null,{"x":-7,"y":-7,"width":1550,"height":838,"state":"maximized"}]
+1546029826435	Marionette	TRACE	0 -> [0,3,"WebDriver:SetTimeouts",{"pageLoad":20000}]
+1546029826440	Marionette	TRACE	0 <- [1,3,null,{"value":null}]
+1546029826450	Marionette	TRACE	0 -> [0,4,"WebDriver:Navigate",{"url":"https://dev58662.service-now.com/nav_to.do?uri=%2Fsc_task_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dactive%253Dtrue%255EEQ"}]
+1546029826465	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for about:blank
+1546029827074	Marionette	DEBUG	[6442450945] Received DOM event pagehide for about:blank
+1546029828163	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/navpage.do
+1546029829081	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/navpage.do
+1546029829082	Marionette	TRACE	0 <- [1,4,null,{"value":null}]
+1546029831084	Marionette	TRACE	0 -> [0,5,"WebDriver:SwitchToFrame",{"id":0}]
+1546029831130	Marionette	TRACE	0 <- [1,5,null,{"value":null}]
+1546029833132	Marionette	TRACE	0 -> [0,6,"WebDriver:FindElement",{"using":"css selector","value":"[name=\"user_name\"]"}]
+1546029833135	Marionette	TRACE	0 <- [1,6,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"786b3a46-61fc-4965-a8a4-9c5b166ef2cb"}}]
+1546029833137	Marionette	TRACE	0 -> [0,7,"WebDriver:ElementSendKeys",{"id":"786b3a46-61fc-4965-a8a4-9c5b166ef2cb","text":"admin","value":["a","d","m","i","n"]}]
+1546029833160	Marionette	TRACE	0 <- [1,7,null,{"value":null}]
+1546029833163	Marionette	TRACE	0 -> [0,8,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"user_password\"]"}]
+1546029833166	Marionette	TRACE	0 <- [1,8,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"3ccd5779-4b2a-43e7-a392-df1b7eb02ac4"}}]
+1546029833169	Marionette	TRACE	0 -> [0,9,"WebDriver:ElementSendKeys",{"id":"3ccd5779-4b2a-43e7-a392-df1b7eb02ac4","text":"Veryhap1*","value":["V","e","r","y","h","a","p","1","*",""]}]
+1546029833208	Marionette	TRACE	0 <- [1,9,null,{"value":null}]
+JavaScript warning: https://dev58662.service-now.com/navpage.do, line 399: unreachable code after return statement
+1546029835210	Marionette	TRACE	0 -> [0,10,"WebDriver:SwitchToFrame",{}]
+1546029835212	Marionette	TRACE	0 <- [1,10,null,{"value":null}]
+1546029837214	Marionette	TRACE	0 -> [0,11,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029837267	Marionette	TRACE	0 <- [1,11,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029837269	Marionette	TRACE	0 -> [0,12,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029837273	Marionette	TRACE	0 <- [1,12,null,{"value":null}]
+1546029839277	Marionette	TRACE	0 -> [0,13,"WebDriver:GetPageSource",{}]
+1546029839298	Marionette	TRACE	0 <- [1,13,null,{"value":"<html class=\"ltr date-calendar tabbed\" data-doctype=\"true\" dir=\"ltr\" lang=\"en\"><head><script src ... a-controls=\"glide:timingBreakdown_widget\" data-original-title=\"\" title=\"\"></button></div></span></div></body></html>"}]
+1546029839348	Marionette	TRACE	0 -> [0,14,"WebDriver:FindElement",{"using":"xpath","value":"//a[@class='linked formlink']"}]
+1546029839363	Marionette	TRACE	0 <- [1,14,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"acdc5559-88bc-40a6-8a78-75d862ec945b"}}]
+1546029839364	Marionette	TRACE	0 -> [0,15,"WebDriver:ElementClick",{"id":"acdc5559-88bc-40a6-8a78-75d862ec945b"}]
+1546029839401	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task_list.do?sysparm_clear_stack=true&sysparm_query=active=true^EQ
+1546029839765	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task_list.do?sysparm_clear_stack=true&sysparm_query=active=true^EQ
+1546029839766	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task_list.do?sysparm_clear_stack=true&sysparm_query=active=true^EQ
+1546029840462	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546029840482	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546029840482	Marionette	TRACE	0 <- [1,15,null,{"value":null}]
+1546029842487	Marionette	TRACE	0 -> [0,16,"WebDriver:SwitchToFrame",{}]
+1546029842488	Marionette	TRACE	0 <- [1,16,null,{"value":null}]
+1546029842489	Marionette	TRACE	0 -> [0,17,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029842491	Marionette	TRACE	0 <- [1,17,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029842494	Marionette	TRACE	0 -> [0,18,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029842495	Marionette	TRACE	0 <- [1,18,null,{"value":null}]
+1546029844499	Marionette	TRACE	0 -> [0,19,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029844505	Marionette	TRACE	0 <- [1,19,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"0f281a31-6898-441d-b627-8884a39c4a3e"}}]
+1546029844509	Marionette	TRACE	0 -> [0,20,"WebDriver:GetPageSource",{}]
+1546029844524	Marionette	TRACE	0 <- [1,20,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... ength === 0 && items.loading --><!-- ngIf: items.length === 0 && !items.loading --></ul></div></mentio-menu></body></html>"}]
+1546029844568	Marionette	TRACE	0 -> [0,21,"WebDriver:GetPageSource",{}]
+1546029844579	Marionette	TRACE	0 <- [1,21,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... ength === 0 && items.loading --><!-- ngIf: items.length === 0 && !items.loading --></ul></div></mentio-menu></body></html>"}]
+1546029844625	Marionette	TRACE	0 -> [0,22,"WebDriver:ElementClick",{"id":"0f281a31-6898-441d-b627-8884a39c4a3e"}]
+1546029844636	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546029844990	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546029844995	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=cc689ae2db652300dd93fe1b68961973&sysparm_record_target=sc_task&sysparm_record_row=1&sysparm_record_rows=8&sysparm_record_list=active%3Dtrue%5EORDERBYDESCnumber
+1546029845425	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029845454	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029845455	Marionette	TRACE	0 <- [1,22,null,{"value":null}]
+1546029847458	Marionette	TRACE	0 -> [0,23,"WebDriver:SwitchToFrame",{}]
+1546029847459	Marionette	TRACE	0 <- [1,23,null,{"value":null}]
+1546029847461	Marionette	TRACE	0 -> [0,24,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029847464	Marionette	TRACE	0 <- [1,24,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029847466	Marionette	TRACE	0 -> [0,25,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029847467	Marionette	TRACE	0 <- [1,25,null,{"value":null}]
+1546029849470	Marionette	TRACE	0 -> [0,26,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029849499	Marionette	TRACE	0 <- [1,26,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"b6fbd519-23df-4ad2-be9d-c2f522d004a6"}}]
+1546029849504	Marionette	TRACE	0 -> [0,27,"WebDriver:GetPageSource",{}]
+1546029849518	Marionette	TRACE	0 <- [1,27,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029849565	Marionette	TRACE	0 -> [0,28,"WebDriver:GetPageSource",{}]
+1546029849575	Marionette	TRACE	0 <- [1,28,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029849633	Marionette	TRACE	0 -> [0,29,"WebDriver:ElementClick",{"id":"b6fbd519-23df-4ad2-be9d-c2f522d004a6"}]
+1546029849647	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029849972	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029849975	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=a5e75ae2db252300dd93fe1b68961992&sysparm_view=&sysparm_record_row=2&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029850439	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029850463	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029850464	Marionette	TRACE	0 <- [1,29,null,{"value":null}]
+1546029852466	Marionette	TRACE	0 -> [0,30,"WebDriver:SwitchToFrame",{}]
+1546029852476	Marionette	TRACE	0 <- [1,30,null,{"value":null}]
+1546029852478	Marionette	TRACE	0 -> [0,31,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029852480	Marionette	TRACE	0 <- [1,31,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029852481	Marionette	TRACE	0 -> [0,32,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029852483	Marionette	TRACE	0 <- [1,32,null,{"value":null}]
+1546029854489	Marionette	TRACE	0 -> [0,33,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029854511	Marionette	TRACE	0 <- [1,33,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"3c15b7b6-57bb-49b6-a6d9-518541eb232a"}}]
+1546029854512	Marionette	TRACE	0 -> [0,34,"WebDriver:GetPageSource",{}]
+1546029854523	Marionette	TRACE	0 <- [1,34,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029854593	Marionette	TRACE	0 -> [0,35,"WebDriver:GetPageSource",{}]
+1546029854603	Marionette	TRACE	0 <- [1,35,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029854649	Marionette	TRACE	0 -> [0,36,"WebDriver:ElementClick",{"id":"3c15b7b6-57bb-49b6-a6d9-518541eb232a"}]
+1546029854663	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029855016	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029855019	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=39c65a2edb252300dd93fe1b689619ff&sysparm_view=&sysparm_record_row=3&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029855638	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029855665	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029855666	Marionette	TRACE	0 <- [1,36,null,{"value":null}]
+1546029857669	Marionette	TRACE	0 -> [0,37,"WebDriver:SwitchToFrame",{}]
+1546029857673	Marionette	TRACE	0 <- [1,37,null,{"value":null}]
+1546029857677	Marionette	TRACE	0 -> [0,38,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029857684	Marionette	TRACE	0 <- [1,38,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029857688	Marionette	TRACE	0 -> [0,39,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029857693	Marionette	TRACE	0 <- [1,39,null,{"value":null}]
+1546029859696	Marionette	TRACE	0 -> [0,40,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029859709	Marionette	TRACE	0 <- [1,40,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"9a5600e3-e249-4842-a664-290402d0ca4f"}}]
+1546029859710	Marionette	TRACE	0 -> [0,41,"WebDriver:GetPageSource",{}]
+1546029859722	Marionette	TRACE	0 <- [1,41,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029859767	Marionette	TRACE	0 -> [0,42,"WebDriver:GetPageSource",{}]
+1546029859778	Marionette	TRACE	0 <- [1,42,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029859826	Marionette	TRACE	0 -> [0,43,"WebDriver:ElementClick",{"id":"9a5600e3-e249-4842-a664-290402d0ca4f"}]
+1546029859840	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029860209	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029860215	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=dfed669047801200e0ef563dbb9a712b&sysparm_view=&sysparm_record_row=4&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029860643	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029860667	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029860668	Marionette	TRACE	0 <- [1,43,null,{"value":null}]
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:721:13
+
+1546029862672	Marionette	TRACE	0 -> [0,44,"WebDriver:SwitchToFrame",{}]
+1546029862673	Marionette	TRACE	0 <- [1,44,null,{"value":null}]
+1546029862677	Marionette	TRACE	0 -> [0,45,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029862679	Marionette	TRACE	0 <- [1,45,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029862681	Marionette	TRACE	0 -> [0,46,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029862682	Marionette	TRACE	0 <- [1,46,null,{"value":null}]
+1546029864685	Marionette	TRACE	0 -> [0,47,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029864691	Marionette	TRACE	0 <- [1,47,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"68eed6f1-3683-4172-a8bd-f133d4dac47c"}}]
+1546029864695	Marionette	TRACE	0 -> [0,48,"WebDriver:GetPageSource",{}]
+1546029864711	Marionette	TRACE	0 <- [1,48,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029864755	Marionette	TRACE	0 -> [0,49,"WebDriver:GetPageSource",{}]
+1546029864766	Marionette	TRACE	0 <- [1,49,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029864814	Marionette	TRACE	0 -> [0,50,"WebDriver:ElementClick",{"id":"68eed6f1-3683-4172-a8bd-f133d4dac47c"}]
+1546029864823	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029865163	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029865170	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=46924015db712300dd93fe1b68961978&sysparm_view=&sysparm_record_row=5&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029865570	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029865587	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029865587	Marionette	TRACE	0 <- [1,50,null,{"value":null}]
+1546029867591	Marionette	TRACE	0 -> [0,51,"WebDriver:SwitchToFrame",{}]
+1546029867593	Marionette	TRACE	0 <- [1,51,null,{"value":null}]
+1546029867596	Marionette	TRACE	0 -> [0,52,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029867599	Marionette	TRACE	0 <- [1,52,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029867601	Marionette	TRACE	0 -> [0,53,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029867604	Marionette	TRACE	0 <- [1,53,null,{"value":null}]
+1546029869607	Marionette	TRACE	0 -> [0,54,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029869623	Marionette	TRACE	0 <- [1,54,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"76e536cf-0310-4714-ba76-1aa3a42e426b"}}]
+1546029869624	Marionette	TRACE	0 -> [0,55,"WebDriver:GetPageSource",{}]
+1546029869634	Marionette	TRACE	0 <- [1,55,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029869678	Marionette	TRACE	0 -> [0,56,"WebDriver:GetPageSource",{}]
+1546029869688	Marionette	TRACE	0 <- [1,56,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope sn-presenc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029869735	Marionette	TRACE	0 -> [0,57,"WebDriver:ElementClick",{"id":"76e536cf-0310-4714-ba76-1aa3a42e426b"}]
+1546029869749	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029870099	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029870103	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=50e505aadb242300dd93fe1b689619a9&sysparm_view=&sysparm_record_row=6&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029870527	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029870550	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029870550	Marionette	TRACE	0 <- [1,57,null,{"value":null}]
+1546029872553	Marionette	TRACE	0 -> [0,58,"WebDriver:SwitchToFrame",{}]
+1546029872555	Marionette	TRACE	0 <- [1,58,null,{"value":null}]
+1546029872557	Marionette	TRACE	0 -> [0,59,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029872559	Marionette	TRACE	0 <- [1,59,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029872560	Marionette	TRACE	0 -> [0,60,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029872562	Marionette	TRACE	0 <- [1,60,null,{"value":null}]
+1546029874565	Marionette	TRACE	0 -> [0,61,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029874592	Marionette	TRACE	0 <- [1,61,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"70932300-f564-4cc7-a1b2-8c5e75643275"}}]
+1546029874594	Marionette	TRACE	0 -> [0,62,"WebDriver:GetPageSource",{}]
+1546029874607	Marionette	TRACE	0 <- [1,62,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029874651	Marionette	TRACE	0 -> [0,63,"WebDriver:GetPageSource",{}]
+1546029874663	Marionette	TRACE	0 <- [1,63,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029874710	Marionette	TRACE	0 -> [0,64,"WebDriver:ElementClick",{"id":"70932300-f564-4cc7-a1b2-8c5e75643275"}]
+1546029874722	Marionette	DEBUG	[6442450945] Received DOM event beforeunload for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029875091	Marionette	DEBUG	[6442450945] Received DOM event pagehide for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029875100	Marionette	DEBUG	[6442450945] Received DOM event unload for https://dev58662.service-now.com/sc_task.do?sys_id=1eb4346edbe02300dd93fe1b6896190d&sysparm_view=&sysparm_record_row=7&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029875525	Marionette	DEBUG	[6442450945] Received DOM event DOMContentLoaded for https://dev58662.service-now.com/sc_task.do?sys_id=92b4346edbe02300dd93fe1b6896190b&sysparm_view=&sysparm_record_row=8&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029875549	Marionette	DEBUG	[6442450945] Received DOM event pageshow for https://dev58662.service-now.com/sc_task.do?sys_id=92b4346edbe02300dd93fe1b6896190b&sysparm_view=&sysparm_record_row=8&syspar ... rm_record_list=active%3dtrue%5eORDERBYDESCnumber&sysparm_record_target=sc_task&sysparm_template_editable=&sysparm_nostack=yes
+1546029875549	Marionette	TRACE	0 <- [1,64,null,{"value":null}]
+1546029877553	Marionette	TRACE	0 -> [0,65,"WebDriver:SwitchToFrame",{}]
+1546029877556	Marionette	TRACE	0 <- [1,65,null,{"value":null}]
+1546029877560	Marionette	TRACE	0 -> [0,66,"WebDriver:FindElement",{"using":"css selector","value":"[id=\"gsft_main\"]"}]
+1546029877565	Marionette	TRACE	0 <- [1,66,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}}]
+1546029877570	Marionette	TRACE	0 -> [0,67,"WebDriver:SwitchToFrame",{"element":"a709ca84-b2a2-42bf-9b37-eab6c00abbdd"}]
+1546029877573	Marionette	TRACE	0 <- [1,67,null,{"value":null}]
+1546029879577	Marionette	TRACE	0 -> [0,68,"WebDriver:FindElement",{"using":"xpath","value":"//button[@class='btn btn-icon icon-arrow-down']"}]
+1546029879607	Marionette	TRACE	0 <- [1,68,null,{"value":{"element-6066-11e4-a52e-4f735466cecf":"e52c5f40-2a15-4179-8428-8942aca095ee"}}]
+1546029879609	Marionette	TRACE	0 -> [0,69,"WebDriver:GetPageSource",{}]
+1546029879622	Marionette	TRACE	0 <- [1,69,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029879701	Marionette	TRACE	0 -> [0,70,"WebDriver:GetPageSource",{}]
+1546029879711	Marionette	TRACE	0 <- [1,70,null,{"value":"<html class=\"section_header_html_no_scroll ltr ng-non-bindable date-calendar tabbed ng-scope\" data-doc ... gth === 0 && !items.loading --></ul></div></mentio-menu><div style=\"padding-left: 1px; width: 1px;\"></div></body></html>"}]
+1546029879757	Marionette	TRACE	0 -> [0,71,"WebDriver:ElementClick",{"id":"e52c5f40-2a15-4179-8428-8942aca095ee"}]
+1546029879762	Marionette	TRACE	0 <- [1,71,{"error":"element click intercepted","message":"Element <button class=\"btn btn-icon icon-arrow-down\"> is not clickabl ... avigate@chrome://marionette/content/listener.js:407:13\nclickElement@chrome://marionette/content/listener.js:1207:5\n"},null]
+1546029879764	Marionette	TRACE	0 -> [0,72,"WebDriver:CloseWindow",{}]
+1546029879764	Marionette	TRACE	0 <- [1,72,null,[]]
+1546029879765	Marionette	TRACE	0 -> [0,73,"Marionette:Quit",{"flags":["eForceQuit"]}]
+1546029879765	Marionette	INFO	Stopped listening on port 49712
+1546029879799	Marionette	TRACE	0 <- [1,73,null,{"cause":"shutdown"}]
+[Parent 25440, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 16776, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 16776, Chro1546029879829	Marionette	DEBUG	Closed connection 0
+[Parent 25440, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 6200, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 6200, Chr[Parent 25440, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 4624, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 1546029880098	Marionette	DEBUG	Received observer notification xpcom-will-shutdown
+1546029880098	Marionette	DEBUG	Resetting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer
+1546029880099	Marionette	DEBUG	Resetting recommended pref apz.content_response_timeout
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.download.panel.shown
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.pagethumbnails.capturing_disabled
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.search.update
+1546029880099	Marionette	DEBUG	Resetting recommended pref toolkit.cosmeticAnimations.enabled
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.tabs.disableBackgroundZombification
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.tabs.warnOnCloseOtherTabs
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.tabs.warnOnOpen
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.usedOnWindows10.introURL
+1546029880099	Marionette	DEBUG	Resetting recommended pref browser.urlbar.suggest.searches
+1546029880100	Marionette	DEBUG	Resetting recommended pref datareporting.policy.dataSubmissionPolicyAccepted
+1546029880100	Marionette	DEBUG	Resetting recommended pref dom.disable_beforeunload
+1546029880100	Marionette	DEBUG	Resetting recommended pref dom.disable_open_during_load
+1546029880100	Marionette	DEBUG	Resetting recommended pref dom.file.createInChild
+1546029880100	Marionette	DEBUG	Resetting recommended pref dom.max_chrome_script_run_time
+1546029880100	Marionette	DEBUG	Resetting recommended pref dom.max_script_run_time
+1546029880100	Marionette	DEBUG	Resetting recommended pref extensions.getAddons.cache.enabled
+1546029880100	Marionette	DEBUG	Resetting recommended pref extensions.webservice.discoverURL
+1546029880100	Marionette	DEBUG	Resetting recommended pref network.http.prompt-temp-redirect
+1546029880100	Marionette	DEBUG	Resetting recommended pref network.http.speculative-parallel-limit
+1546029880100	Marionette	DEBUG	Resetting recommended pref security.fileuri.strict_origin_policy
+1546029880100	Marionette	DEBUG	Resetting recommended pref security.notification_enable_delay
+1546029880100	Marionette	DEBUG	Resetting recommended pref signon.autofillForms
+1546029880100	Marionette	DEBUG	Resetting recommended pref signon.rememberSignons
+1546029880101	Marionette	DEBUG	Remote service is inactive
+[GPU 8
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
