@@ -1,20 +1,3 @@
-'''
-NOTE: We've got the table link, from there you can alter the filter further to active tasks, or even all tasks 
-- Rebase commits, clean up commit history
-- I would add some verifiers or assertions so we can get some consistency going as far as running.
-- PROD TODO: 
-        - Only prioritized task number, state, assigned_to, and all activity cards. I can still update descriptions and other details during indiviual page scrape
-        - assigned_to vs. assignment group in EPDSM - Assigned_Group doesn't appear on task pages, so i may need to add in a table iterator anyway. 
-        - line 250 may be a problem in EPDSM, it correctly cuts first 2 td of each row in table, but also cuts last 4 off the end, if this is important data it will be a problem - Easily solved by fixing fields section or just use indv page scrape
-        - Currently exports to csv, but with small set column widths. Can fix col widths(https://www.bing.com/search?q=cant+increase+column+size+in+excel+csv&PC=U316&FORM=CHROMN), but can also be changed to another file type if neccessary.
-        - file paths
-
-feild_names = ['number', 'active', 'priority', 'state', 'assigned_to', 'sys_created_by', 'opened_at', 'opened_by', 'assignment_group', 'sys_created_on', 
-'short_description', 'description', 'comments_and_work_notes', 'work_notes', 'work_notes_list', 'closed_at', 'closed_by', 'reassignment_count', 'sys_updated_on', 
-'sys_updated_by', 'due_date', 'expected_start', 'follow_up', 'sys_class_name', 'time_worked', 'approval_history', 
-'additional_assignee_list', 'comments', 'business_duration', 'close_notes', 'company', 'upon_approval', 'upon_reject']
-
-'''
 # given the location of python as their first line: #!/usr/bin/python and become executable.
 # encoding: utf-8
 from bs4 import BeautifulSoup

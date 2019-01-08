@@ -1,13 +1,20 @@
 """
 Packaging and Distribution Options:
-1) Requires Python Install - Offline dependency install-from-dir -  https://stackoverflow.com/questions/36725843/installing-python-packages-without-internet-and-using-source-code-as-tar-gz-and
-		- Same with webdriver offline install - https://stackoverflow.com/questions/52861370/how-can-i-package-and-distribute-python-projects-with-dependencies-that-require
-2) 
+	1) Requires Python Install - Offline dependency install-from-dir -  https://stackoverflow.com/questions/36725843/installing-python-packages-without-internet-and-using-source-code-as-tar-gz-and
+			- Same with webdriver offline install - https://stackoverflow.com/questions/52861370/how-can-i-package-and-distribute-python-projects-with-dependencies-that-require
+	2) Assuming VDI has Java, Distribute as jar executable file using the Jython Project 
+
+Transferring to VDI:
+	1) Zipped Email - Protonmail
+	2) FTP?
+
+pip install -r requirements.txt
+Pipreqs to get requirements.txt
 
 """
 
 import sys
-from cx_Freeze import setup, Executable
+# from cx_Freeze import setup, Executable
 
 build_exe_options= {
 	"packages": [],

@@ -1,0 +1,28 @@
+What's done?
+    Scraper perfectly finishes loop for ServiceNow starting at the table of catalog task and iterating through the tasks until the button disappears. 
+    Compatability changes for switch PDSM have been made but not tested. 
+Distribution for testing is pending. Our options include: 
+        
+        - Packaging via pip, which requires we install Python and pip, followed by installing pip -r requirements.txt, on host. 
+        This is the most efficent option for development as we can continue building and testing in VDI indefinitely. 
+        However fedex would have to install python as well as the dependencies on VDI for us before we can begin.
+        
+        - Freezing the Distribution with its dependencies and a python interpretor. This will give us a packaged executable which can run without python installed on the host.
+        This presents the issue of transfering the project distribution into the VDI, which will have to be done for each new distribution if any code needs changing.
+            - I'm Currently working with this method and it seems there may be issues with including selenium in the installation
+        
+        - Copy code from dependencies into project files. 
+
+## Dev Notes for Distribution
+- We've got the table link, from there you can alter the filter further to active tasks, or even all tasks 
+- Only prioritized task number, state, assigned_to, and all activity cards. I can still update descriptions and other details during indiviual page scrape
+- line 250 may be a problem in EPDSM, it correctly cuts first 2 td of each row in table, but also cuts last 4 off the end, if this is important data it will be a problem - Easily solved by fixing fields section or just use indv page scrape
+- Currently exports to csv, but with small set column widths. Can fix col widths(https://www.bing.com/search?q=cant+increase+column+size+in+excel+csv&PC=U316&FORM=CHROMN), but can also be changed to another file type if neccessary.
+- fix file paths if needed
+
+
+feild_names = ['number', 'active', 'priority', 'state', 'assigned_to', 'sys_created_by', 'opened_at', 'opened_by', 'assignment_group', 'sys_created_on', 
+'short_description', 'description', 'comments_and_work_notes', 'work_notes', 'work_notes_list', 'closed_at', 'closed_by', 'reassignment_count', 'sys_updated_on', 
+'sys_updated_by', 'due_date', 'expected_start', 'follow_up', 'sys_class_name', 'time_worked', 'approval_history', 
+'additional_assignee_list', 'comments', 'business_duration', 'close_notes', 'company', 'upon_approval', 'upon_reject']
+
