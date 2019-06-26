@@ -32,9 +32,6 @@ config_filename="Scraper_Configuration"
 restart_limit=0
 list_url = ''
 
-###################     Last Left: Luara wants you to test on PDSM and make sure you can get assignment_group attribute
-                                # See if you can finish up development in VDI
-
 def init_from_config():
 # Initializes global variables from config file 
         global USER_NAME
