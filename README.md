@@ -12,7 +12,7 @@ To run the scraper you must have access to a EPDSM account, as well as its login
 
 ### Installing
 
-No Installation required, just download, configure and run. :)
+No Installation required, just download the exe, configure the Scraper_Configuration file and run. :)
 
 ## Built With
 
