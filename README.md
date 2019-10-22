@@ -1,6 +1,6 @@
 # KPI Web Scraper
 
-Accepts a url and login details from a text file and then scrapes and exports metrics data to a csv file
+Uses an automated browser to access key performance indicator data from an internal web interface and export the metrics to csv.
 
 ## Getting Started
 
